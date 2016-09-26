@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="type">
+        <item>资源回收</item>
+        <item>旧物利用 </item>
+    </string-array>
+</resources>
