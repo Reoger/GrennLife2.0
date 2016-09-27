@@ -1,69 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@drawable/background">
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="245dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="205dp"
+        android:layout_centerHorizontal="true"
         android:hint="请输入手机号"
-        android:inputType="text"
+        android:paddingLeft="15dp"
+        android:drawableRight="@mipmap/user3"
+        android:paddingRight="12dp"
+        android:background="@drawable/shape_text"
         android:id="@+id/login_num"
         />
-
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="245dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="265dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shape_text"
         android:hint="请输密码"
+        android:paddingLeft="15dp"
+        android:drawableRight="@mipmap/password1"
+        android:paddingRight="12dp"
         android:inputType="textPassword"
         android:id="@+id/login_password"
         />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="记住密码"
-        android:checked="true"
-        android:id="@+id/login_remember"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginTop="385dp"
+        android:orientation="vertical"
         android:gravity="center">
+
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="登陆"
-            android:id="@+id/login_load"/>
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:text="注  册"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:background="@drawable/shape_register"
+            android:id="@+id/login_register"/>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="取消"
-            android:id="@+id/login_cancel"
-            />
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:text="登  陆"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:background="@drawable/shape"
+            android:id="@+id/login_load" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="0dip"
+        android:gravity="center"
+        android:layout_marginTop="325dp">
+
+        <CheckBox
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="记住密码"
+            android:textColor="@color/black"
+            android:checked="true"
+            android:id="@+id/login_remember"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
             android:text="忘记密码"
+            android:textColor="@color/blue"
             android:id="@+id/login_forgetpassword"/>
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:text="注册账号"
-            android:gravity="end"
-            android:id="@+id/login_register"/>
+
     </LinearLayout>
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="跳过"
-    android:onClick="skip"/>
-</LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_alignParentBottom="true"
+        android:text="跳过"
+        android:paddingRight="10dp"
+        android:textColor="#000000"
+        android:background="#000000ff"
+        android:textSize="18sp"
+        android:gravity="right"
+        android:onClick="skip"/>
+</RelativeLayout>

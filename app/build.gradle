@@ -48,7 +48,6 @@ dependencies {
     //compile 'de.hdodenhof:circleimageview:2.0.0'
     //团片选择器
     compile 'com.yuyh.imgsel:library:1.1.1'
-
 }
 
 

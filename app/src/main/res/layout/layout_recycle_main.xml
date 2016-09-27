@@ -4,27 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#29e7e7cd">
+    android:background="#29f9f900">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:orientation="horizontal"
-        android:background="#f0f00ff0"
-        android:gravity="center_horizontal">
+        android:background="@color/toolbar_background"
+        android:gravity="center_vertical">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_sort_by_size"/>
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="18dp"
+            android:src="@mipmap/toolbar_return"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="资源回收"/>
+            android:layout_marginLeft="90dp"
+            android:text="资源回收"
+            android:textSize="22sp"/>
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:id="@+id/recycle_add"
-            android:src="@android:drawable/ic_input_add"/>
+            android:layout_marginLeft="90dp"
+            android:src="@mipmap/set_up"
+            android:background="@drawable/shape_transparent"
+            android:id="@+id/recycle_add"/>
     </LinearLayout>
     <Button
         android:layout_width="match_parent"

@@ -92,7 +92,7 @@ public class PublishingResourcesView extends AppCompatActivity implements View.O
         mLocation = (EditText) findViewById(R.id.publish_resources_location);
         mAddPhoto = (ImageButton) findViewById(R.id.public_resources_add_photo);
 
-        mImage = (ImageView) findViewById(R.id.public_resources_photo);
+       // mImage = (ImageView) findViewById(R.id.public_resources_photo);
 
         mIPublishResourcesPresenter = new PublishResourcesPresenterCompl(PublishingResourcesView.this,this);
     }

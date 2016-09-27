@@ -16,7 +16,7 @@ public class GarbagerFrament extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View messageLayout = inflater.inflate(R.layout.layout_garbager_main, container, false);
+        View messageLayout = inflater.inflate(R.layout.layout_base_main, container, false);
         return messageLayout;
     }
 }

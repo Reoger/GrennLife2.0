@@ -2,4 +2,15 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="user_list_picture">35dp</dimen>
+    <dimen name="user__list_text">15sp</dimen>
+    <dimen name="relater__picture">30dp</dimen>
+    <dimen name="user_picture_marginLeft">8dp</dimen>
+    <dimen name="user_text_marginLeft">25dp</dimen>
+    <dimen name="user_into_marginLeft">190dp</dimen>
+    <dimen name="user_picture_ml">10dp</dimen>
+    <dimen name="user_text_ml">28dp</dimen>
+    <dimen name="user_into_ml">225dp</dimen>
+    <dimen name="transparent">10dp</dimen>
+    <dimen name="user_list_height">45dp</dimen>
 </resources>

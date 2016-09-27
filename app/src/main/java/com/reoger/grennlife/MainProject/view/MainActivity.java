@@ -23,6 +23,7 @@ import com.reoger.grennlife.MainProject.presenter.IMainPresenter;
 import com.reoger.grennlife.MainProject.presenter.MainPresenterComple;
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.view.EncyclopaediaView;
+import com.reoger.grennlife.utils.toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,11 +76,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void recycleViewMethod() {
         mDatas = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            mDatas.add("我是最帅的on activity"+i);
+            mDatas.add("我真的很需要一个人在我身边，就是那种天天带我学习，张嘴闭嘴就是要考证，约我出去都是要去图书馆学习，看我不学习反手就给我一巴掌的引领我走向人生巅峰的那种人"+i);
         }
         View header = View.inflate(this,R.layout.recycle_header2,null);
         View footer = View.inflate(this,R.layout.dynamic_botton,null);
-     //   recyclerView = (RefreshRecyclerView) findViewById(R.id.dynamic_recyclerView);
         mDynamicAdapter = new DynamicAdapter(this,mDatas);
         RecyclerViewManager.with(mDynamicAdapter,new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case 10:
-                    mDatas.add(0, "new Item");
+                    mDatas.add(0, "罗杰真丑"+"1123");
                     break;
                 case 23:
                     for (int i = 0; i < 10; i++){
@@ -145,13 +145,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 resetImg();
                 switch (currentItem) {
                     case 0:
-                        mHomeImg.setImageResource(android.R.drawable.bottom_bar);
+                        mHomeImg.setImageResource(R.mipmap.home_bright);
                         break;
                     case 1:
-                        mDynamicImg.setImageResource(android.R.drawable.bottom_bar);
+                        mDynamicImg.setImageResource(R.mipmap.circle_bright);
                         break;
                     case 2:
-                        mUserImg.setImageResource(android.R.drawable.bottom_bar);
+                        mUserImg.setImageResource(R.mipmap.my_bright);
                         break;
                 }
 
@@ -179,11 +179,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mainPresenter = new MainPresenterComple(this);
 
-        mHomeImg.setImageResource(android.R.drawable.stat_notify_missed_call);
+        mHomeImg.setImageResource(R.mipmap.home_bright);
 
         LayoutInflater mInflater = LayoutInflater.from(this);
         View tab01 = mInflater.inflate(R.layout.layout_home_main, null);
-        View tab02 = mInflater.inflate(R.layout.layout_dynamic_main, null);
+        View tab02 = mInflater.inflate(R.layout.layout_base_main, null);
         View tab03 = mInflater.inflate(R.layout.layout_user_main, null);
 
         //位于home的button
@@ -194,8 +194,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mComeRecycle = (Button) tab01.findViewById(R.id.home_resources_recycle);
 
         recyclerView = (RefreshRecyclerView) tab02.findViewById(R.id.dynamic_recyclerView);
-
-
 
         mViews.add(tab01);
         mViews.add(tab02);
@@ -234,9 +232,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 将所有的图片切换为暗色的
      */
     private void resetImg() {
-        mDynamicImg.setImageResource(R.mipmap.ic_launcher);
-        mUserImg.setImageResource(R.mipmap.ic_launcher);
-        mHomeImg.setImageResource(R.mipmap.ic_launcher);
+        mDynamicImg.setImageResource(R.mipmap.circle_dark);
+        mUserImg.setImageResource(R.mipmap.my_dark);
+        mHomeImg.setImageResource(R.mipmap.home_test);
     }
 
     @Override
@@ -244,15 +242,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.main_bottom_home:
                 mViewPager.setCurrentItem(0);
-                mHomeImg.setImageResource(android.R.drawable.bottom_bar);
+                mHomeImg.setImageResource(R.mipmap.home_bright);
                 break;
             case R.id.main_bottom_dynamic:
                 mViewPager.setCurrentItem(1);
-                mDynamicImg.setImageResource(android.R.drawable.bottom_bar);
+                mDynamicImg.setImageResource(R.mipmap.circle_bright);
                 break;
             case R.id.main_bottom_user:
                 mViewPager.setCurrentItem(2);
-                mUserImg.setImageResource(android.R.drawable.bottom_bar);
+                mUserImg.setImageResource(R.mipmap.my_bright);
                 break;
             case R.id.home_en_control:
                 mainPresenter.doComeActivity(MainActivity.this,MainPresenterComple.MONITORING);
@@ -265,6 +263,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(this, EncyclopaediaView.class);
                 startActivity(intent);
         }
+    }
+
+    public void addNewsDynamic(View view){
+        new toast(this,"点击事件测试");
+        startActivity(new Intent(this,DynamicActivity.class));
     }
 
 }
