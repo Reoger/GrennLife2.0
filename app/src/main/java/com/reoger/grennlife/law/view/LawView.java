@@ -1,4 +1,4 @@
-package com.reoger.grennlife.encyclopaedia.view;
+package com.reoger.grennlife.law.view;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.adapter.EncyclopaediaAdapter;
+import com.reoger.grennlife.law.adapter.LawsViewAdapter;
 import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.IServerData;
 import com.reoger.grennlife.utils.ServerDataOperation.ServerDataCompl;
@@ -29,12 +30,12 @@ import space.sye.z.library.manager.RecyclerMode;
 import space.sye.z.library.manager.RecyclerViewManager;
 
 /**
- * Created by admin on 2016/9/18.
+ * Created by Zimmerman on 2016/9/27.
  */
-public class EncyclopaediaView extends AppCompatActivity implements IEncyclopaediaView {
-    private ArrayList<BmobObject> mData;
-    private EncyclopaediaAdapter mEncyclopaediaAdapter;
+public class LawView extends AppCompatActivity implements ILawView {
+    private ArrayList<BmobObject> mDatas;
     private RefreshRecyclerView mRecyclerView;
+    private LawsViewAdapter mAdapter;
 
     private IServerData mServerDataCompl;
     //数据库操作
@@ -43,46 +44,40 @@ public class EncyclopaediaView extends AppCompatActivity implements IEncyclopaed
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_encyclopaedia_main);
-        initAttr();
         initView();
+        initAttr();
         recycleViewMethod();
-        //更新下新闻
-
     }
 
     private void initView() {
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.dynamic_recyclerView);
-
     }
-
 
     private void initAttr() {
         mServerDataCompl = new ServerDataCompl();
-        mDBOperationComl = DBOperationCompl.getInstance(this, ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA);
-//        mData = new ArrayList<>();
-        mData = mDBOperationComl.getDataFromLocalDB();
-        Log.d("qqw", "finish read data :" + mData.size());
+        mDBOperationComl = DBOperationCompl.getInstance(this,ServerDataCompl.BEAN_TYPE_LAWS);
+
+        mDatas = mDBOperationComl.getDataFromLocalDB();
+        Log.d("qqw", "finish read data :" + mDatas.size());
         //判定是否需要从网络后台读取数据
-        if (mData.size() > 0) {
+        if (mDatas.size() > 0) {
             //成功从数据库读入
             Log.d("in encyclopaedia view", "succeed in reading from local db");
         } else {
             //耗时操作
-            mData = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA);
-            Log.d("qqe", "initAttr: " + (mData == null)+ " "+mData.size());
+            mDatas = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA);
+            Log.d("qqe", "initAttr: " + (mDatas == null)+ " "+mDatas.size());
 //            //存入数据库
 //            mDBOperationComl.doSaveDataIntoDB(mData);
 //            Log.d("qqe","成功存入数据库哦"+mData.size());
         }
-        mEncyclopaediaAdapter = new EncyclopaediaAdapter(this, mData);
-
+        mAdapter = new LawsViewAdapter(this,mDatas);
     }
 
 
     private void recycleViewMethod() {
         View footer = View.inflate(this, R.layout.dynamic_botton, null);
-        RecyclerViewManager.with(mEncyclopaediaAdapter, new LinearLayoutManager(this))
+        RecyclerViewManager.with(mAdapter, new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
 //                .addHeaderView(header)
                 .addFooterView(footer)
@@ -102,8 +97,8 @@ public class EncyclopaediaView extends AppCompatActivity implements IEncyclopaed
                         Message msg = new Message();
                         msg.what = 23;
                         //当前总的词条数目
-                        msg.arg1 = mEncyclopaediaAdapter.getItemCount();
-                        Log.d("qqw", "before handler :" + mData.size());
+                        msg.arg1 = mAdapter.getItemCount();
+                        Log.d("qqw", "before handler :" + mDatas.size());
                         mHandler.sendMessageDelayed(msg, 2000);
                     }
                 }).setOnItemClickListener(new RefreshRecyclerViewAdapter.OnItemClickListener() {
@@ -113,7 +108,6 @@ public class EncyclopaediaView extends AppCompatActivity implements IEncyclopaed
                         .show();
             }
         }).into(mRecyclerView, this);
-
     }
 
     private Handler mHandler = new Handler() {
@@ -132,11 +126,12 @@ public class EncyclopaediaView extends AppCompatActivity implements IEncyclopaed
                     break;
             }
             mRecyclerView.onRefreshCompleted();
-            Log.d("qqw", "before notify size :" + mData.size());
+            Log.d("qqw", "before notify size :" + mDatas.size());
             //存入数据库
-            mDBOperationComl.doSaveDataIntoDB(mData);
+            mDBOperationComl.doSaveDataIntoDB(mDatas);
 //            mData.clear();
-            mEncyclopaediaAdapter.notifyDataSetChanged();
+            mAdapter.notifyDataSetChanged();
         }
     };
+
 }

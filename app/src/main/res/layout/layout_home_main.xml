@@ -84,7 +84,7 @@
             android:textColor="#8a8a8a"
             android:drawableTop="@mipmap/news"
             android:paddingTop="15dp"
-            android:id="@+id/button"/>
+            android:id="@+id/home_en_news"/>
 
         <Button
             android:layout_width="110dp"

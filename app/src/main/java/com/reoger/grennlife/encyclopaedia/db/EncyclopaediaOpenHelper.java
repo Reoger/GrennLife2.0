@@ -15,12 +15,15 @@ public class EncyclopaediaOpenHelper extends SQLiteOpenHelper {
     public static final String BAIKE_CONTENT = "content";
     public static final String BAIKE_RESOURCE = "source";
     public static final String BAIKE_TYPE = "type";
+
+    public static final String TABLE_NAME = "Encyclopaedia";
+    public static final int VERSION = 1;
     //建表语句
     public static final String CREATE_ENCYCLOPAEDIA = "create table Encyclopaedia(" +
             "num integer primary key autoincrement," +
             "title text," +
             "content text," +
-            "resource text," +
+            "source text," +
             "type text)";
 
 

@@ -23,6 +23,7 @@ import com.reoger.grennlife.MainProject.presenter.IMainPresenter;
 import com.reoger.grennlife.MainProject.presenter.MainPresenterComple;
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.view.EncyclopaediaView;
+import com.reoger.grennlife.news.view.NewsView;
 import com.reoger.grennlife.utils.toast;
 
 import java.util.ArrayList;
@@ -55,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton mDynamicImg;
     private ImageButton mUserImg;
     private Button mBaikeBtn;
+    private Button mNewsBtn;
+
 
     private ArrayList<String> mDatas;
     private RefreshRecyclerView recyclerView;
@@ -128,7 +131,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTabHome.setOnClickListener(this);
         mTabDynamic.setOnClickListener(this);
         mTabUser.setOnClickListener(this);
+
         mBaikeBtn.setOnClickListener(this);
+        mNewsBtn.setOnClickListener(this);
 
         mComeEnMonitoring.setOnClickListener(this);
         mComeRecycle.setOnClickListener(this);
@@ -188,6 +193,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //位于home的button
         mBaikeBtn = (Button) tab01.findViewById(R.id.home_en_baike);
+        mNewsBtn = (Button) tab01.findViewById(R.id.home_en_news);
+
 
 
         mComeEnMonitoring = (Button) tab01.findViewById(R.id.home_en_control);
@@ -262,6 +269,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d("debug","baike btn");
                 Intent intent = new Intent(this, EncyclopaediaView.class);
                 startActivity(intent);
+                break;
+            case R.id.home_en_news:
+                Intent newsIntent = new Intent(this, NewsView.class);
+                startActivity(newsIntent);
+                break;
+
         }
     }
 
