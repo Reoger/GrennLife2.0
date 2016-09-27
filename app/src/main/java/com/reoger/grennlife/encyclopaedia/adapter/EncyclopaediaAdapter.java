@@ -11,15 +11,17 @@ import com.reoger.grennlife.encyclopaedia.model.EncyclopaediaBean;
 
 import java.util.ArrayList;
 
+import cn.bmob.v3.BmobObject;
+
 /**
  * Created by admin on 2016/9/18.
  */
 public class EncyclopaediaAdapter extends RecyclerView.Adapter<EncyclopaediaViewHolder>{
 
     private Context mContext;
-    private ArrayList<EncyclopaediaBean> mData;
+    private ArrayList<BmobObject> mData;
 
-    public EncyclopaediaAdapter(Context mContext, ArrayList<EncyclopaediaBean> data) {
+    public EncyclopaediaAdapter(Context mContext, ArrayList<BmobObject> data) {
         this.mContext = mContext;
         this.mData = data;
     }
@@ -33,8 +35,14 @@ public class EncyclopaediaAdapter extends RecyclerView.Adapter<EncyclopaediaView
 
     @Override
     public void onBindViewHolder(EncyclopaediaViewHolder holder, int position) {
-        holder.mContentTextView.setText(mData.get(position).getmContent());
-        holder.mTitleTextView.setText(mData.get(position).getmTitle());
+        holder.mContentTextView.setText(
+                (
+                        (EncyclopaediaBean)( mData.get(position) )
+                ).getmContent());
+        holder.mTitleTextView.setText(
+                (
+                        (EncyclopaediaBean)( mData.get(position) )
+                ).getmTitle());
 
     }
 
@@ -43,4 +51,3 @@ public class EncyclopaediaAdapter extends RecyclerView.Adapter<EncyclopaediaView
         return mData.size();
     }
 }
-

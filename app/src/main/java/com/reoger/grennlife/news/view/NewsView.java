@@ -1,10 +1,9 @@
-package com.reoger.grennlife.encyclopaedia.view;
+package com.reoger.grennlife.news.view;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,7 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.reoger.grennlife.R;
-import com.reoger.grennlife.encyclopaedia.adapter.EncyclopaediaAdapter;
+import com.reoger.grennlife.news.adapter.NewsAdapter;
 import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.IServerData;
 import com.reoger.grennlife.utils.ServerDataOperation.ServerDataCompl;
@@ -29,81 +28,70 @@ import space.sye.z.library.manager.RecyclerMode;
 import space.sye.z.library.manager.RecyclerViewManager;
 
 /**
- * Created by admin on 2016/9/18.
+ * Created by admin on 2016/9/26.
  */
-public class EncyclopaediaView extends AppCompatActivity implements IEncyclopaediaView {
-    private ArrayList<BmobObject> mData;
-    private EncyclopaediaAdapter mEncyclopaediaAdapter;
+public class NewsView extends Activity implements INewsView {
     private RefreshRecyclerView mRecyclerView;
+    private NewsAdapter mNewsAdapter;
+    private ArrayList<BmobObject> mDatas;
 
-    private IServerData mServerDataCompl;
-    //数据库操作
-    private IDBOperation mDBOperationComl;
+    private IDBOperation mDBOperation;
+    private IServerData mServerData;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_encyclopaedia_main);
-        initAttr();
+        setContentView(R.layout.layout_news_main);
         initView();
-        recycleViewMethod();
-        //更新下新闻
+        initAttr();
+        recycleMethod();
 
     }
 
     private void initView() {
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.dynamic_recyclerView);
-
     }
-
 
     private void initAttr() {
-        mServerDataCompl = new ServerDataCompl();
-        mDBOperationComl = DBOperationCompl.getInstance(this, ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA);
-//        mData = new ArrayList<>();
-        mData = mDBOperationComl.getDataFromLocalDB();
-        Log.d("qqw", "finish read data :" + mData.size());
-        //判定是否需要从网络后台读取数据
-        if (mData.size() > 0) {
+        mServerData = new ServerDataCompl();
+        mDBOperation = DBOperationCompl.getInstance(this, ServerDataCompl.BEAN_TYPE_NEWS);
+//        mDatas = mServerData.getDataFromServer(ServerDataCompl.BEAN_TYPE_NEWS);
+        mDatas = mDBOperation.getDataFromLocalDB();
+        Log.d("qqe6", "dbOperation table name" + mDBOperation.getmTableName());
+        if (mDatas.size() > 0) {
             //成功从数据库读入
+            Log.d("qqe in newsView if ", "get table size:" + mDatas.get(0).getTableName());
+
             Log.d("in encyclopaedia view", "succeed in reading from local db");
         } else {
+
             //耗时操作
-            mData = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA);
-            Log.d("qqe", "initAttr: " + (mData == null)+ " "+mData.size());
-//            //存入数据库
-//            mDBOperationComl.doSaveDataIntoDB(mData);
-//            Log.d("qqe","成功存入数据库哦"+mData.size());
+            mDatas = mServerData.getDataFromServer(ServerDataCompl.BEAN_TYPE_NEWS);
+            Log.d("qqe", "initAttr: " + (mDatas == null) + " " + mDatas.size());
+//            Log.d("qqe in newsView ","get table size:"+ mDatas.get(0).getTableName());
         }
-        mEncyclopaediaAdapter = new EncyclopaediaAdapter(this, mData);
+        mNewsAdapter = new NewsAdapter(this, mDatas);
 
     }
 
-
-    private void recycleViewMethod() {
+    private void recycleMethod() {
         View footer = View.inflate(this, R.layout.dynamic_botton, null);
-        RecyclerViewManager.with(mEncyclopaediaAdapter, new LinearLayoutManager(this))
+        RecyclerViewManager.with(mNewsAdapter, new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
-//                .addHeaderView(header)
                 .addFooterView(footer)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {
                         Message msg = new Message();
-                        msg.what = 10;
+                        msg.what = 17;
                         mHandler.sendMessageDelayed(msg, 2000);
                     }
 
-                    //上拉刷新
                     @Override
                     public void onLoadMore() {
-
-                        //存在数据库的时候编下号，每次加载五个
+                        //上拉加载更多
                         Message msg = new Message();
                         msg.what = 23;
-                        //当前总的词条数目
-                        msg.arg1 = mEncyclopaediaAdapter.getItemCount();
-                        Log.d("qqw", "before handler :" + mData.size());
                         mHandler.sendMessageDelayed(msg, 2000);
                     }
                 }).setOnItemClickListener(new RefreshRecyclerViewAdapter.OnItemClickListener() {
@@ -119,24 +107,24 @@ public class EncyclopaediaView extends AppCompatActivity implements IEncyclopaed
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            super.handleMessage(msg);
             switch (msg.what) {
-                case 10:
-                    //下拉刷新要从服务器加载更多数据
-//                    for (BmobObject one : mServerDataCompl.getDataFromServer(
-//                            ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA
-//                    )) {
-//                        mData.add(one);
+                case 17:
+                    //下拉刷新
+//                    for (BmobObject one : mServerData.
+//                            getDataFromServer(ServerDataCompl.BEAN_TYPE_NEWS)) {
+//                        mDatas.add(one);
 //                    }
-                    break;
+//                    break;
                 case 23:
+                    //上拉加载更多
                     break;
             }
             mRecyclerView.onRefreshCompleted();
-            Log.d("qqw", "before notify size :" + mData.size());
-            //存入数据库
-            mDBOperationComl.doSaveDataIntoDB(mData);
-//            mData.clear();
-            mEncyclopaediaAdapter.notifyDataSetChanged();
+//            Log.d("qqe news","table name: " + mDBOperation)
+            mDBOperation.doSaveDataIntoDB(mDatas);
+//            mDatas.clear();
+            mNewsAdapter.notifyDataSetChanged();
         }
     };
 }
