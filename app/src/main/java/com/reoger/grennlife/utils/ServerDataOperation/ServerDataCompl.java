@@ -20,6 +20,7 @@ import cn.bmob.v3.listener.FindListener;
 public class ServerDataCompl implements IServerData {
     public static final int BEAN_TYPE_ENCYCLOPAEDIA = 1;
     public static final int BEAN_TYPE_NEWS = 2;
+    public static final int BEAN_TYPE_LAWS = 3;
 
     private ArrayList<BmobObject> datas;
 

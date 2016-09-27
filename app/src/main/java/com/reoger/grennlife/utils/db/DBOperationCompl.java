@@ -8,6 +8,8 @@ import android.util.Log;
 
 import com.reoger.grennlife.encyclopaedia.db.EncyclopaediaOpenHelper;
 import com.reoger.grennlife.encyclopaedia.model.EncyclopaediaBean;
+import com.reoger.grennlife.law.db.LawsOpenHelper;
+import com.reoger.grennlife.law.model.LawsBean;
 import com.reoger.grennlife.news.db.NewsDBOpenHelper;
 import com.reoger.grennlife.news.model.NewsBean;
 import com.reoger.grennlife.utils.ServerDataOperation.ServerDataCompl;
@@ -29,6 +31,7 @@ public class DBOperationCompl implements IDBOperation {
 
     private static DBOperationCompl mPaediaCompl;
     private static DBOperationCompl mNewsCompl;
+    private static DBOperationCompl mLawsCompl;
 
     private SQLiteDatabase db = null;
     private int mBeanType;
@@ -79,6 +82,11 @@ public class DBOperationCompl implements IDBOperation {
                 }
                 Log.d("qqe ", "getInstance: for return mNewsCompl");
                 return mNewsCompl;
+            case ServerDataCompl.BEAN_TYPE_LAWS:
+                if (mLawsCompl == null) {
+                    mNewsCompl = new DBOperationCompl(context,beanType);
+                }
+                return mLawsCompl;
         }
         return null;
 //        switch (beanType) {
@@ -127,6 +135,17 @@ public class DBOperationCompl implements IDBOperation {
                         saveAData(one);
                     }
                     break;
+                case ServerDataCompl.BEAN_TYPE_LAWS:
+                    Cursor lawsCursor = queryTitle(
+                            ((LawsBean) one).getTitle(),
+                            LawsOpenHelper.LAWS_TITLE);
+                    //cursor为空，则数据库并不存在，可以存入
+                    Log.d("qqe ","in do save data beantype:" + mBeanType);
+                    Log.d("qqe", "in doSave data tablename" + mTableName);
+                    if (lawsCursor.getCount() == 0) {
+                        saveAData(one);
+                    }
+                    break;
             }
 
         }
@@ -170,6 +189,13 @@ public class DBOperationCompl implements IDBOperation {
                     }
                     Log.d("qqe2", "news data size in local db :" + datas.size());
                     break;
+                case ServerDataCompl.BEAN_TYPE_LAWS:
+                    //获取法律的一个方法：
+                    for (BmobObject one : doGetLawsArray(cursor)) {
+                        datas.add(one);
+                    }
+                    Log.d("qqe2", "laws data size in local db :" + datas.size());
+                    break;
             }
         }
 
@@ -179,6 +205,25 @@ public class DBOperationCompl implements IDBOperation {
         return datas;
     }
 
+    //获取法律私有
+    private ArrayList<BmobObject> doGetLawsArray(Cursor cursor) {
+        ArrayList<BmobObject> datas = new ArrayList<>();
+        do {
+            LawsBean one = new LawsBean();
+            //标题
+            one.setTitle(cursor.getString(
+                    cursor.getColumnIndex(LawsOpenHelper.LAWS_TITLE)));
+            //内容
+            one.setContent(cursor.getString(
+                    cursor.getColumnIndex(LawsOpenHelper.LAWS_CONTENT)));
+
+            datas.add(one);
+
+
+        } while (cursor.moveToNext());
+
+        return datas;
+    }
     //为获取新闻的私有
     private ArrayList<BmobObject> doGetNewsArray(Cursor cursor) {
         ArrayList<BmobObject> datas = new ArrayList<>();
@@ -248,6 +293,21 @@ public class DBOperationCompl implements IDBOperation {
                     values.put(EncyclopaediaOpenHelper.BAIKE_TYPE, ((EncyclopaediaBean) one).getmType());
                     long i = db.insert(EncyclopaediaOpenHelper.TABLE_NAME, null, values);
                     break;
+                case ServerDataCompl.BEAN_TYPE_LAWS:
+                    values.put(LawsOpenHelper.LAWS_TITLE, ((LawsBean) one).getTitle());
+                    values.put(LawsOpenHelper.LAWS_CONTENT, ((LawsBean) one).getContent());
+                    db.insert(LawsOpenHelper.TABLE_NAME, null, values);
+                    break;
+                case ServerDataCompl.BEAN_TYPE_NEWS:
+                    values.put(NewsDBOpenHelper.NEWS_TITLE, ((NewsBean) one).getContent());
+                    values.put(NewsDBOpenHelper.NEWS_CONTENT, ((NewsBean) one).getContent());
+                    values.put(NewsDBOpenHelper.NEWS_OUTLINE, ((NewsBean) one).getOutLine());
+                    values.put(NewsDBOpenHelper.NEWS_DATE, ((NewsBean) one).getDate());
+                    db.insert(NewsDBOpenHelper.TABLE_NAME, null, values);
+
+
+
+
             }
         }
     }
