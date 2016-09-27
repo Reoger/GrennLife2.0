@@ -43,7 +43,9 @@
         <activity android:name=".Recycle.view.RecycleView"/>
         <activity android:name=".Recycle.view.PublishingResourcesView"/>
         <activity android:name=".Recycle.view.GarbagerListView"/>
-
+        <activity android:name=".register.view.RegisterView"/>
+        <activity android:name=".MainProject.view.MainActivity"/>
+        <activity android:name=".monitoring.view.EnvironmentalMonitoring"/>
         <activity android:name=".ResetPassword.view.ResetPasswordView" />
         <activity android:name=".encyclopaedia.view.EncyclopaediaView"
             android:label="环保百科"/>

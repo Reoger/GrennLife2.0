@@ -5,50 +5,108 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <ImageView
+    <com.reoger.grennlife.TitleLayout.TitleLayout_home
         android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_height="wrap_content">
+    </com.reoger.grennlife.TitleLayout.TitleLayout_home>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey">
+    </View>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="280dp"
+        android:background="@color/grey">
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/picture_"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey">
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal">
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:layout_height="match_parent"
+            android:background="@drawable/shape_button"
             android:id="@+id/home_en_control"
-            android:text="环境监控"/>
+            android:drawableTop="@mipmap/moniter7"
+            android:paddingTop="15dp"
+            android:text="环境监控"
+            android:textColor="@color/home_button_text"/>
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:layout_height="match_parent"
+            android:background="@drawable/shape_button"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:id="@+id/home_resources_recycle"
-            android:text="资源回收"/>
+            android:text="资源回收"
+            android:textColor="#8a8a8a"
+            android:drawableTop="@mipmap/recovery1"
+            android:paddingTop="15dp"/>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_button"
             android:id="@+id/home_en_baike"
-            android:text="环保百科"/>
+            android:text="环保百科"
+            android:textColor="#8a8a8a"
+            android:drawableTop="@mipmap/knowledge"
+            android:paddingTop="15dp"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+
         android:orientation="horizontal">
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:layout_height="match_parent"
-            android:id="@+id/home_en_news"
-            android:text="环保新闻"/>
+            android:background="@drawable/shape_button"
+            android:text="环保新闻"
+            android:textColor="#8a8a8a"
+            android:drawableTop="@mipmap/news"
+            android:paddingTop="15dp"
+            android:id="@+id/home_en_news"/>
+
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:layout_height="match_parent"
-            android:id="@+id/home_en_law"
-            android:text="法律法规"/>
+            android:background="@drawable/shape_button"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:text="法律法规"
+            android:textColor="@color/home_button_text"
+            android:drawableTop="@mipmap/law"
+            android:paddingTop="15dp"
+            android:id="@+id/button2"/>
+
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/home_en_technology"
-            android:text="环保科技"/>
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_button"
+            android:text="环保科技"
+            android:textColor="#8a8a8a"
+            android:drawableTop="@mipmap/science"
+            android:paddingTop="15dp"
+            android:id="@+id/button3" />
     </LinearLayout>
 
 </LinearLayout>

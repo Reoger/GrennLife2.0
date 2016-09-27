@@ -37,7 +37,7 @@ public class GarbagerListView extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_garbager_main);
+        setContentView(R.layout.layout_base_main);
         mdatas = new Datas();
 
         datas = mdatas.getData();

@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">GrennLife</string>
     <string name="phone_num_cn">手机号</string>
+    <string name="detailed_information">详细资料</string>
+    <string name="related_to_me">与我相关</string>
+    <string name="my_resources">我的资源</string>
+    <string name="feedback">反馈</string>
+    <string name="about_APP">关于APP</string>
+    <string name="set_up">设置</string>
+    <string name="history">监控历史</string>
 </resources>

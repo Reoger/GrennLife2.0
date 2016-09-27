@@ -1,53 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
     <Spinner
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_title_text"
+        android:id="@+id/publish_resources_type"
+        >
+    </Spinner>
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/publish_resources_type"
-       >
-    </Spinner>
-<EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="描述你的资源"
-    android:lines="3"
-    android:ems="10"
-    android:id="@+id/publish_resources_content"/>
-    <ImageButton
+        android:layout_marginTop="70dp"
+        android:hint="描述你的资源"
+        android:padding="8dp"
+        android:lines="7"
+        android:ems="12"
+        android:background="#440000ff"
+        android:id="@+id/publish_resources_content"/>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_input_add"
-        android:id="@+id/public_resources_add_photo"/>
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:src="@mipmap/ic_launcher"
-        android:id="@+id/public_resources_photo"/>
+        android:layout_marginTop="240dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="@color/transparent"
+            android:src="@android:drawable/ic_input_add"
+            android:id="@+id/public_resources_add_photo"/>
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="335dp"
+        android:layout_marginLeft="8dp">
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="添加地理信息"
+            android:textSize="15sp"
             android:id="@+id/publish_resources_location"/>
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_lock_idle_alarm"/>
     </LinearLayout>
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="添加联系方式"
+        android:textSize="15sp"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="8dp"
         android:id="@+id/publish_resources_num"/>
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="确定发布"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="390dp"
+        android:text="发 布"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:background="@drawable/shape_recycle_publishing"
         android:id="@+id/publish_resources"/>
-</LinearLayout>
+
+</RelativeLayout>

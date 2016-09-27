@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@mipmap/ic_launcher"
-    android:orientation="horizontal">
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:orientation="horizontal"
+        android:layout_height="200dp"
+        android:background="@drawable/tree"
+        android:orientation="vertical"
         android:gravity="center">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@mipmap/ic_launcher"/>
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/photo1"/>
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -25,13 +23,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="用户名"
-                    android:padding="10dp"/>
+                    android:padding="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="嘻嘻嘻"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:layout_gravity="center"/>
                 <TextView
-                    android:padding="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="简介:就是一个特点：帅@！"/>
+                    android:text="简介:就是一个特点：丑@！"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
