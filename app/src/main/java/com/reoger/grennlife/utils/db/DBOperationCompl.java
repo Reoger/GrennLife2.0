@@ -51,6 +51,8 @@ public class DBOperationCompl implements IDBOperation {
         //包含了百科和新闻
         switch (beanType) {
             case ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA:
+                Log.d("qqe 1234","aftern into bean laws");
+
                 this.mTableName = EncyclopaediaOpenHelper.TABLE_NAME;
                 EncyclopaediaOpenHelper helper = new EncyclopaediaOpenHelper(context, EncyclopaediaOpenHelper.TABLE_NAME,
                         null, EncyclopaediaOpenHelper.VERSION);
@@ -58,10 +60,22 @@ public class DBOperationCompl implements IDBOperation {
                 db = helper.getWritableDatabase();
                 break;
             case ServerDataCompl.BEAN_TYPE_NEWS:
+                Log.d("qqe 123","aftern into bean laws");
+
                 this.mTableName = NewsDBOpenHelper.TABLE_NAME;
                 NewsDBOpenHelper newsHelper = new NewsDBOpenHelper(context, NewsDBOpenHelper.TABLE_NAME,
                         null, NewsDBOpenHelper.VERSION);
                 db = newsHelper.getWritableDatabase();
+                break;
+            case ServerDataCompl.BEAN_TYPE_LAWS:
+                Log.d("qqe 12","aftern into bean laws");
+                this.mTableName = LawsOpenHelper.TABLE_NAME;
+                LawsOpenHelper lawsOpenHelper = new LawsOpenHelper(context, LawsOpenHelper.TABLE_NAME,
+                        null, LawsOpenHelper.VERSION);
+                db = lawsOpenHelper.getWritableDatabase();
+                break;
+            default:
+                Log.d("qqe w","default:");
                 break;
         }
     }
@@ -84,21 +98,12 @@ public class DBOperationCompl implements IDBOperation {
                 return mNewsCompl;
             case ServerDataCompl.BEAN_TYPE_LAWS:
                 if (mLawsCompl == null) {
-                    mNewsCompl = new DBOperationCompl(context,beanType);
+                    mLawsCompl = new DBOperationCompl(context,beanType);
+                    Log.d("qqe 8", "getInstance: for return mLawsCompl");
                 }
                 return mLawsCompl;
         }
         return null;
-//        switch (beanType) {
-//            //百科类：
-//            case ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA:
-//                if (mPaediaCompl == null) {
-//                    mPaediaCompl = new DBOperationCompl(context, beanType);
-//                }
-//                return mPaediaCompl;
-//
-//        }
-//        return null;
     }
 
     /**
@@ -108,7 +113,7 @@ public class DBOperationCompl implements IDBOperation {
      */
     @Override
     public void doSaveDataIntoDB(ArrayList<BmobObject> datas) {
-//        Log.d("qqe5","in do savce data "+mTableName + mBeanType + datas.size() + datas.get(0).getTableName());
+        Log.d("qqe5","in do savce data "+mTableName + mBeanType + datas.size() + datas.get(0).getTableName());
         for (BmobObject one : datas) {
             //如果数据库已经重复了，那么就不存入数据
             //处理包含了百科，新闻
@@ -118,8 +123,6 @@ public class DBOperationCompl implements IDBOperation {
                             ((EncyclopaediaBean) one).getmTitle(),
                             EncyclopaediaOpenHelper.BAIKE_TITLE);
                     //cursor为空，则数据库并不存在，可以存入
-                    Log.d("qqe ","in do save data beantype:" + mBeanType);
-                    Log.d("qqe", "in doSave data tablename" + mTableName);
                     if (cursor.getCount() == 0) {
                         saveAData(one);
                     }
@@ -156,7 +159,6 @@ public class DBOperationCompl implements IDBOperation {
     private Cursor queryTitle(String titleName, String titleKey) {
         return db.query(mTableName, new String[]{titleKey}, titleKey + " = ?",
                 new String[]{titleName}, null, null, null);
-
     }
 
     /**

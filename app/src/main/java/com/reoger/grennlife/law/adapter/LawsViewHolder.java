@@ -15,7 +15,7 @@ public class LawsViewHolder extends RecyclerView.ViewHolder {
     public TextView mContentTextView;
     public LawsViewHolder(View itemView) {
         super(itemView);
-        mTitleTextView = (TextView) itemView.findViewById(R.id.encyclopaedia_title_text);
-        mContentTextView = (TextView) itemView.findViewById(R.id.encyclopaedia_content_text);
+        mTitleTextView = (TextView) itemView.findViewById(R.id.laws_title_text);
+        mContentTextView = (TextView) itemView.findViewById(R.id.laws_content_text);
     }
 }

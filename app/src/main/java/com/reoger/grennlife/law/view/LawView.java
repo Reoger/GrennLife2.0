@@ -34,7 +34,7 @@ import space.sye.z.library.manager.RecyclerViewManager;
  */
 public class LawView extends AppCompatActivity implements ILawView {
     private ArrayList<BmobObject> mDatas;
-    private RefreshRecyclerView mRecyclerView;
+    private RefreshRecyclerView mLawRecyclerView;
     private LawsViewAdapter mAdapter;
 
     private IServerData mServerDataCompl;
@@ -44,18 +44,21 @@ public class LawView extends AppCompatActivity implements ILawView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initView();
+        setContentView(R.layout.layout_laws_main);
         initAttr();
+        initView();
         recycleViewMethod();
     }
 
     private void initView() {
-        mRecyclerView = (RefreshRecyclerView) findViewById(R.id.dynamic_recyclerView);
+        mLawRecyclerView = (RefreshRecyclerView) findViewById(R.id.dynamic_recyclerView);
     }
 
     private void initAttr() {
+        Log.d("qqe6",""+ (mDBOperationComl==null) );
         mServerDataCompl = new ServerDataCompl();
         mDBOperationComl = DBOperationCompl.getInstance(this,ServerDataCompl.BEAN_TYPE_LAWS);
+        Log.d("qqe7",""+ (mDBOperationComl==null)+mDBOperationComl.getmTableName());
 
         mDatas = mDBOperationComl.getDataFromLocalDB();
         Log.d("qqw", "finish read data :" + mDatas.size());
@@ -65,7 +68,7 @@ public class LawView extends AppCompatActivity implements ILawView {
             Log.d("in encyclopaedia view", "succeed in reading from local db");
         } else {
             //耗时操作
-            mDatas = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA);
+            mDatas = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_LAWS);
             Log.d("qqe", "initAttr: " + (mDatas == null)+ " "+mDatas.size());
 //            //存入数据库
 //            mDBOperationComl.doSaveDataIntoDB(mData);
@@ -107,7 +110,7 @@ public class LawView extends AppCompatActivity implements ILawView {
                 Toast.makeText(CustomApplication.getContext(), "position:" + position, Toast.LENGTH_SHORT)
                         .show();
             }
-        }).into(mRecyclerView, this);
+        }).into(mLawRecyclerView, this);
     }
 
     private Handler mHandler = new Handler() {
@@ -125,9 +128,10 @@ public class LawView extends AppCompatActivity implements ILawView {
                 case 23:
                     break;
             }
-            mRecyclerView.onRefreshCompleted();
-            Log.d("qqw", "before notify size :" + mDatas.size());
+            mLawRecyclerView.onRefreshCompleted();
+            Log.d("qqw", "before notify size :" + mDatas.size() + "db table:"+mDBOperationComl.getmTableName());
             //存入数据库
+
             mDBOperationComl.doSaveDataIntoDB(mDatas);
 //            mData.clear();
             mAdapter.notifyDataSetChanged();

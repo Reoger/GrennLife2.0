@@ -23,6 +23,7 @@ import com.reoger.grennlife.MainProject.presenter.IMainPresenter;
 import com.reoger.grennlife.MainProject.presenter.MainPresenterComple;
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.view.EncyclopaediaView;
+import com.reoger.grennlife.law.view.LawView;
 import com.reoger.grennlife.news.view.NewsView;
 import com.reoger.grennlife.utils.toast;
 
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton mUserImg;
     private Button mBaikeBtn;
     private Button mNewsBtn;
+    private Button mLawsBtn;
 
 
     private ArrayList<String> mDatas;
@@ -134,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mBaikeBtn.setOnClickListener(this);
         mNewsBtn.setOnClickListener(this);
+        mLawsBtn.setOnClickListener(this);
 
         mComeEnMonitoring.setOnClickListener(this);
         mComeRecycle.setOnClickListener(this);
@@ -194,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //位于home的button
         mBaikeBtn = (Button) tab01.findViewById(R.id.home_en_baike);
         mNewsBtn = (Button) tab01.findViewById(R.id.home_en_news);
-
+        mLawsBtn = (Button) tab01.findViewById(R.id.home_en_laws);
 
 
         mComeEnMonitoring = (Button) tab01.findViewById(R.id.home_en_control);
@@ -273,6 +276,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.home_en_news:
                 Intent newsIntent = new Intent(this, NewsView.class);
                 startActivity(newsIntent);
+                break;
+            case R.id.home_en_laws:
+                Intent lawsIntent = new Intent(this, LawView.class);
+                startActivity(lawsIntent);
                 break;
 
         }

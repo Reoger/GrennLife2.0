@@ -51,6 +51,8 @@
             android:label="环保百科"/>
         <activity android:name=".news.view.NewsView"
             android:label="环保新闻" />
+        <activity android:name=".law.view.LawView"
+            android:label="法律法规" />
 
 
     </application>
