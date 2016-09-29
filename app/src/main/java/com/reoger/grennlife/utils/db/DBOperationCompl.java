@@ -12,6 +12,8 @@ import com.reoger.grennlife.law.db.LawsOpenHelper;
 import com.reoger.grennlife.law.model.LawsBean;
 import com.reoger.grennlife.news.db.NewsDBOpenHelper;
 import com.reoger.grennlife.news.model.NewsBean;
+import com.reoger.grennlife.technology.db.TechnologyOpenHelper;
+import com.reoger.grennlife.technology.model.TechnologyBean;
 import com.reoger.grennlife.utils.ServerDataOperation.ServerDataCompl;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class DBOperationCompl implements IDBOperation {
     private static DBOperationCompl mPaediaCompl;
     private static DBOperationCompl mNewsCompl;
     private static DBOperationCompl mLawsCompl;
+    private static DBOperationCompl mTechnologyCompl;
 
     private SQLiteDatabase db = null;
     private int mBeanType;
@@ -74,6 +77,13 @@ public class DBOperationCompl implements IDBOperation {
                         null, LawsOpenHelper.VERSION);
                 db = lawsOpenHelper.getWritableDatabase();
                 break;
+            case ServerDataCompl.BEAN_TYPE_TECHNOLOGY:
+                this.mTableName = TechnologyOpenHelper.TABLE_NAME;
+                TechnologyOpenHelper technologyOpenHelper = new TechnologyOpenHelper(
+                        context, TechnologyOpenHelper.TABLE_NAME,
+                        null, TechnologyOpenHelper.VERSION);
+                db = technologyOpenHelper.getWritableDatabase();
+                break;
             default:
                 Log.d("qqe w","default:");
                 break;
@@ -102,6 +112,14 @@ public class DBOperationCompl implements IDBOperation {
                     Log.d("qqe 8", "getInstance: for return mLawsCompl");
                 }
                 return mLawsCompl;
+            case ServerDataCompl.BEAN_TYPE_TECHNOLOGY:
+//                mTechnologyCompl
+                if (mTechnologyCompl == null) {
+                    mTechnologyCompl = new DBOperationCompl(context,beanType);
+                    Log.d("qqe 8", "getInstance: for return techCompl");
+                }
+                return mTechnologyCompl;
+
         }
         return null;
     }
@@ -113,7 +131,7 @@ public class DBOperationCompl implements IDBOperation {
      */
     @Override
     public void doSaveDataIntoDB(ArrayList<BmobObject> datas) {
-        Log.d("qqe5","in do savce data "+mTableName + mBeanType + datas.size() + datas.get(0).getTableName());
+//        Log.d("qqe5","in do savce data "+mTableName + mBeanType + datas.size() + datas.get(0).getTableName());
         for (BmobObject one : datas) {
             //如果数据库已经重复了，那么就不存入数据
             //处理包含了百科，新闻
@@ -146,6 +164,17 @@ public class DBOperationCompl implements IDBOperation {
                     Log.d("qqe ","in do save data beantype:" + mBeanType);
                     Log.d("qqe", "in doSave data tablename" + mTableName);
                     if (lawsCursor.getCount() == 0) {
+                        saveAData(one);
+                    }
+                    break;
+                case ServerDataCompl.BEAN_TYPE_TECHNOLOGY:
+                    Cursor technologyCursor = queryTitle(
+                            ((TechnologyBean) one).getTitle(),
+                            TechnologyOpenHelper.TECHNOLOGY_TITLE);
+                    //cursor为空，则数据库并不存在，可以存入
+                    Log.d("qqe ","in do save data beantype:" + mBeanType);
+                    Log.d("qqe", "in doSave data tablename" + mTableName);
+                    if (technologyCursor.getCount() == 0) {
                         saveAData(one);
                     }
                     break;
@@ -198,6 +227,12 @@ public class DBOperationCompl implements IDBOperation {
                     }
                     Log.d("qqe2", "laws data size in local db :" + datas.size());
                     break;
+                case ServerDataCompl.BEAN_TYPE_TECHNOLOGY:
+                    for (BmobObject one : doGetTechnologyArray(cursor)) {
+                        datas.add(one);
+                    }
+                    Log.d("qqe2", "laws data size in local db :" + datas.size());
+                    break;
             }
         }
 
@@ -207,6 +242,25 @@ public class DBOperationCompl implements IDBOperation {
         return datas;
     }
 
+    //获取环保科技所有
+    private ArrayList<BmobObject> doGetTechnologyArray(Cursor cursor) {
+        ArrayList<BmobObject> datas = new ArrayList<>();
+        do {
+            TechnologyBean one = new TechnologyBean();
+            //标题
+            one.setTitle(cursor.getString(
+                    cursor.getColumnIndex(TechnologyOpenHelper.TECHNOLOGY_TITLE)));
+            //内容
+            one.setContent(cursor.getString(
+                    cursor.getColumnIndex(TechnologyOpenHelper.TECHNOLOGY_CONTENT)));
+
+            datas.add(one);
+
+
+        } while (cursor.moveToNext());
+
+        return datas;
+    }
     //获取法律私有
     private ArrayList<BmobObject> doGetLawsArray(Cursor cursor) {
         ArrayList<BmobObject> datas = new ArrayList<>();
@@ -223,7 +277,6 @@ public class DBOperationCompl implements IDBOperation {
 
 
         } while (cursor.moveToNext());
-
         return datas;
     }
     //为获取新闻的私有
@@ -306,10 +359,14 @@ public class DBOperationCompl implements IDBOperation {
                     values.put(NewsDBOpenHelper.NEWS_OUTLINE, ((NewsBean) one).getOutLine());
                     values.put(NewsDBOpenHelper.NEWS_DATE, ((NewsBean) one).getDate());
                     db.insert(NewsDBOpenHelper.TABLE_NAME, null, values);
-
-
-
-
+                    break;
+                case ServerDataCompl.BEAN_TYPE_TECHNOLOGY:
+                    values.put(TechnologyOpenHelper.TECHNOLOGY_TITLE, ((
+                            TechnologyBean) one).getTitle());
+                    values.put(TechnologyOpenHelper.TECHNOLOGY_CONTENT, ((
+                            TechnologyBean) one).getContent());
+                    db.insert(TechnologyOpenHelper.TABLE_NAME, null, values);
+                    break;
             }
         }
     }

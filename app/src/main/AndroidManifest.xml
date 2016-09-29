@@ -53,6 +53,8 @@
             android:label="环保新闻" />
         <activity android:name=".law.view.LawView"
             android:label="法律法规" />
+        <activity android:name=".technology.view.TechnologyView"
+            android:label="环保新闻" />
 
 
     </application>

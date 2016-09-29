@@ -106,7 +106,7 @@
             android:textColor="#8a8a8a"
             android:drawableTop="@mipmap/science"
             android:paddingTop="15dp"
-            android:id="@+id/button3" />
+            android:id="@+id/home_en_technology" />
     </LinearLayout>
 
 </LinearLayout>

@@ -7,6 +7,8 @@ import com.reoger.grennlife.law.db.LawsOpenHelper;
 import com.reoger.grennlife.law.model.LawsBean;
 import com.reoger.grennlife.news.db.NewsDBOpenHelper;
 import com.reoger.grennlife.news.model.NewsBean;
+import com.reoger.grennlife.technology.db.TechnologyOpenHelper;
+import com.reoger.grennlife.technology.model.TechnologyBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +39,35 @@ public class ServerDataCompl implements IServerData {
                 return newsType();
             case BEAN_TYPE_LAWS:
                 return lawsType();
+            case BEAN_TYPE_TECHNOLOGY:
+                return technologyType();
 
         }
         return null;
     }
 
+
+    //从网络后台获取环保科技相关的词条
+    private ArrayList<BmobObject> technologyType() {
+        datas = new ArrayList<>();
+        BmobQuery<TechnologyBean> query = new BmobQuery<TechnologyBean>();
+        query.addWhereNotEqualTo(TechnologyOpenHelper.TECHNOLOGY_TITLE, "Barbie");
+        query.findObjects(new FindListener<TechnologyBean>() {
+            @Override
+            public void done(List<TechnologyBean> list, BmobException e) {
+                if (e == null) {
+                    for (TechnologyBean bean : list) {
+                        datas.add(bean);
+                    }
+                    Log.d("qqw", " done :" + datas.size());
+                } else {
+                    Log.i("bmob", "失败：" + e.getMessage() + "," + e.getErrorCode());
+                }
+            }
+        });
+        Log.d("qqe", "log before get data return" + datas.size());
+        return datas;
+    }
     //从网络后台获取法律法规相关词条
     private ArrayList<BmobObject> lawsType() {
         datas = new ArrayList<>();

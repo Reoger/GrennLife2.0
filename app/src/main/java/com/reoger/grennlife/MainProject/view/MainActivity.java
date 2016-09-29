@@ -25,6 +25,7 @@ import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.view.EncyclopaediaView;
 import com.reoger.grennlife.law.view.LawView;
 import com.reoger.grennlife.news.view.NewsView;
+import com.reoger.grennlife.technology.view.TechnologyView;
 import com.reoger.grennlife.utils.toast;
 
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBaikeBtn;
     private Button mNewsBtn;
     private Button mLawsBtn;
+    private Button mTechnologyBtn;
 
 
     private ArrayList<String> mDatas;
@@ -137,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBaikeBtn.setOnClickListener(this);
         mNewsBtn.setOnClickListener(this);
         mLawsBtn.setOnClickListener(this);
+        mTechnologyBtn.setOnClickListener(this);
 
         mComeEnMonitoring.setOnClickListener(this);
         mComeRecycle.setOnClickListener(this);
@@ -198,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBaikeBtn = (Button) tab01.findViewById(R.id.home_en_baike);
         mNewsBtn = (Button) tab01.findViewById(R.id.home_en_news);
         mLawsBtn = (Button) tab01.findViewById(R.id.home_en_laws);
+        mTechnologyBtn = (Button) tab01.findViewById(R.id.home_en_technology);
 
 
         mComeEnMonitoring = (Button) tab01.findViewById(R.id.home_en_control);
@@ -280,6 +284,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.home_en_laws:
                 Intent lawsIntent = new Intent(this, LawView.class);
                 startActivity(lawsIntent);
+                break;
+            case R.id.home_en_technology:
+                Intent technologyIntent = new Intent(this, TechnologyView.class);
+                startActivity(technologyIntent);
                 break;
 
         }

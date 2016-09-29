@@ -67,9 +67,6 @@ public class TechnologyView extends AppCompatActivity {
             //耗时操作
             mData = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_TECHNOLOGY);
             Log.d("qqe", "initAttr: " + (mData == null) + " " + mData.size());
-//            //存入数据库
-//            mDBOperationComl.doSaveDataIntoDB(mData);
-//            Log.d("qqe","成功存入数据库哦"+mData.size());
         }
         mTechnologyAdapter = new TechnologyAdapter(this, mData);
 
