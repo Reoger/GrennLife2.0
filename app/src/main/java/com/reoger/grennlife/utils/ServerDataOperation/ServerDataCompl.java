@@ -23,6 +23,7 @@ public class ServerDataCompl implements IServerData {
     public static final int BEAN_TYPE_ENCYCLOPAEDIA = 1;
     public static final int BEAN_TYPE_NEWS = 2;
     public static final int BEAN_TYPE_LAWS = 3;
+    public static final int BEAN_TYPE_TECHNOLOGY = 4;
 
     private ArrayList<BmobObject> datas;
 
