@@ -5,7 +5,7 @@ import cn.bmob.v3.BmobObject;
 /**
  * Created by admin on 2016/9/18.
  */
-public class EncyclopaediaBean extends BmobObject{
+public class EncyclopaediaBean extends BmobObject {
     private String mTitle;
     private String mContent;
     private String mSource;
@@ -68,4 +68,3 @@ public class EncyclopaediaBean extends BmobObject{
         this.mContent = mContent;
     }
 }
-
