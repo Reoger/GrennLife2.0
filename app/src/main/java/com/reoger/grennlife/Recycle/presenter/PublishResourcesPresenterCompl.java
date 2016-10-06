@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.Recycle.model.Garbager;
 import com.reoger.grennlife.Recycle.model.OldThing;
@@ -19,8 +20,6 @@ import com.yuyh.library.imgsel.ImgSelConfig;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
-
-import static com.squareup.picasso.Picasso.with;
 
 /**
  * Created by 24540 on 2016/9/19.
@@ -61,7 +60,7 @@ public class PublishResourcesPresenterCompl implements IPublishResourcesPresente
                 .titleBgColor(Color.parseColor("#3F51B5"))
                 // 裁剪大小。needCrop为true的时候配置
                 .cropSize(1, 1, 200, 200)
-                .needCrop(true)
+                .needCrop(false)
                 // 第一个是否显示相机
                 .needCamera(true)
                 // 最大选择图片数量
@@ -75,7 +74,7 @@ public class PublishResourcesPresenterCompl implements IPublishResourcesPresente
         @Override
         public void displayImage(Context context, String path, ImageView imageView) {
             // TODO 在这边可以自定义图片加载库来加载ImageView，例如Glide、Picasso、ImageLoader等
-            with(context).load(path).into(imageView);
+            Glide.with(context).load(path).into(imageView);
         }
     };
 

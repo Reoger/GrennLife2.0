@@ -1,5 +1,7 @@
 package com.reoger.grennlife.monitoring.Model;
 
+import com.reoger.grennlife.loginMVP.model.UserMode;
+
 import cn.bmob.v3.BmobObject;
 
 /**
@@ -10,6 +12,30 @@ public class ReportInfo extends BmobObject implements IReportInfo{
     private String content;
     private String num;
     private String ImageUrl;
+    private UserMode userMode;
+    /**
+     * 用于标识举报后的进度
+     * 1.表示审核中
+     * 2.表示未通过审核
+     * 3.表示通过审核
+     */
+    private Integer statuts;
+
+
+    public UserMode getUserMode() {
+        return userMode;
+    }
+
+    public void setUserMode(UserMode userMode) {
+        this.userMode = userMode;
+    }
+    public Integer getStatuts() {
+        return statuts;
+    }
+
+    public void setStatuts(Integer statuts) {
+        this.statuts = statuts;
+    }
 
     public String getImageUrl() {
         return ImageUrl;

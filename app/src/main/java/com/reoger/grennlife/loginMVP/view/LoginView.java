@@ -24,15 +24,15 @@ import cn.bmob.v3.Bmob;
  * Created by 24540 on 2016/9/10.
  */
 public class LoginView extends AppCompatActivity implements ILoginViw, View.OnClickListener {
-    //    杰哥的
-//    private final static String APP_ID = "bd11c4f379b3dce8ec40ed462494ba25";
-    public final static String APP_ID = "92df55f29a323c8c205a15c39d0c63bc";
-    //W850565405@163.COM  这个账号的 短信资源不多
-//    public final static String APP_ID = "9d714aa8912264ebcaae79ad4db067ab";
+
     public final static String REMEMBER_PASSWORD = "remember_password";
     public final static String ACCOUNT = "account";
     public final static String PASSWORD = "password";
-
+    //    杰哥的
+    private final static String APP_ID = "bd11c4f379b3dce8ec40ed462494ba25";
+    //  public final static String APP_ID = "92df55f29a323c8c205a15c39d0c63bc";
+    //W850565405@163.COM  这个账号的 短信资源不多
+//    public final static String APP_ID = "9d714aa8912264ebcaae79ad4db067ab";
 
     private ILoginPresenter mILoginPresenter;
 
@@ -53,7 +53,6 @@ public class LoginView extends AppCompatActivity implements ILoginViw, View.OnCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login_main);
-
         Bmob.initialize(this, APP_ID);
         mILoginPresenter = new LoginPresenterCompl(this);
         initView();
@@ -85,6 +84,8 @@ public class LoginView extends AppCompatActivity implements ILoginViw, View.OnCl
         if (result) {
             Toast.makeText(this, "login success", Toast.LENGTH_SHORT).show();
             //进入到app的主界面
+
+
             mILoginPresenter.doComeMainActivity(this);
         } else {
             Toast.makeText(this, "login failed~00011!", Toast.LENGTH_SHORT).show();
@@ -99,6 +100,8 @@ public class LoginView extends AppCompatActivity implements ILoginViw, View.OnCl
         mPassword = (EditText) findViewById(R.id.login_password);
         mRegister = (TextView) findViewById(R.id.login_register);
         mLoginRemember = (CheckBox) findViewById(R.id.login_remember);
+
+
     }
 
     @Override

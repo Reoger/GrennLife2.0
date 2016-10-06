@@ -1,5 +1,6 @@
 package com.reoger.grennlife.MainProject.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,7 +10,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,17 +19,21 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.reoger.grennlife.MainProject.adapter.DynamicAdapter;
+import com.reoger.grennlife.MainProject.model.Dynamic;
 import com.reoger.grennlife.MainProject.presenter.IMainPresenter;
 import com.reoger.grennlife.MainProject.presenter.MainPresenterComple;
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.view.EncyclopaediaView;
+import com.reoger.grennlife.utils.log;
 import com.reoger.grennlife.utils.toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import space.sye.z.library.RefreshRecyclerView;
-import space.sye.z.library.adapter.RefreshRecyclerViewAdapter;
 import space.sye.z.library.listener.OnBothRefreshListener;
 import space.sye.z.library.manager.RecyclerMode;
 import space.sye.z.library.manager.RecyclerViewManager;
@@ -37,7 +41,7 @@ import space.sye.z.library.manager.RecyclerViewManager;
 /**
  * Created by 24540 on 2016/9/10.
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener,IMainActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, IMainActivity {
 
     private ViewPager mViewPager;
     private PagerAdapter mAdapter;
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout mTabHome;
     private LinearLayout mTabDynamic;
     private LinearLayout mTabUser;
+    private LinearLayout mMonitorHistory;
 
     private Button mComeEnMonitoring;
     private Button mComeRecycle;
@@ -56,10 +61,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton mUserImg;
     private Button mBaikeBtn;
 
-    private ArrayList<String> mDatas;
+
+    private ProgressDialog mDialog;
+
+
+    private List<Dynamic> mDatas = new ArrayList<>();
     private RefreshRecyclerView recyclerView;
     private DynamicAdapter mDynamicAdapter;
-    private int counts = 10;
+
+
+    private final static int INITIALZATION = 0x10;
+    private final static int LOAD_MORE = 0x11;
+    private final static int REFRESH = 0x12;
+    private final static int INITIALZATION_FINISH = 0x20;
 
 
     @Override
@@ -70,18 +84,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initEvents();
 
         recycleViewMethod();
-
     }
 
     private void recycleViewMethod() {
-        mDatas = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            mDatas.add("我真的很需要一个人在我身边，就是那种天天带我学习，张嘴闭嘴就是要考证，约我出去都是要去图书馆学习，看我不学习反手就给我一巴掌的引领我走向人生巅峰的那种人"+i);
-        }
-        View header = View.inflate(this,R.layout.recycle_header2,null);
-        View footer = View.inflate(this,R.layout.dynamic_botton,null);
-        mDynamicAdapter = new DynamicAdapter(this,mDatas);
-        RecyclerViewManager.with(mDynamicAdapter,new LinearLayoutManager(this))
+
+        showDialog();
+        initializationData();//初始化数据
+        testLALAL();
+
+        View header = View.inflate(this, R.layout.recycle_header2, null);
+        View footer = View.inflate(this, R.layout.dynamic_botton, null);
+
+        mDynamicAdapter = new DynamicAdapter(MainActivity.this, mDatas);
+        RecyclerViewManager.with(mDynamicAdapter, new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
                 .addHeaderView(header)
                 .addFooterView(footer)
@@ -89,33 +104,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onPullDown() {
                         Message msg = new Message();
-                        msg.what =10;
-                        mHandler.sendMessageDelayed(msg,2000);
+                        msg.what = REFRESH;
+                        mHandler.sendMessageDelayed(msg, 1000);
                     }
-                    //下拉刷新
+
+                    //下拉加载更多
                     @Override
                     public void onLoadMore() {
-
+                        Message msg = new Message();
+                        msg.what = LOAD_MORE;
+                        mHandler.sendMessageDelayed(msg, 1000);
                     }
-                }).setOnItemClickListener(new RefreshRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
-                android.widget.Toast.makeText(MainActivity.this, "item" + position, android.widget.Toast.LENGTH_SHORT).show();
-            }
-        }).into(recyclerView,this);
+                })
+//                .setOnItemClickListener(new RefreshRecyclerViewAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+//                android.widget.Toast.makeText(MainActivity.this, "item" + position, android.widget.Toast.LENGTH_SHORT).show();
+//            }
+//        })//这里是针对item的点击事件
+                .into(recyclerView, this);
     }
-    private Handler mHandler = new Handler(){
+
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
-                case 10:
-                    mDatas.add(0, "罗杰真丑"+"1123");
+            switch (msg.what) {
+                case INITIALZATION_FINISH://数据初始化完成
+                    new toast(getApplicationContext(), "数据加载完成");
+                    mDialog.dismiss();
                     break;
-                case 23:
-                    for (int i = 0; i < 10; i++){
-                        mDatas.add("item" + (counts + i));
-                    }
-                    counts += 10;
+                case LOAD_MORE://加载更多
+                    testLALAL();
+                    break;
+                case REFRESH://刷新
+                    testLALAL();
                     break;
             }
             recyclerView.onRefreshCompleted();
@@ -164,41 +186,82 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    /**
+     * 初始化数据
+     *
+     * @return
+     */
+    void initializationData() {
+
+        BmobQuery<Dynamic> query = new BmobQuery<>();
+        query.addWhereNotEqualTo("title", "null");
+        query.setLimit(10);
+        query.findObjects(new FindListener<Dynamic>() {
+            @Override
+            public void done(List<Dynamic> list, BmobException e) {
+                if (e == null) {
+                    mDatas.addAll(list);
+                    Message msg = new Message();
+                    msg.what = INITIALZATION_FINISH;
+                    mHandler.sendMessage(msg);
+                } else {
+                    log.d("TAG", "查询失败");
+                }
+            }
+        });
+
+    }
+
+    /**
+     * 加载更多
+     *
+     * @return
+     */
+    List<Dynamic> loadMoreData() {
+        List<Dynamic> list = new ArrayList<>();
+        BmobQuery<Dynamic> query = new BmobQuery<>();
+
+        return list;
+    }
+
+    /**
+     * 更新数据
+     */
+    List<Dynamic> refreshData() {
+        List<Dynamic> list = new ArrayList<>();
+        BmobQuery<Dynamic> query = new BmobQuery<>();
+
+        return list;
+    }
+
     private void initView() {
         mViewPager = (ViewPager) findViewById(R.id.main_viewPager);
-
         mTabHome = (LinearLayout) findViewById(R.id.main_bottom_home);
         mTabDynamic = (LinearLayout) findViewById(R.id.main_bottom_dynamic);
         mTabUser = (LinearLayout) findViewById(R.id.main_bottom_user);
-
         mHomeImg = (ImageButton) findViewById(R.id.main_bottom_home_img);
         mDynamicImg = (ImageButton) findViewById(R.id.main_bottom_dynamic_img);
         mUserImg = (ImageButton) findViewById(R.id.main_bottom_user_img);
-
-
-
         mainPresenter = new MainPresenterComple(this);
 
         mHomeImg.setImageResource(R.mipmap.home_bright);
 
         LayoutInflater mInflater = LayoutInflater.from(this);
-        View tab01 = mInflater.inflate(R.layout.layout_home_main, null);
-        View tab02 = mInflater.inflate(R.layout.layout_base_main, null);
-        View tab03 = mInflater.inflate(R.layout.layout_user_main, null);
-
+        View tab01 = mInflater.inflate(R.layout.layout_home_main, null);//主界面
+        View tab02 = mInflater.inflate(R.layout.layout_base_main, null);//动态界面
+        View tab03 = mInflater.inflate(R.layout.layout_user_main, null);//用户界面
         //位于home的button
         mBaikeBtn = (Button) tab01.findViewById(R.id.home_en_baike);
-
-
         mComeEnMonitoring = (Button) tab01.findViewById(R.id.home_en_control);
         mComeRecycle = (Button) tab01.findViewById(R.id.home_resources_recycle);
+
+        mMonitorHistory = (LinearLayout) tab03.findViewById(R.id.user_monitoring_history);
 
         recyclerView = (RefreshRecyclerView) tab02.findViewById(R.id.dynamic_recyclerView);
 
         mViews.add(tab01);
         mViews.add(tab02);
         mViews.add(tab03);
-
 
 
         mAdapter = new PagerAdapter() {
@@ -253,21 +316,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mUserImg.setImageResource(R.mipmap.my_bright);
                 break;
             case R.id.home_en_control:
-                mainPresenter.doComeActivity(MainActivity.this,MainPresenterComple.MONITORING);
+                mainPresenter.doComeActivity(MainActivity.this, MainPresenterComple.MONITORING);
                 break;
             case R.id.home_resources_recycle:
-                mainPresenter.doComeActivity(MainActivity.this,MainPresenterComple.RECYCLE);
+                mainPresenter.doComeActivity(MainActivity.this, MainPresenterComple.RECYCLE);
                 break;
             case R.id.home_en_baike:
-                Log.d("debug","baike btn");
+                Log.d("debug", "baike btn");
                 Intent intent = new Intent(this, EncyclopaediaView.class);
                 startActivity(intent);
+            case R.id.user_monitoring_history:
+                break;
         }
     }
 
-    public void addNewsDynamic(View view){
-        new toast(this,"点击事件测试");
-        startActivity(new Intent(this,DynamicActivity.class));
+    public void addNewsDynamic(View view) {
+        new toast(this, "点击事件测试");
+        startActivity(new Intent(this, DynamicActivity.class));
     }
 
+
+    private void showDialog() {
+        mDialog = new ProgressDialog(this);
+        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mDialog.setTitle("Loading...");
+        mDialog.setMessage("正在加载中，请稍后...");
+        mDialog.setCancelable(true);
+        mDialog.show();
+    }
+
+    private void testLALAL() {
+        Dynamic item = new Dynamic();
+        item.setContent("sds");
+        item.setTitle("123");
+        item.setImageUrl("[http://bmob-cdn-6268.b0.upaiyun.com/2016/10/05/17bf2a2321db4d008dc7b20fc3b1e755.png, http://bmob-cdn-6268.b0.upai");
+        mDatas.add(item);
+    }
 }

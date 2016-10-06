@@ -1,13 +1,18 @@
 package com.reoger.grennlife.MainProject.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.reoger.grennlife.MainProject.model.Dynamic;
 import com.reoger.grennlife.MainProject.model.MyViewHolder;
+import com.reoger.grennlife.MainProject.view.CommentActivity;
 import com.reoger.grennlife.R;
+import com.reoger.grennlife.utils.toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +23,11 @@ import java.util.List;
  */
 public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder>{
     private Context mContext;
-    private List mDatas = new ArrayList<>();
+    private List<Dynamic> mDatas = new ArrayList<>();
 
-    public DynamicAdapter(Context contex,List datas) {
+    public static final String COMMENTS = "comments";
+
+    public DynamicAdapter(Context contex,List<Dynamic> datas) {
         mContext = contex;
         mDatas= datas;
     }
@@ -33,8 +40,27 @@ public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.mItemText.setText(mDatas.get(position)+"sdhi");
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
+        holder.mItemContent.setText(mDatas.get(position).getContent().toString());
+      // holder.mItemAuthor.setText(mDatas.get(position).getAuthor().toString());
+        // holder.mItemAuthor.setText(mDatas.get(position).getAuthor().toString());
+        holder.mDynamicLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new toast(mContext,"点击了喜欢"+position);
+            }
+        });
+        holder.mDynamicComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new toast(mContext,"评论ing");
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(COMMENTS,mDatas.get(position));
+                Intent intent = new Intent(mContext, CommentActivity.class);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -42,10 +68,5 @@ public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder>{
         return mDatas.size();
     }
 
-    public void  getData() {
-        for (int i = 0; i < 10; i++) {
-            mDatas.add("我就是最帅(on adapter)"+i);
-        }
 
-    }
 }
