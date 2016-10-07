@@ -21,10 +21,16 @@
         android:layout_height="280dp"
         android:background="@color/grey">
 
-        <ImageButton
+        <com.reoger.grennlife.recyclerPlayView.gear.BannerViewPager
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/picture_"/>
+            android:id="@+id/home_en_recycler_play_view">
+
+        </com.reoger.grennlife.recyclerPlayView.gear.BannerViewPager>
+        <!--<ImageButton-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:src="@drawable/picture_"/>-->
     </LinearLayout>
     <View
         android:layout_width="match_parent"

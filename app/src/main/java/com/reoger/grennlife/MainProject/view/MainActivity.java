@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.reoger.grennlife.MainProject.adapter.DynamicAdapter;
@@ -25,6 +26,8 @@ import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.view.EncyclopaediaView;
 import com.reoger.grennlife.law.view.LawView;
 import com.reoger.grennlife.news.view.NewsView;
+import com.reoger.grennlife.recyclerPlayView.adapter.BannerViewPagerAdapter;
+import com.reoger.grennlife.recyclerPlayView.gear.BannerViewPager;
 import com.reoger.grennlife.technology.view.TechnologyView;
 import com.reoger.grennlife.utils.toast;
 
@@ -40,7 +43,7 @@ import space.sye.z.library.manager.RecyclerViewManager;
 /**
  * Created by 24540 on 2016/9/10.
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener,IMainActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, IMainActivity {
 
     private ViewPager mViewPager;
     private PagerAdapter mAdapter;
@@ -50,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout mTabHome;
     private LinearLayout mTabDynamic;
     private LinearLayout mTabUser;
+    //轮播图界面与adapter
+    private BannerViewPager mBannerView;
+    private BannerViewPagerAdapter mBannerAdapter;
 
     private Button mComeEnMonitoring;
     private Button mComeRecycle;
@@ -63,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mTechnologyBtn;
 
 
+    //轮播图的图ArrayList
+    private List<View> mBannerViewDatas;
     private ArrayList<String> mDatas;
     private RefreshRecyclerView recyclerView;
     private DynamicAdapter mDynamicAdapter;
@@ -83,12 +91,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void recycleViewMethod() {
         mDatas = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            mDatas.add("我真的很需要一个人在我身边，就是那种天天带我学习，张嘴闭嘴就是要考证，约我出去都是要去图书馆学习，看我不学习反手就给我一巴掌的引领我走向人生巅峰的那种人"+i);
+            mDatas.add("我真的很需要一个人在我身边，就是那种天天带我学习，张嘴闭嘴就是要考证，约我出去都是要去图书馆学习，看我不学习反手就给我一巴掌的引领我走向人生巅峰的那种人" + i);
         }
-        View header = View.inflate(this,R.layout.recycle_header2,null);
-        View footer = View.inflate(this,R.layout.dynamic_botton,null);
-        mDynamicAdapter = new DynamicAdapter(this,mDatas);
-        RecyclerViewManager.with(mDynamicAdapter,new LinearLayoutManager(this))
+        View header = View.inflate(this, R.layout.recycle_header2, null);
+        View footer = View.inflate(this, R.layout.dynamic_botton, null);
+        mDynamicAdapter = new DynamicAdapter(this, mDatas);
+        RecyclerViewManager.with(mDynamicAdapter, new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
                 .addHeaderView(header)
                 .addFooterView(footer)
@@ -96,9 +104,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onPullDown() {
                         Message msg = new Message();
-                        msg.what =10;
-                        mHandler.sendMessageDelayed(msg,2000);
+                        msg.what = 10;
+                        mHandler.sendMessageDelayed(msg, 2000);
                     }
+
                     //下拉刷新
                     @Override
                     public void onLoadMore() {
@@ -109,17 +118,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
                 android.widget.Toast.makeText(MainActivity.this, "item" + position, android.widget.Toast.LENGTH_SHORT).show();
             }
-        }).into(recyclerView,this);
+        }).into(recyclerView, this);
     }
-    private Handler mHandler = new Handler(){
+
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case 10:
-                    mDatas.add(0, "罗杰真丑"+"1123");
+                    mDatas.add(0, "罗杰真丑" + "1123");
                     break;
                 case 23:
-                    for (int i = 0; i < 10; i++){
+                    for (int i = 0; i < 10; i++) {
                         mDatas.add("item" + (counts + i));
                     }
                     counts += 10;
@@ -187,7 +197,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mUserImg = (ImageButton) findViewById(R.id.main_bottom_user_img);
 
 
-
         mainPresenter = new MainPresenterComple(this);
 
         mHomeImg.setImageResource(R.mipmap.home_bright);
@@ -197,7 +206,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View tab02 = mInflater.inflate(R.layout.layout_base_main, null);
         View tab03 = mInflater.inflate(R.layout.layout_user_main, null);
 
+        /**
+         * 轮播图控件初始化
+         */
+        mBannerView = (BannerViewPager) tab01.findViewById(R.id.home_en_recycler_play_view);
+        mBannerViewDatas = new ArrayList<>();
+        addOneResourceToData(R.drawable.recycler_play_a);
+        addOneResourceToData(R.drawable.recycler_play_b);
+        addOneResourceToData(R.drawable.recycler_play_c);
+        addOneResourceToData(R.drawable.picture_);
+//        addOneResourceToData(R.drawable.picture_2);
+        mBannerAdapter = new BannerViewPagerAdapter(mBannerViewDatas);
+        mBannerView.setAdapter(mBannerAdapter);
+        mBannerAdapter.notifyDataSetChanged();
         //位于home的button
+
         mBaikeBtn = (Button) tab01.findViewById(R.id.home_en_baike);
         mNewsBtn = (Button) tab01.findViewById(R.id.home_en_news);
         mLawsBtn = (Button) tab01.findViewById(R.id.home_en_laws);
@@ -212,7 +235,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mViews.add(tab01);
         mViews.add(tab02);
         mViews.add(tab03);
-
 
 
         mAdapter = new PagerAdapter() {
@@ -242,6 +264,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
+//    private void initData() {
+//        mImageData = new ArrayList<>();
+//        addOneResourceToData(R.drawable.a);
+//        addOneResourceToData(R.drawable.b);
+//        addOneResourceToData(R.drawable.c);
+//        addOneResourceToData(R.drawable.d);
+//        addOneResourceToData(R.drawable.e);
+//    }
+
+    //用于轮播图增加图片用方法
+    private void addOneResourceToData(int resId) {
+        ImageView one = new ImageView(this);
+        one.setImageResource(resId);
+        one.setScaleType(ImageView.ScaleType.FIT_XY);
+        mBannerViewDatas.add(one);
+    }
+
     /**
      * 将所有的图片切换为暗色的
      */
@@ -267,13 +307,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mUserImg.setImageResource(R.mipmap.my_bright);
                 break;
             case R.id.home_en_control:
-                mainPresenter.doComeActivity(MainActivity.this,MainPresenterComple.MONITORING);
+                mainPresenter.doComeActivity(MainActivity.this, MainPresenterComple.MONITORING);
                 break;
             case R.id.home_resources_recycle:
-                mainPresenter.doComeActivity(MainActivity.this,MainPresenterComple.RECYCLE);
+                mainPresenter.doComeActivity(MainActivity.this, MainPresenterComple.RECYCLE);
                 break;
             case R.id.home_en_baike:
-                Log.d("debug","baike btn");
+                Log.d("debug", "baike btn");
                 Intent intent = new Intent(this, EncyclopaediaView.class);
                 startActivity(intent);
                 break;
@@ -293,9 +333,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void addNewsDynamic(View view){
-        new toast(this,"点击事件测试");
-        startActivity(new Intent(this,DynamicActivity.class));
+    public void addNewsDynamic(View view) {
+        new toast(this, "点击事件测试");
+        startActivity(new Intent(this, DynamicActivity.class));
     }
 
 }
