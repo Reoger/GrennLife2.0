@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dynamic_comments_history"
+        android:paddingTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="这里要显示的内容就是动态的具体内容了，这里先不做"/>
+
+    <TextView
+        android:paddingTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下面显示的评论列表"/>
+
+    <ListView
+        android:id="@+id/dynamic_comments_list"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        ></ListView>
+
+<LinearLayout
+    android:layout_gravity="bottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <EditText
+        android:drawableLeft="@android:drawable/dark_header"
+        android:layout_width="0dp"
+        android:id="@+id/dynamic_comments_content"
+        android:layout_weight="6"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:padding="5dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:id="@+id/dynamic_comments_publish"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/ic_delete"/>
+</LinearLayout>
+</LinearLayout>

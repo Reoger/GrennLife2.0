@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.reoger.grennlife.ResetPassword.view.ResetPasswordView;
+import com.reoger.grennlife.loginMVP.model.UserMode;
 import com.reoger.grennlife.loginMVP.view.ILoginViw;
 import com.reoger.grennlife.loginMVP.view.LoginView;
 import com.reoger.grennlife.utils.CustomApplication;
@@ -14,7 +15,6 @@ import com.reoger.grennlife.utils.log;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
@@ -40,8 +40,9 @@ public class LoginPresenterCompl implements ILoginPresenter {
         this.mILoginView = mILoginView;
     }
 
+    //登陆的逻辑
     @Override
-    public void doLogin(String name, String password) {
+    public void doLogin(final String name, String password) {
         BmobUser user = new BmobUser();
         user.setUsername(name);
         user.setPassword(password);
@@ -49,6 +50,10 @@ public class LoginPresenterCompl implements ILoginPresenter {
             @Override
             public void done(BmobUser bmobUser, BmobException e) {
                 if (e == null) {
+                    CustomApplication application = new CustomApplication();
+                    application.setUserName(name);//设置全局的用户名
+                    application.setUserMode(BmobUser.getCurrentUser(UserMode.class));//保留当前的用户登录
+                    log.d("TAG","login"+application.getUserName()+" use"+application.getUserMode());
                   mILoginView.onLoginResult(true);
                     log.d(TAG,"登陆成功");
                 } else {

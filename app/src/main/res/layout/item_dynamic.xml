@@ -34,6 +34,7 @@
                     android:layout_height="wrap_content"
                     android:text="用户名"
                     android:textSize="20sp"
+                    android:id="@+id/dynamic_item_author"
                     android:layout_marginTop="18dp" />
 
                 <TextView
@@ -42,6 +43,7 @@
                     android:text="发布的时间+地点"
                     android:textSize="10sp"
                     android:padding="5dp"
+                    android:id="@+id/dynamic_item_time_location"
                     android:layout_marginTop="5dp"/>
 
             </LinearLayout>
@@ -50,7 +52,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/dynamic_item_text"
+            android:id="@+id/dynamic_item_content"
             android:text="我真的很需要一个人在我身边，就是那种天天带我学习，张嘴闭嘴就是要考证，约我出去都是要去图书馆学习，看我不学习反手就给我一巴掌的引领我走向人生巅峰的那种人"
             android:textSize="15sp"
             android:padding="10dp"
@@ -74,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/like"
                 android:layout_gravity="center"
+                android:id="@+id/dynamic_item_like"
                 android:layout_marginLeft="50dp"/>
 
             <TextView
@@ -96,6 +99,7 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/share__"
                 android:layout_gravity="center"
+                android:id="@+id/dynamic_item_share"
                 android:layout_marginLeft="40dp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -117,16 +121,16 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/comment_"
                 android:layout_gravity="center"
+                android:id="@+id/dynamic_item_comments"
                 android:layout_marginLeft="40dp"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" 评论"
                 android:textSize="12sp"
                 android:layout_gravity="center" />
-
         </LinearLayout>
-
     </LinearLayout>
 
 </LinearLayout>

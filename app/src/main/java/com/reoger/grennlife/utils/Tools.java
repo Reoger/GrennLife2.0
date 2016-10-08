@@ -64,8 +64,7 @@ public class Tools {
      */
     public String upLoadFile(final String picPath){
 
-        String test = "/storage/emulated/0/greenLife/1474033774728.long";
-        final BmobFile bmobFile = new BmobFile(new File(test));
+        final BmobFile bmobFile = new BmobFile(new File(picPath));
         bmobFile.uploadblock(new UploadFileListener() {
 
             @Override
