@@ -146,6 +146,5 @@ public class BannerViewPager extends FrameLayout implements ViewPager.OnPageChan
             mViewPagerScrollState = ViewPager.SCROLL_STATE_IDLE;
             mViewRealeseTime = (int) (System.currentTimeMillis()/1000);
         }
-
     }
 }
