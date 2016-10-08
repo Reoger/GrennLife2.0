@@ -8,11 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.reoger.grennlife.R;
-import com.reoger.grennlife.encyclopaedia.adapter.EncyclopaediaAdapter;
 import com.reoger.grennlife.law.adapter.LawsViewAdapter;
 import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.IServerData;
@@ -79,11 +77,11 @@ public class LawView extends AppCompatActivity implements ILawView {
 
 
     private void recycleViewMethod() {
-        View footer = View.inflate(this, R.layout.dynamic_botton, null);
+   //     View footer = View.inflate(this, R.layout.dynamic_botton, null);
         RecyclerViewManager.with(mAdapter, new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
 //                .addHeaderView(header)
-                .addFooterView(footer)
+          //      .addFooterView(footer)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {

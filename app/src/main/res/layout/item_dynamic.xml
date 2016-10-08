@@ -9,8 +9,8 @@
         android:orientation="vertical">
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="#edf5f1">
+            android:layout_height="5dp"
+            android:background="#44e0e0e0">
         </View>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -27,13 +27,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="用户名"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:id="@+id/dynamic_item_author"
                     android:layout_marginTop="18dp" />
 
@@ -41,10 +41,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="发布的时间+地点"
-                    android:textSize="10sp"
-                    android:padding="5dp"
                     android:id="@+id/dynamic_item_time_location"
-                    android:layout_marginTop="5dp"/>
+                    android:textSize="10sp"
+                    android:padding="5dp" />
 
             </LinearLayout>
         </LinearLayout>
@@ -62,7 +61,7 @@
             android:layout_width="350dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:background="@color/Ivory2">
+            android:background="#88e0e0e0">
         </View>
 
         <LinearLayout
@@ -71,13 +70,17 @@
             android:layout_gravity="center"
             android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/dynamic_item_like">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/like"
                 android:layout_gravity="center"
-                android:id="@+id/dynamic_item_like"
-                android:layout_marginLeft="50dp"/>
+                android:layout_marginLeft="45dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -87,11 +90,24 @@
                 android:layout_gravity="center"/>
 
             <View
-                android:layout_width="1dp"
+                android:layout_width="0.5dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="40dp"
-                android:background="@color/Ivory2">
+                android:background="#88e0e0e0">
+            </View>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/dynamic_item_share">
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:background="#88e0e0e0">
             </View>
 
             <ImageView
@@ -99,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/share__"
                 android:layout_gravity="center"
-                android:id="@+id/dynamic_item_share"
+
                 android:layout_marginLeft="40dp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -109,11 +125,25 @@
                 android:layout_gravity="center"/>
 
             <View
-                android:layout_width="1dp"
+                android:layout_width="0.5dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="40dp"
-                android:background="@color/Ivory2">
+                android:background="#88e0e0e0">
+            </View>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/dynamic_item_comments">
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:background="#88e0e0e0">
             </View>
 
             <ImageView
@@ -121,16 +151,26 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/comment_"
                 android:layout_gravity="center"
-                android:id="@+id/dynamic_item_comments"
+
                 android:layout_marginLeft="40dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 评论"
+                android:text=" 评论         "
                 android:textSize="12sp"
                 android:layout_gravity="center" />
+
+            </LinearLayout>
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#44e0e0e0">
+        </View>
+
     </LinearLayout>
+
 
 </LinearLayout>

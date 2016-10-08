@@ -108,13 +108,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         testLALAL();
 
         View header = View.inflate(this, R.layout.recycle_header2, null);
-        View footer = View.inflate(this, R.layout.dynamic_botton, null);
+     //   View footer = View.inflate(this, R.layout.dynamic_botton, null);
 
         mDynamicAdapter = new DynamicAdapter(MainActivity.this, mDatas);
         RecyclerViewManager.with(mDynamicAdapter, new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
                 .addHeaderView(header)
-                .addFooterView(footer)
+          //      .addFooterView(footer)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {
