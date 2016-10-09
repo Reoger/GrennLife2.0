@@ -1,4 +1,4 @@
-package com.reoger.grennlife.law.view;
+package com.reoger.grennlife.technology.view;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.adapter.EncyclopaediaAdapter;
-import com.reoger.grennlife.law.adapter.LawsViewAdapter;
+import com.reoger.grennlife.technology.adapter.TechnologyAdapter;
 import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.IServerData;
 import com.reoger.grennlife.utils.ServerDataOperation.ServerDataCompl;
@@ -30,57 +30,51 @@ import space.sye.z.library.manager.RecyclerMode;
 import space.sye.z.library.manager.RecyclerViewManager;
 
 /**
- * Created by Zimmerman on 2016/9/27.
+ * Created by admin on 2016/9/28.
  */
-public class LawView extends AppCompatActivity implements ILawView {
-    private ArrayList<BmobObject> mDatas;
-    private RefreshRecyclerView mLawRecyclerView;
-    private LawsViewAdapter mAdapter;
+public class TechnologyView extends AppCompatActivity {
+    private TechnologyAdapter mTechnologyAdapter;
+    private RefreshRecyclerView mRecyclerView;
+    private ArrayList<BmobObject> mData;
 
     private IServerData mServerDataCompl;
-    //数据库操作
     private IDBOperation mDBOperationComl;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_laws_main);
-        initAttr();
+        setContentView(R.layout.layout_technology_main);
         initView();
+        initAttr();
         recycleViewMethod();
     }
 
     private void initView() {
-        mLawRecyclerView = (RefreshRecyclerView) findViewById(R.id.dynamic_recyclerView);
+        mRecyclerView = (RefreshRecyclerView) findViewById(R.id.dynamic_recyclerView);
     }
 
     private void initAttr() {
-        Log.d("qqe6",""+ (mDBOperationComl==null) );
         mServerDataCompl = new ServerDataCompl();
-        mDBOperationComl = DBOperationCompl.getInstance(this,ServerDataCompl.BEAN_TYPE_LAWS);
-        Log.d("qqe7",""+ (mDBOperationComl==null)+mDBOperationComl.getmTableName());
-
-        mDatas = mDBOperationComl.getDataFromLocalDB();
-        Log.d("qqw", "finish read data :" + mDatas.size());
+        mDBOperationComl = DBOperationCompl.getInstance(this, ServerDataCompl.BEAN_TYPE_TECHNOLOGY);
+//        mData = new ArrayList<>();
+        mData = mDBOperationComl.getDataFromLocalDB();
+        Log.d("qqw", "finish read data :" + mData.size());
         //判定是否需要从网络后台读取数据
-        if (mDatas.size() > 0) {
+        if (mData.size() > 0) {
             //成功从数据库读入
             Log.d("in encyclopaedia view", "succeed in reading from local db");
         } else {
             //耗时操作
-            mDatas = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_LAWS);
-            Log.d("qqe", "initAttr: " + (mDatas == null)+ " "+mDatas.size());
-//            //存入数据库
-//            mDBOperationComl.doSaveDataIntoDB(mData);
-//            Log.d("qqe","成功存入数据库哦"+mData.size());
+            mData = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_TECHNOLOGY);
+            Log.d("qqe", "initAttr: " + (mData == null) + " " + mData.size());
         }
-        mAdapter = new LawsViewAdapter(this,mDatas);
-    }
+        mTechnologyAdapter = new TechnologyAdapter(this, mData);
 
+    }
 
     private void recycleViewMethod() {
         View footer = View.inflate(this, R.layout.dynamic_botton, null);
-        RecyclerViewManager.with(mAdapter, new LinearLayoutManager(this))
+        RecyclerViewManager.with(mTechnologyAdapter, new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
 //                .addHeaderView(header)
                 .addFooterView(footer)
@@ -100,8 +94,8 @@ public class LawView extends AppCompatActivity implements ILawView {
                         Message msg = new Message();
                         msg.what = 23;
                         //当前总的词条数目
-                        msg.arg1 = mAdapter.getItemCount();
-                        Log.d("qqw", "before handler :" + mDatas.size());
+                        msg.arg1 = mTechnologyAdapter.getItemCount();
+                        Log.d("qqw", "before handler :" + mData.size());
                         mHandler.sendMessageDelayed(msg, 2000);
                     }
                 }).setOnItemClickListener(new RefreshRecyclerViewAdapter.OnItemClickListener() {
@@ -110,7 +104,7 @@ public class LawView extends AppCompatActivity implements ILawView {
                 Toast.makeText(CustomApplication.getContext(), "position:" + position, Toast.LENGTH_SHORT)
                         .show();
             }
-        }).into(mLawRecyclerView, this);
+        }).into(mRecyclerView, this);
     }
 
     private Handler mHandler = new Handler() {
@@ -128,14 +122,12 @@ public class LawView extends AppCompatActivity implements ILawView {
                 case 23:
                     break;
             }
-            mLawRecyclerView.onRefreshCompleted();
-            Log.d("qqw", "before notify size :" + mDatas.size() + "db table:"+mDBOperationComl.getmTableName());
+            mRecyclerView.onRefreshCompleted();
+            Log.d("qqw", "before notify size :" + mData.size());
             //存入数据库
-
-            mDBOperationComl.doSaveDataIntoDB(mDatas);
+            mDBOperationComl.doSaveDataIntoDB(mData);
 //            mData.clear();
-            mAdapter.notifyDataSetChanged();
+            mTechnologyAdapter.notifyDataSetChanged();
         }
     };
-
 }

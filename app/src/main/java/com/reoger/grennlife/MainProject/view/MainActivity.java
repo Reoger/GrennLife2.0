@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.reoger.grennlife.MainProject.adapter.DynamicAdapter;
@@ -24,6 +25,11 @@ import com.reoger.grennlife.MainProject.presenter.IMainPresenter;
 import com.reoger.grennlife.MainProject.presenter.MainPresenterComple;
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.view.EncyclopaediaView;
+import com.reoger.grennlife.law.view.LawView;
+import com.reoger.grennlife.news.view.NewsView;
+import com.reoger.grennlife.recyclerPlayView.adapter.BannerViewPagerAdapter;
+import com.reoger.grennlife.recyclerPlayView.gear.BannerViewPager;
+import com.reoger.grennlife.technology.view.TechnologyView;
 import com.reoger.grennlife.utils.log;
 import com.reoger.grennlife.utils.toast;
 
@@ -51,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout mTabHome;
     private LinearLayout mTabDynamic;
     private LinearLayout mTabUser;
+    //轮播图界面与adapter
+    private BannerViewPager mBannerView;
+    private BannerViewPagerAdapter mBannerAdapter;
     private LinearLayout mMonitorHistory;
 
     private Button mComeEnMonitoring;
@@ -60,9 +69,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton mDynamicImg;
     private ImageButton mUserImg;
     private Button mBaikeBtn;
-
+    private Button mNewsBtn;
+    private Button mLawsBtn;
+    private Button mTechnologyBtn;
 
     private ProgressDialog mDialog;
+    //轮播图的图ArrayList
+    private List<View> mBannerViewDatas;
+//    private ArrayList<String> mDatas;
 
 
     private List<Dynamic> mDatas = new ArrayList<>();
@@ -84,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initEvents();
 
         recycleViewMethod();
+
     }
 
     private void recycleViewMethod() {
@@ -151,6 +166,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTabDynamic.setOnClickListener(this);
         mTabUser.setOnClickListener(this);
         mBaikeBtn.setOnClickListener(this);
+        mNewsBtn.setOnClickListener(this);
+        mLawsBtn.setOnClickListener(this);
+        mTechnologyBtn.setOnClickListener(this);
 
         mComeEnMonitoring.setOnClickListener(this);
         mComeRecycle.setOnClickListener(this);
@@ -236,12 +254,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         mViewPager = (ViewPager) findViewById(R.id.main_viewPager);
+
         mTabHome = (LinearLayout) findViewById(R.id.main_bottom_home);
         mTabDynamic = (LinearLayout) findViewById(R.id.main_bottom_dynamic);
         mTabUser = (LinearLayout) findViewById(R.id.main_bottom_user);
+
         mHomeImg = (ImageButton) findViewById(R.id.main_bottom_home_img);
         mDynamicImg = (ImageButton) findViewById(R.id.main_bottom_dynamic_img);
         mUserImg = (ImageButton) findViewById(R.id.main_bottom_user_img);
+
+
+
         mainPresenter = new MainPresenterComple(this);
 
         mHomeImg.setImageResource(R.mipmap.home_bright);
@@ -250,8 +273,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View tab01 = mInflater.inflate(R.layout.layout_home_main, null);//主界面
         View tab02 = mInflater.inflate(R.layout.layout_base_main, null);//动态界面
         View tab03 = mInflater.inflate(R.layout.layout_user_main, null);//用户界面
+
+        /**
+         * 轮播图控件初始化
+         */
+        mBannerView = (BannerViewPager) tab01.findViewById(R.id.home_en_recycler_play_view);
+        mBannerViewDatas = new ArrayList<>();
+        addOneResourceToData(R.drawable.recycler_play_a);
+        addOneResourceToData(R.drawable.recycler_play_b);
+        addOneResourceToData(R.drawable.recycler_play_c);
+        addOneResourceToData(R.drawable.picture_);
+//        addOneResourceToData(R.drawable.picture_2);
+        mBannerAdapter = new BannerViewPagerAdapter(mBannerViewDatas);
+        mBannerView.setAdapter(mBannerAdapter);
+        mBannerAdapter.notifyDataSetChanged();
         //位于home的button
         mBaikeBtn = (Button) tab01.findViewById(R.id.home_en_baike);
+        mNewsBtn = (Button) tab01.findViewById(R.id.home_en_news);
+        mLawsBtn = (Button) tab01.findViewById(R.id.home_en_laws);
+        mTechnologyBtn = (Button) tab01.findViewById(R.id.home_en_technology);
+
+
         mComeEnMonitoring = (Button) tab01.findViewById(R.id.home_en_control);
         mComeRecycle = (Button) tab01.findViewById(R.id.home_resources_recycle);
 
@@ -291,6 +333,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
+//    private void initData() {
+//        mImageData = new ArrayList<>();
+//        addOneResourceToData(R.drawable.a);
+//        addOneResourceToData(R.drawable.b);
+//        addOneResourceToData(R.drawable.c);
+//        addOneResourceToData(R.drawable.d);
+//        addOneResourceToData(R.drawable.e);
+//    }
+
+    //用于轮播图增加图片用方法
+    private void addOneResourceToData(int resId) {
+        ImageView one = new ImageView(this);
+        one.setImageResource(resId);
+        one.setScaleType(ImageView.ScaleType.FIT_XY);
+        mBannerViewDatas.add(one);
+    }
+
     /**
      * 将所有的图片切换为暗色的
      */
@@ -327,6 +387,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             case R.id.user_monitoring_history:
                 break;
+            case R.id.home_en_news:
+                Intent newsIntent = new Intent(this, NewsView.class);
+                startActivity(newsIntent);
+                break;
+            case R.id.home_en_laws:
+                Intent lawsIntent = new Intent(this, LawView.class);
+                startActivity(lawsIntent);
+                break;
+            case R.id.home_en_technology:
+                Intent technologyIntent = new Intent(this, TechnologyView.class);
+                startActivity(technologyIntent);
+                break;
+
         }
     }
 

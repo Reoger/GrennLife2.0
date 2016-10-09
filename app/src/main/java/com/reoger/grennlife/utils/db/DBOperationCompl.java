@@ -12,6 +12,8 @@ import com.reoger.grennlife.law.db.LawsOpenHelper;
 import com.reoger.grennlife.law.model.LawsBean;
 import com.reoger.grennlife.news.db.NewsDBOpenHelper;
 import com.reoger.grennlife.news.model.NewsBean;
+import com.reoger.grennlife.technology.db.TechnologyOpenHelper;
+import com.reoger.grennlife.technology.model.TechnologyBean;
 import com.reoger.grennlife.utils.ServerDataOperation.ServerDataCompl;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class DBOperationCompl implements IDBOperation {
     private static DBOperationCompl mPaediaCompl;
     private static DBOperationCompl mNewsCompl;
     private static DBOperationCompl mLawsCompl;
+    private static DBOperationCompl mTechnologyCompl;
 
     private SQLiteDatabase db = null;
     private int mBeanType;
@@ -51,6 +54,8 @@ public class DBOperationCompl implements IDBOperation {
         //包含了百科和新闻
         switch (beanType) {
             case ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA:
+                Log.d("qqe 1234","aftern into bean laws");
+
                 this.mTableName = EncyclopaediaOpenHelper.TABLE_NAME;
                 EncyclopaediaOpenHelper helper = new EncyclopaediaOpenHelper(context, EncyclopaediaOpenHelper.TABLE_NAME,
                         null, EncyclopaediaOpenHelper.VERSION);
@@ -58,10 +63,29 @@ public class DBOperationCompl implements IDBOperation {
                 db = helper.getWritableDatabase();
                 break;
             case ServerDataCompl.BEAN_TYPE_NEWS:
+                Log.d("qqe 123","aftern into bean laws");
+
                 this.mTableName = NewsDBOpenHelper.TABLE_NAME;
                 NewsDBOpenHelper newsHelper = new NewsDBOpenHelper(context, NewsDBOpenHelper.TABLE_NAME,
                         null, NewsDBOpenHelper.VERSION);
                 db = newsHelper.getWritableDatabase();
+                break;
+            case ServerDataCompl.BEAN_TYPE_LAWS:
+                Log.d("qqe 12","aftern into bean laws");
+                this.mTableName = LawsOpenHelper.TABLE_NAME;
+                LawsOpenHelper lawsOpenHelper = new LawsOpenHelper(context, LawsOpenHelper.TABLE_NAME,
+                        null, LawsOpenHelper.VERSION);
+                db = lawsOpenHelper.getWritableDatabase();
+                break;
+            case ServerDataCompl.BEAN_TYPE_TECHNOLOGY:
+                this.mTableName = TechnologyOpenHelper.TABLE_NAME;
+                TechnologyOpenHelper technologyOpenHelper = new TechnologyOpenHelper(
+                        context, TechnologyOpenHelper.TABLE_NAME,
+                        null, TechnologyOpenHelper.VERSION);
+                db = technologyOpenHelper.getWritableDatabase();
+                break;
+            default:
+                Log.d("qqe w","default:");
                 break;
         }
     }
@@ -84,21 +108,20 @@ public class DBOperationCompl implements IDBOperation {
                 return mNewsCompl;
             case ServerDataCompl.BEAN_TYPE_LAWS:
                 if (mLawsCompl == null) {
-                    mNewsCompl = new DBOperationCompl(context,beanType);
+                    mLawsCompl = new DBOperationCompl(context,beanType);
+                    Log.d("qqe 8", "getInstance: for return mLawsCompl");
                 }
                 return mLawsCompl;
+            case ServerDataCompl.BEAN_TYPE_TECHNOLOGY:
+//                mTechnologyCompl
+                if (mTechnologyCompl == null) {
+                    mTechnologyCompl = new DBOperationCompl(context,beanType);
+                    Log.d("qqe 8", "getInstance: for return techCompl");
+                }
+                return mTechnologyCompl;
+
         }
         return null;
-//        switch (beanType) {
-//            //百科类：
-//            case ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA:
-//                if (mPaediaCompl == null) {
-//                    mPaediaCompl = new DBOperationCompl(context, beanType);
-//                }
-//                return mPaediaCompl;
-//
-//        }
-//        return null;
     }
 
     /**
@@ -118,8 +141,6 @@ public class DBOperationCompl implements IDBOperation {
                             ((EncyclopaediaBean) one).getmTitle(),
                             EncyclopaediaOpenHelper.BAIKE_TITLE);
                     //cursor为空，则数据库并不存在，可以存入
-                    Log.d("qqe ","in do save data beantype:" + mBeanType);
-                    Log.d("qqe", "in doSave data tablename" + mTableName);
                     if (cursor.getCount() == 0) {
                         saveAData(one);
                     }
@@ -146,6 +167,17 @@ public class DBOperationCompl implements IDBOperation {
                         saveAData(one);
                     }
                     break;
+                case ServerDataCompl.BEAN_TYPE_TECHNOLOGY:
+                    Cursor technologyCursor = queryTitle(
+                            ((TechnologyBean) one).getTitle(),
+                            TechnologyOpenHelper.TECHNOLOGY_TITLE);
+                    //cursor为空，则数据库并不存在，可以存入
+                    Log.d("qqe ","in do save data beantype:" + mBeanType);
+                    Log.d("qqe", "in doSave data tablename" + mTableName);
+                    if (technologyCursor.getCount() == 0) {
+                        saveAData(one);
+                    }
+                    break;
             }
 
         }
@@ -156,7 +188,6 @@ public class DBOperationCompl implements IDBOperation {
     private Cursor queryTitle(String titleName, String titleKey) {
         return db.query(mTableName, new String[]{titleKey}, titleKey + " = ?",
                 new String[]{titleName}, null, null, null);
-
     }
 
     /**
@@ -196,6 +227,12 @@ public class DBOperationCompl implements IDBOperation {
                     }
                     Log.d("qqe2", "laws data size in local db :" + datas.size());
                     break;
+                case ServerDataCompl.BEAN_TYPE_TECHNOLOGY:
+                    for (BmobObject one : doGetTechnologyArray(cursor)) {
+                        datas.add(one);
+                    }
+                    Log.d("qqe2", "laws data size in local db :" + datas.size());
+                    break;
             }
         }
 
@@ -205,6 +242,25 @@ public class DBOperationCompl implements IDBOperation {
         return datas;
     }
 
+    //获取环保科技所有
+    private ArrayList<BmobObject> doGetTechnologyArray(Cursor cursor) {
+        ArrayList<BmobObject> datas = new ArrayList<>();
+        do {
+            TechnologyBean one = new TechnologyBean();
+            //标题
+            one.setTitle(cursor.getString(
+                    cursor.getColumnIndex(TechnologyOpenHelper.TECHNOLOGY_TITLE)));
+            //内容
+            one.setContent(cursor.getString(
+                    cursor.getColumnIndex(TechnologyOpenHelper.TECHNOLOGY_CONTENT)));
+
+            datas.add(one);
+
+
+        } while (cursor.moveToNext());
+
+        return datas;
+    }
     //获取法律私有
     private ArrayList<BmobObject> doGetLawsArray(Cursor cursor) {
         ArrayList<BmobObject> datas = new ArrayList<>();
@@ -221,7 +277,6 @@ public class DBOperationCompl implements IDBOperation {
 
 
         } while (cursor.moveToNext());
-
         return datas;
     }
     //为获取新闻的私有
@@ -304,10 +359,14 @@ public class DBOperationCompl implements IDBOperation {
                     values.put(NewsDBOpenHelper.NEWS_OUTLINE, ((NewsBean) one).getOutLine());
                     values.put(NewsDBOpenHelper.NEWS_DATE, ((NewsBean) one).getDate());
                     db.insert(NewsDBOpenHelper.TABLE_NAME, null, values);
-
-
-
-
+                    break;
+                case ServerDataCompl.BEAN_TYPE_TECHNOLOGY:
+                    values.put(TechnologyOpenHelper.TECHNOLOGY_TITLE, ((
+                            TechnologyBean) one).getTitle());
+                    values.put(TechnologyOpenHelper.TECHNOLOGY_CONTENT, ((
+                            TechnologyBean) one).getContent());
+                    db.insert(TechnologyOpenHelper.TABLE_NAME, null, values);
+                    break;
             }
         }
     }

@@ -39,11 +39,13 @@ public class LawsViewAdapter extends RecyclerView.Adapter<LawsViewHolder> {
         holder.mContentTextView.setText(
                 (
                         (LawsBean)( datas.get(position) )
-                ).getContent());
+                ).getContent()
+        );
         holder.mTitleTextView.setText(
                 (
                         (LawsBean)( datas.get(position) )
-                ).getTitle());
+                ).getTitle()
+        );
     }
 
     @Override
