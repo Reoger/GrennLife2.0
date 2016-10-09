@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.adapter.EncyclopaediaAdapter;
 import com.reoger.grennlife.law.adapter.LawsViewAdapter;
+import com.reoger.grennlife.law.presenter.ILawPresenter;
+import com.reoger.grennlife.law.presenter.PresenterComl;
 import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.IServerData;
 import com.reoger.grennlife.utils.ServerDataOperation.ServerDataCompl;
@@ -35,8 +37,13 @@ import space.sye.z.library.manager.RecyclerViewManager;
 public class LawView extends AppCompatActivity implements ILawView {
     private ArrayList<BmobObject> mDatas;
     private RefreshRecyclerView mLawRecyclerView;
+    //所有数据
     private LawsViewAdapter mAdapter;
+    private ILawPresenter mLawPresenter;
 
+    //初次显示的数据数量
+    private int mCurrentAdatperCounts = 5;
+    //网络后台操作类
     private IServerData mServerDataCompl;
     //数据库操作
     private IDBOperation mDBOperationComl;
@@ -56,6 +63,7 @@ public class LawView extends AppCompatActivity implements ILawView {
 
     private void initAttr() {
         Log.d("qqe6",""+ (mDBOperationComl==null) );
+        mLawPresenter = new PresenterComl();
         mServerDataCompl = new ServerDataCompl();
         mDBOperationComl = DBOperationCompl.getInstance(this,ServerDataCompl.BEAN_TYPE_LAWS);
         Log.d("qqe7",""+ (mDBOperationComl==null)+mDBOperationComl.getmTableName());
@@ -70,11 +78,11 @@ public class LawView extends AppCompatActivity implements ILawView {
             //耗时操作
             mDatas = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_LAWS);
             Log.d("qqe", "initAttr: " + (mDatas == null)+ " "+mDatas.size());
-//            //存入数据库
-//            mDBOperationComl.doSaveDataIntoDB(mData);
-//            Log.d("qqe","成功存入数据库哦"+mData.size());
+
         }
-        mAdapter = new LawsViewAdapter(this,mDatas);
+
+
+        mAdapter = new LawsViewAdapter(this,mLawPresenter.getListsFormer(mDatas,mCurrentAdatperCounts));
     }
 
 
@@ -95,12 +103,8 @@ public class LawView extends AppCompatActivity implements ILawView {
                     //上拉刷新
                     @Override
                     public void onLoadMore() {
-
-                        //存在数据库的时候编下号，每次加载五个
                         Message msg = new Message();
                         msg.what = 23;
-                        //当前总的词条数目
-                        msg.arg1 = mAdapter.getItemCount();
                         Log.d("qqw", "before handler :" + mDatas.size());
                         mHandler.sendMessageDelayed(msg, 2000);
                     }
@@ -119,13 +123,18 @@ public class LawView extends AppCompatActivity implements ILawView {
             switch (msg.what) {
                 case 10:
                     //下拉刷新要从服务器加载更多数据
-//                    for (BmobObject one : mServerDataCompl.getDataFromServer(
-//                            ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA
-//                    )) {
-//                        mData.add(one);
-//                    }
+                    for(BmobObject one : mServerDataCompl.getDataFromServer(
+                            ServerDataCompl.BEAN_TYPE_LAWS
+                    )) {
+                        //如果本地数组不包含新得到的数据，那么就添加进本地数组
+                        if (!mDatas.contains(one) ) {
+                            mDatas.add(0,one);
+                        }
+                    }
                     break;
                 case 23:
+                    mAdapter = new LawsViewAdapter(,mLawPresenter.getListsFormer(mDatas,mCurrentAdatperCounts));
+
                     break;
             }
             mLawRecyclerView.onRefreshCompleted();
@@ -133,7 +142,6 @@ public class LawView extends AppCompatActivity implements ILawView {
             //存入数据库
 
             mDBOperationComl.doSaveDataIntoDB(mDatas);
-//            mData.clear();
             mAdapter.notifyDataSetChanged();
         }
     };

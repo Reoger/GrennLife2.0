@@ -33,7 +33,6 @@ public class ServerDataCompl implements IServerData {
     public ArrayList<BmobObject> getDataFromServer(int beanType) {
         switch (beanType) {
             case BEAN_TYPE_ENCYCLOPAEDIA:
-                Log.d("qqw", "getDataFromServer: ");
                 return encyclopaediaType();
             case BEAN_TYPE_NEWS:
                 return newsType();
