@@ -44,7 +44,7 @@ public class OldThingFrament extends Fragment{
     private void initView() {
         Context context = getContext();
         View header = View.inflate(context,R.layout.recycle_header2,null);
-        View footer = View.inflate(context,R.layout.dynamic_botton,null);
+     //   View footer = View.inflate(context,R.layout.dynamic_botton,null);
         //recyclerView = (RefreshRecyclerView)getContext().findViewById(R.id.dynamic_recyclerView);
         recyclerView = (RefreshRecyclerView) getActivity().findViewById(R.id.dynamic_recyclerView);
         for (int i=0;i<10;i++){
@@ -54,7 +54,7 @@ public class OldThingFrament extends Fragment{
         RecyclerViewManager.with(myAdapter,new LinearLayoutManager(context))
                 .setMode(RecyclerMode.BOTH)
                 .addHeaderView(header)
-                .addFooterView(footer)
+          //      .addFooterView(footer)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {

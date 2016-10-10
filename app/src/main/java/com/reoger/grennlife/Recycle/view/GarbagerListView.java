@@ -47,13 +47,13 @@ public class GarbagerListView extends AppCompatActivity {
             mDatas.add("我是最帅的"+i);
         }
         View header = View.inflate(this,R.layout.recycle_header2,null);
-        View footer = View.inflate(this,R.layout.dynamic_botton,null);
+     //   View footer = View.inflate(this,R.layout.dynamic_botton,null);
         recyclerView = (RefreshRecyclerView) findViewById(R.id.dynamic_recyclerView);
         myAdapter = new MyAdapter(this,mDatas);
         RecyclerViewManager.with(myAdapter,new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
                 .addHeaderView(header)
-                .addFooterView(footer)
+          //      .addFooterView(footer)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {

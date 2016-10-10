@@ -2,7 +2,7 @@ package com.reoger.grennlife.MainProject.model;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.reoger.grennlife.R;
@@ -16,9 +16,9 @@ public class MyViewHolder extends RecyclerView.ViewHolder{
     public TextView mItemAuthor;
     public TextView mItemTimeAndLocation;
 
-    public ImageView mDynamicShare;
-    public ImageView mDynamicLike;
-    public ImageView mDynamicComment;
+    public LinearLayout mDynamicShare;
+    public LinearLayout mDynamicLike;
+    public LinearLayout mDynamicComment;
 
     public MyViewHolder(View itemView) {
         super(itemView);
@@ -26,9 +26,9 @@ public class MyViewHolder extends RecyclerView.ViewHolder{
         mItemContent = (TextView) itemView.findViewById(R.id.dynamic_item_content);
         mItemTimeAndLocation = (TextView) itemView.findViewById(R.id.dynamic_item_time_location);
 
-        mDynamicShare = (ImageView) itemView.findViewById(R.id.dynamic_item_share);
-        mDynamicLike = (ImageView) itemView.findViewById(R.id.dynamic_item_like);
-        mDynamicComment = (ImageView) itemView.findViewById(R.id.dynamic_item_comments);
+        mDynamicShare = (LinearLayout) itemView.findViewById(R.id.dynamic_item_share);
+        mDynamicLike = (LinearLayout) itemView.findViewById(R.id.dynamic_item_like);
+        mDynamicComment = (LinearLayout) itemView.findViewById(R.id.dynamic_item_comments);
 
     }
 }

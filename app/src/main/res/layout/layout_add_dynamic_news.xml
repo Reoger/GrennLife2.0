@@ -1,24 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/dynamic_add_title"
-            android:hint="动态标题"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_main">
+
+    <com.reoger.grennlife.TitleLayout.TitleLayout_add_dynamic
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.reoger.grennlife.TitleLayout.TitleLayout_add_dynamic>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="15dp"
+        android:padding="3dp"
+        android:background="@drawable/shape_text"
+        android:id="@+id/dynamic_add_title"
+        android:hint="   动态标题" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey"></View>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_text"
         android:lines="3"
         android:id="@+id/dynamic_add_content"
         android:hint="详细描述"/>
 
     <GridView
         android:id="@+id/dynamic_add_gridview"
-        android:layout_width="290dp"
-        android:layout_height="250dp"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
         android:layout_marginLeft="5dp"
         android:horizontalSpacing="3dp"
         android:numColumns="4"
@@ -29,7 +47,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dynamic_add_publish"
-        android:text="添加图片"
+        android:layout_marginTop="30dp"
+        android:text="发  布"
+        android:textSize="18dp"
         />
 
 </LinearLayout>

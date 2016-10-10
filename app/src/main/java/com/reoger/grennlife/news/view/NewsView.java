@@ -7,7 +7,6 @@ import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.reoger.grennlife.R;
@@ -75,10 +74,10 @@ public class NewsView extends Activity implements INewsView {
     }
 
     private void recycleMethod() {
-        View footer = View.inflate(this, R.layout.dynamic_botton, null);
+    //    View footer = View.inflate(this, R.layout.dynamic_botton, null);
         RecyclerViewManager.with(mNewsAdapter, new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
-                .addFooterView(footer)
+           //     .addFooterView(footer)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {

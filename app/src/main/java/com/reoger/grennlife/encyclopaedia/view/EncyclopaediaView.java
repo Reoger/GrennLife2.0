@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.reoger.grennlife.R;
@@ -81,11 +80,11 @@ public class EncyclopaediaView extends AppCompatActivity implements IEncyclopaed
 
 
     private void recycleViewMethod() {
-        View footer = View.inflate(this, R.layout.dynamic_botton, null);
+      //  View footer = View.inflate(this, R.layout.dynamic_botton, null);
         RecyclerViewManager.with(mEncyclopaediaAdapter, new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
 //                .addHeaderView(header)
-                .addFooterView(footer)
+          //      .addFooterView(footer)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {

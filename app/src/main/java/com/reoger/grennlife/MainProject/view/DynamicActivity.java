@@ -181,7 +181,7 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
     public List<? extends Map<String, ?>> getData() {
         list = new ArrayList<>();
         HashMap<String, Object> map = new HashMap<>();
-        map.put("image", R.mipmap.icon_addpic_focused);
+        map.put("image", R.mipmap.icon_addpic_focused);//@@@@@@@@@
         map.put("text", "添加图片");
         list.add(map);
         return list;
