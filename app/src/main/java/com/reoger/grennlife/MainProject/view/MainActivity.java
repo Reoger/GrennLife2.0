@@ -2,6 +2,7 @@ package com.reoger.grennlife.MainProject.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,12 +28,17 @@ import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.view.EncyclopaediaView;
 import com.reoger.grennlife.law.view.LawView;
 import com.reoger.grennlife.news.view.NewsView;
+import com.reoger.grennlife.recyclerPlayView.Utils.ViewPagerScrollerSetter;
 import com.reoger.grennlife.recyclerPlayView.adapter.BannerViewPagerAdapter;
 import com.reoger.grennlife.recyclerPlayView.gear.BannerViewPager;
 import com.reoger.grennlife.technology.view.TechnologyView;
+import com.reoger.grennlife.utils.ServerDataOperation.GlideUtil;
 import com.reoger.grennlife.utils.log;
 import com.reoger.grennlife.utils.toast;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -263,8 +269,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDynamicImg = (ImageButton) findViewById(R.id.main_bottom_dynamic_img);
         mUserImg = (ImageButton) findViewById(R.id.main_bottom_user_img);
 
-
-
         mainPresenter = new MainPresenterComple(this);
 
         mHomeImg.setImageResource(R.mipmap.home_bright);
@@ -277,12 +281,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         /**
          * 轮播图控件初始化
          */
+        //这句话用于设置轮播图切换图片速度
+//        new ViewPagerScrollerSetter(this).initViewPagerScroll(mViewPager);
         mBannerView = (BannerViewPager) tab01.findViewById(R.id.home_en_recycler_play_view);
         mBannerViewDatas = new ArrayList<>();
-        addOneResourceToData(R.drawable.recycler_play_a);
-        addOneResourceToData(R.drawable.recycler_play_b);
-        addOneResourceToData(R.drawable.recycler_play_c);
-        addOneResourceToData(R.drawable.picture_);
+        //添加图片至轮播图
+//        addOneResourceToData(R.drawable.recycler_play_a);
+//        addOneResourceToData(R.drawable.recycler_play_b);
+//        addOneResourceToData(R.drawable.recycler_play_c);
+//        addOneResourceToData(R.drawable.picture_);
+        addOneResourceToData("http://www.andbeautiful.cn/padgram/IMG_20160727_190533_107.jpg");
+        addOneResourceToData("http://www.andbeautiful.cn/padgram/IMG_20160727_190606_10.jpg");
+        addOneResourceToData("http://www.andbeautiful.cn/padgram/IMG_20160727_190625_980.jpg");
+
+
+
 //        addOneResourceToData(R.drawable.picture_2);
         mBannerAdapter = new BannerViewPagerAdapter(mBannerViewDatas);
         mBannerView.setAdapter(mBannerAdapter);
@@ -334,14 +347,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-//    private void initData() {
-//        mImageData = new ArrayList<>();
-//        addOneResourceToData(R.drawable.a);
-//        addOneResourceToData(R.drawable.b);
-//        addOneResourceToData(R.drawable.c);
-//        addOneResourceToData(R.drawable.d);
-//        addOneResourceToData(R.drawable.e);
-//    }
 
     //用于轮播图增加图片用方法
     private void addOneResourceToData(int resId) {
@@ -350,6 +355,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         one.setScaleType(ImageView.ScaleType.FIT_XY);
         mBannerViewDatas.add(one);
     }
+
+
+    //用于轮播图增加wangluo图片用方法
+    private void addOneResourceToData(String resURL) {
+        ImageView one = new ImageView(this);
+        GlideUtil.loadImage(getApplicationContext(),resURL,one);
+        one.setScaleType(ImageView.ScaleType.FIT_XY);
+        mBannerViewDatas.add(one);
+    }
+
+
 
     /**
      * 将所有的图片切换为暗色的
