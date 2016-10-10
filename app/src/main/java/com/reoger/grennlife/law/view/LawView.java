@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.law.adapter.LawsViewAdapter;
+import com.reoger.grennlife.law.model.LawsBean;
 import com.reoger.grennlife.law.presenter.ILawPresenter;
 import com.reoger.grennlife.law.presenter.PresenterComl;
 import com.reoger.grennlife.utils.CustomApplication;
@@ -80,7 +81,8 @@ public class LawView extends AppCompatActivity implements ILawView {
         }
 
 
-        mAdapter = new LawsViewAdapter(this,mLawPresenter.getListsFormer(mDatas,mCurrentAdatperCounts));
+//        mAdapter = new LawsViewAdapter(this,mLawPresenter.getListsFormer(mDatas,mCurrentAdatperCounts));
+        mAdapter = new LawsViewAdapter(this,mDatas);
     }
 
 
@@ -121,17 +123,26 @@ public class LawView extends AppCompatActivity implements ILawView {
             switch (msg.what) {
                 case 10:
                     //下拉刷新要从服务器加载更多数据
-                    for(BmobObject one : mServerDataCompl.getDataFromServer(
+                    Log.d("qqeq","enter");
+                    ArrayList<BmobObject> aDatas;
+                    for(BmobObject one : aDatas = mServerDataCompl.getDataFromServer(
                             ServerDataCompl.BEAN_TYPE_LAWS
                     )) {
                         //如果本地数组不包含新得到的数据，那么就添加进本地数组
+                        Log.d("qqeq",""+ aDatas.size());
                         if (!mDatas.contains(one) ) {
+                            Log.d("qqeq","no contain");
                             mDatas.add(0,one);
                         }
                     }
+//                    BmobObject one = new LawsBean();
+//                    ((LawsBean)one).setTitle("232142123");
+//                    ((LawsBean)one).setContent("asfasf");
+//
+//                    mDatas.add(0,one);
                     break;
                 case 23:
-                    mAdapter = new LawsViewAdapter(,mLawPresenter.getListsFormer(mDatas,mCurrentAdatperCounts));
+//                    mAdapter = new LawsViewAdapter(,mLawPresenter.getListsFormer(mDatas,mCurrentAdatperCounts));
 
                     break;
             }
