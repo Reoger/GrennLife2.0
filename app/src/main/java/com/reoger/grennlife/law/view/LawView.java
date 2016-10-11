@@ -78,10 +78,7 @@ public class LawView extends AppCompatActivity implements ILawView {
             //耗时操作
             mDatas = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_LAWS);
             Log.d("qqe", "initAttr: " + (mDatas == null)+ " "+mDatas.size());
-
         }
-
-
         mAdapter = new LawsViewAdapter(this,mLawPresenter.getListsFormer(mDatas,mCurrentAdatperCounts));
     }
 
