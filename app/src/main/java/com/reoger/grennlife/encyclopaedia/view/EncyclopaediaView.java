@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.reoger.grennlife.R;
@@ -66,26 +65,24 @@ public class EncyclopaediaView extends AppCompatActivity implements IEncyclopaed
         //判定是否需要从网络后台读取数据
         if (mData.size() > 0) {
             //成功从数据库读入
+            mEncyclopaediaAdapter = new EncyclopaediaAdapter(this, mData);
+            mEncyclopaediaAdapter.notifyDataSetChanged();
             Log.d("in encyclopaedia view", "succeed in reading from local db");
         } else {
             //耗时操作
-            mData = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA);
-            Log.d("qqe", "initAttr: " + (mData == null)+ " "+mData.size());
-//            //存入数据库
-//            mDBOperationComl.doSaveDataIntoDB(mData);
-//            Log.d("qqe","成功存入数据库哦"+mData.size());
+            mData = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA,this);
+            mEncyclopaediaAdapter = new EncyclopaediaAdapter(this, mData);
         }
-        mEncyclopaediaAdapter = new EncyclopaediaAdapter(this, mData);
 
     }
 
 
     private void recycleViewMethod() {
-        View footer = View.inflate(this, R.layout.dynamic_botton, null);
+      //  View footer = View.inflate(this, R.layout.dynamic_botton, null);
         RecyclerViewManager.with(mEncyclopaediaAdapter, new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
 //                .addHeaderView(header)
-                .addFooterView(footer)
+          //      .addFooterView(footer)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {
@@ -116,7 +113,7 @@ public class EncyclopaediaView extends AppCompatActivity implements IEncyclopaed
 
     }
 
-    private Handler mHandler = new Handler() {
+    public Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {

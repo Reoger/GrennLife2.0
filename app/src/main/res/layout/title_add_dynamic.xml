@@ -7,12 +7,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="环境监控"
+        android:text="添加动态"
         android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:textSize="18sp"
-        android:id="@+id/toolbar_text"/>
+        android:id="@+id/title_add_dynamic_text"/>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -20,7 +20,6 @@
         android:background="@mipmap/all__return"
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
-        android:id="@+id/toolbar_button1"/>
-
+        android:id="@+id/title_add_dynamic_button"/>
 
 </RelativeLayout>

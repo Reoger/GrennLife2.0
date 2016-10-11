@@ -1,5 +1,8 @@
 package com.reoger.grennlife.utils.ServerDataOperation;
 
+import android.app.Activity;
+import android.view.View;
+
 import java.util.ArrayList;
 
 import cn.bmob.v3.BmobObject;
@@ -9,4 +12,5 @@ import cn.bmob.v3.BmobObject;
  */
 public interface IServerData {
     ArrayList<BmobObject> getDataFromServer(int beanType);
+    ArrayList<BmobObject> getDataFromServer(int beanType,Activity instanceView);
 }

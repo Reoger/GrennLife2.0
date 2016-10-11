@@ -46,6 +46,8 @@
         <activity android:name=".ResetPassword.view.ResetPasswordView" />
         <activity android:name=".MainProject.view.CommentActivity"/>
         <activity android:name=".MainProject.view.DynamicActivity" />
+        <!--法律详情页-->
+        <activity android:name=".law.view.LawDetailView" />
         <activity android:name=".encyclopaedia.view.EncyclopaediaView"
             android:label="环保百科"/>
         <activity android:name=".news.view.NewsView"

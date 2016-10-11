@@ -1,7 +1,6 @@
 package com.reoger.grennlife.law.adapter;
 
 import android.content.Context;
-import android.content.pm.ProviderInfo;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,11 +35,11 @@ public class LawsViewAdapter extends RecyclerView.Adapter<LawsViewHolder> {
 
     @Override
     public void onBindViewHolder(LawsViewHolder holder, int position) {
-        holder.mContentTextView.setText(
-                (
-                        (LawsBean)( datas.get(position) )
-                ).getContent()
-        );
+//        holder.mContentTextView.setText(
+//                (
+//                        (LawsBean)( datas.get(position) )
+//                ).getContent()
+//        );
         holder.mTitleTextView.setText(
                 (
                         (LawsBean)( datas.get(position) )

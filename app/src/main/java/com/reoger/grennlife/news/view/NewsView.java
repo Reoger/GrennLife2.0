@@ -7,7 +7,6 @@ import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.reoger.grennlife.R;
@@ -60,25 +59,20 @@ public class NewsView extends Activity implements INewsView {
         Log.d("qqe6", "dbOperation table name" + mDBOperation.getmTableName());
         if (mDatas.size() > 0) {
             //成功从数据库读入
-            Log.d("qqe in newsView if ", "get table size:" + mDatas.get(0).getTableName());
-
-            Log.d("in encyclopaedia view", "succeed in reading from local db");
+            mNewsAdapter = new NewsAdapter(this, mDatas);
+            mNewsAdapter.notifyDataSetChanged();
         } else {
-
-            //耗时操作
-            mDatas = mServerData.getDataFromServer(ServerDataCompl.BEAN_TYPE_NEWS);
-            Log.d("qqe", "initAttr: " + (mDatas == null) + " " + mDatas.size());
-//            Log.d("qqe in newsView ","get table size:"+ mDatas.get(0).getTableName());
+            mDatas = mServerData.getDataFromServer(ServerDataCompl.BEAN_TYPE_NEWS,this);
+            mNewsAdapter = new NewsAdapter(this, mDatas);
         }
-        mNewsAdapter = new NewsAdapter(this, mDatas);
 
     }
 
     private void recycleMethod() {
-        View footer = View.inflate(this, R.layout.dynamic_botton, null);
+    //    View footer = View.inflate(this, R.layout.dynamic_botton, null);
         RecyclerViewManager.with(mNewsAdapter, new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
-                .addFooterView(footer)
+           //     .addFooterView(footer)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {
@@ -104,7 +98,7 @@ public class NewsView extends Activity implements INewsView {
 
     }
 
-    private Handler mHandler = new Handler() {
+    public Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);

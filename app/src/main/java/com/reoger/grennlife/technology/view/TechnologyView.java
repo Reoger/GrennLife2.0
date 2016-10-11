@@ -8,11 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.reoger.grennlife.R;
-import com.reoger.grennlife.encyclopaedia.adapter.EncyclopaediaAdapter;
 import com.reoger.grennlife.technology.adapter.TechnologyAdapter;
 import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.IServerData;
@@ -62,22 +60,22 @@ public class TechnologyView extends AppCompatActivity {
         //判定是否需要从网络后台读取数据
         if (mData.size() > 0) {
             //成功从数据库读入
-            Log.d("in encyclopaedia view", "succeed in reading from local db");
+            mTechnologyAdapter = new TechnologyAdapter(this, mData);
+            mTechnologyAdapter.notifyDataSetChanged();
         } else {
             //耗时操作
-            mData = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_TECHNOLOGY);
-            Log.d("qqe", "initAttr: " + (mData == null) + " " + mData.size());
+            mData = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_TECHNOLOGY,this);
+            mTechnologyAdapter = new TechnologyAdapter(this, mData);
         }
-        mTechnologyAdapter = new TechnologyAdapter(this, mData);
 
     }
 
     private void recycleViewMethod() {
-        View footer = View.inflate(this, R.layout.dynamic_botton, null);
+      //  View footer = View.inflate(this, R.layout.dynamic_botton, null);
         RecyclerViewManager.with(mTechnologyAdapter, new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
 //                .addHeaderView(header)
-                .addFooterView(footer)
+             //   .addFooterView(footer)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {
@@ -107,7 +105,7 @@ public class TechnologyView extends AppCompatActivity {
         }).into(mRecyclerView, this);
     }
 
-    private Handler mHandler = new Handler() {
+    public Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
