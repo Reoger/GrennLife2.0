@@ -1,5 +1,6 @@
 package com.reoger.grennlife.technology.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.technology.adapter.TechnologyAdapter;
+import com.reoger.grennlife.technology.model.TechnologyBean;
 import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.IServerData;
 import com.reoger.grennlife.utils.ServerDataOperation.ServerDataCompl;
@@ -99,8 +101,16 @@ public class TechnologyView extends AppCompatActivity {
                 }).setOnItemClickListener(new RefreshRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+                TechnologyBean one = (TechnologyBean) mData.get(position)
+                        ;
+                Intent technologyIntent = new Intent(getApplicationContext(),TechnologyDetailView.class);
+                technologyIntent.putExtra(TechnologyDetailView.ARG_TECHNOLOGY_TITLE,one.getTitle());
+                technologyIntent.putExtra(TechnologyDetailView.ARG_TECHNOLOGY_CONTENT,one.getContent());
+                startActivity(technologyIntent);
+
                 Toast.makeText(CustomApplication.getContext(), "position:" + position, Toast.LENGTH_SHORT)
                         .show();
+
             }
         }).into(mRecyclerView, this);
     }

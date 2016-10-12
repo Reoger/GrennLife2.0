@@ -15,7 +15,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/laws_detail_title"
+                android:id="@+id/technology_detail_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#C4C4C4"
@@ -25,7 +25,8 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/laws_detail_content"
+                android:text="content"
+                android:id="@+id/technology_detail_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

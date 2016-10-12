@@ -1,6 +1,7 @@
 package com.reoger.grennlife.news.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.news.adapter.NewsAdapter;
+import com.reoger.grennlife.news.model.NewsBean;
 import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.IServerData;
 import com.reoger.grennlife.utils.ServerDataOperation.ServerDataCompl;
@@ -91,6 +93,17 @@ public class NewsView extends Activity implements INewsView {
                 }).setOnItemClickListener(new RefreshRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+                NewsBean one = (NewsBean) mDatas.get(position);
+                Intent newsIntent = new Intent(getApplicationContext(),NewsDetailView.class);
+                newsIntent.putExtra(NewsDetailView.ARG_NEWS_TITLE,one.getTitle());
+                Log.d("qqer","title:"+one.getTitle());
+                newsIntent.putExtra(NewsDetailView.ARG_NEWS_OUTLINE,one.getOutLine());
+                Log.d("qqer","outline:"+one.getOutLine());
+
+                newsIntent.putExtra(NewsDetailView.ARG_NEWS_CONTENT,one.getContent());
+                Log.d("qqer","content:"+one.getContent());
+
+                startActivity(newsIntent);
                 Toast.makeText(CustomApplication.getContext(), "position:" + position, Toast.LENGTH_SHORT)
                         .show();
             }

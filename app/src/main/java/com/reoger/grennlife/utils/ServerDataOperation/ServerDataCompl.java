@@ -130,7 +130,8 @@ public class ServerDataCompl implements IServerData {
     private ArrayList<BmobObject> newsType() {
 //        datas = new ArrayList<>();
         BmobQuery<NewsBean> query = new BmobQuery<NewsBean>();
-        query.addWhereNotEqualTo(NewsDBOpenHelper.NEWS_OUTLINE, "Barbie");
+//        query.addWhereNotEqualTo(NewsDBOpenHelper.NEWS_OUTLINE, "Barbie");
+        query.addWhereNotEqualTo("outLine", "Barbie");
         query.findObjects(new FindListener<NewsBean>() {
             @Override
             public void done(List<NewsBean> list, BmobException e) {

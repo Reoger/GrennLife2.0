@@ -1,5 +1,6 @@
 package com.reoger.grennlife.encyclopaedia.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.adapter.EncyclopaediaAdapter;
+import com.reoger.grennlife.encyclopaedia.model.EncyclopaediaBean;
 import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.IServerData;
 import com.reoger.grennlife.utils.ServerDataOperation.ServerDataCompl;
@@ -106,6 +108,12 @@ public class EncyclopaediaView extends AppCompatActivity implements IEncyclopaed
                 }).setOnItemClickListener(new RefreshRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+                EncyclopaediaBean one = (EncyclopaediaBean) mData.get(position);
+
+                Intent encyclopaediaIntent = new Intent(getApplicationContext(),EncyclopaediaDetailView.class);
+                encyclopaediaIntent.putExtra(EncyclopaediaDetailView.ARG_ENCYCLOPAEDIA_TITLE,one.getmTitle());
+                encyclopaediaIntent.putExtra(EncyclopaediaDetailView.ARG_ENCYLCOPAEDIA_CONTENT,one.getmContent());
+                startActivity(encyclopaediaIntent);
                 Toast.makeText(CustomApplication.getContext(), "position:" + position, Toast.LENGTH_SHORT)
                         .show();
             }
