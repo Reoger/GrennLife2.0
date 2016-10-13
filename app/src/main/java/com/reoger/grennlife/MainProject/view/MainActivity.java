@@ -290,9 +290,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        addOneResourceToData(R.drawable.recycler_play_b);
 //        addOneResourceToData(R.drawable.recycler_play_c);
 //        addOneResourceToData(R.drawable.picture_);
-        addOneResourceToData("http://www.andbeautiful.cn/padgram/IMG_20160727_190533_107.jpg");
-        addOneResourceToData("http://www.andbeautiful.cn/padgram/IMG_20160727_190606_10.jpg");
-        addOneResourceToData("http://www.andbeautiful.cn/padgram/IMG_20160727_190625_980.jpg");
+        addOneResourceToData("http://oeznvpnrn.bkt.clouddn.com/IMG_20160727_190533_107.jpg");
+        addOneResourceToData("http://oeznvpnrn.bkt.clouddn.com/IMG_20160727_190606_10.jpg");
+        addOneResourceToData("http://oeznvpnrn.bkt.clouddn.com/IMG_20160727_190625_980.jpg");
 
 
 
