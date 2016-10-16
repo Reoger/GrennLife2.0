@@ -2,6 +2,7 @@ package com.reoger.grennlife.monitoring.presenter;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -71,9 +72,11 @@ public class MonitoringPresenterCompl implements IMonitoringPresenter {
                         public void done(String s, BmobException e) {
                             if(e == null){
                                 log.d("TAG","保存成功");
+                                mDialog.dismiss();
                                 mIEnvironmentalMonitoring.onLoadResult(1,s);
                             }else{
-                                log.d("TAG","保存失败"+"dynamic"+e.getMessage());
+                                log.d("TAG","保存失败"+"Dynamic"+e.getMessage());
+                                mDialog.dismiss();
                             //    mIDynamicView.onPublishResult(0,s);
                                 mIEnvironmentalMonitoring.onLoadResult(2,s);
                             }
@@ -143,7 +146,6 @@ public class MonitoringPresenterCompl implements IMonitoringPresenter {
         } else if (providerList.contains(LocationManager.NETWORK_PROVIDER)) {
             mProvider = LocationManager.NETWORK_PROVIDER;
         } else {
-            //Toast.makeText(this, "定位失败~", Toast.LENGTH_SHORT).show();
             Log.d("TAG", "定位失败");
             return;
         }
@@ -157,6 +159,8 @@ public class MonitoringPresenterCompl implements IMonitoringPresenter {
 
             showLocation(location);
 
+        }else{
+            log.d("TAG","返回值为空");
         }
         mLocationManager.requestLocationUpdates(mProvider, 5000, 1, locationListener);
     }
@@ -175,7 +179,7 @@ public class MonitoringPresenterCompl implements IMonitoringPresenter {
     public void doUploadMonitoringInfo(String title, String content, String num, String location, List<String> imageUrl) {
         log.d("YYY", "tttUPLOAD");
 
-
+        showDialog();
 
 
         reportInfo = new ReportInfo();
@@ -192,9 +196,11 @@ public class MonitoringPresenterCompl implements IMonitoringPresenter {
                 public void done(String s, BmobException e) {
                     if(e == null){
                         log.d("TAG","保存成功");
+                        mDialog.dismiss();
                         mIEnvironmentalMonitoring.onLoadResult(1,s);
                     }else{
-                        log.d("TAG","保存失败"+"dynamic"+e.getMessage());
+                        mDialog.dismiss();
+                        log.d("TAG","保存失败"+"Dynamic"+e.getMessage());
                         mIEnvironmentalMonitoring.onLoadResult(2,s);
                     }
                 }
@@ -331,5 +337,13 @@ public class MonitoringPresenterCompl implements IMonitoringPresenter {
 
         return bomeFileUrl;
     }
-
+    private ProgressDialog mDialog;
+    private void showDialog() {
+        mDialog = new ProgressDialog(context);
+        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mDialog.setTitle("loading...");
+        mDialog.setMessage("正在登录，请稍后...");
+        mDialog.setCancelable(true);
+        mDialog.show();
+    }
 }

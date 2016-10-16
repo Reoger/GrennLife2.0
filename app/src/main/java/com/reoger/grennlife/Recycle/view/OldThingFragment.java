@@ -12,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.reoger.grennlife.R;
-import com.reoger.grennlife.Recycle.adapter.MyAdapter;
+import com.reoger.grennlife.Recycle.adapter.OldThingsAdapter;
+import com.reoger.grennlife.Recycle.model.OldThing;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import space.sye.z.library.RefreshRecyclerView;
 import space.sye.z.library.adapter.RefreshRecyclerViewAdapter;
@@ -25,47 +27,43 @@ import space.sye.z.library.manager.RecyclerViewManager;
 /**
  * Created by 24540 on 2016/9/26.
  */
-public class OldThingFrament extends Fragment{
+public class OldThingFragment extends Fragment{
 
-    private ArrayList<String> mDatas = new ArrayList<>();
+    private List<OldThing> mData = new ArrayList<OldThing>();
     private RefreshRecyclerView recyclerView;
-    private MyAdapter myAdapter;
+    private OldThingsAdapter mOldthingAdapter;
+    private View rootView;
 
-    private int counts = 10;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View messageLayout = inflater.inflate(R.layout.layout_base_main, container, false);
+        View messageLayout = inflater.inflate(R.layout.layout_base_main_recycle2, container, false);
+        rootView=messageLayout;
         initView();
         return messageLayout;
+
     }
 
     private void initView() {
         Context context = getContext();
         View header = View.inflate(context,R.layout.recycle_header2,null);
-        View footer = View.inflate(context,R.layout.dynamic_botton,null);
-        //recyclerView = (RefreshRecyclerView)getContext().findViewById(R.id.dynamic_recyclerView);
-        recyclerView = (RefreshRecyclerView) getActivity().findViewById(R.id.dynamic_recyclerView);
-        for (int i=0;i<10;i++){
-            mDatas.add("reoger is the best handsome boy all the world！"+i);
-        }
-        myAdapter = new MyAdapter(context,mDatas);
-        RecyclerViewManager.with(myAdapter,new LinearLayoutManager(context))
+        recyclerView = (RefreshRecyclerView) rootView.findViewById(R.id.dynamic_recyclerView2);
+        //需要先初始化数据
+        mOldthingAdapter = new OldThingsAdapter(context,mData);
+        RecyclerViewManager.with(mOldthingAdapter,new LinearLayoutManager(context))
                 .setMode(RecyclerMode.BOTH)
                 .addHeaderView(header)
-                .addFooterView(footer)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {
-                        Message msg = new Message();
-                        msg.what =10;
-                        mHandler.sendMessageDelayed(msg,2000);
+                        //这里添加下拉刷刷新的逻辑
                     }
 
                     @Override
                     public void onLoadMore() {
-
+                        //这里添加上拉加载更多的逻辑
                     }
                 }).setOnItemClickListener(new RefreshRecyclerViewAdapter.OnItemClickListener() {
             @Override
@@ -79,17 +77,12 @@ public class OldThingFrament extends Fragment{
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case 10:
-                    mDatas.add(0, "new Item");
                     break;
                 case 23:
-                    for (int i = 0; i < 10; i++){
-                        mDatas.add("item" + (counts + i));
-                    }
-                    counts += 10;
                     break;
             }
             recyclerView.onRefreshCompleted();
-            myAdapter.notifyDataSetChanged();
+            mOldthingAdapter.notifyDataSetChanged();
         }
     };
 }

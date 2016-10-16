@@ -1,14 +1,15 @@
 package com.reoger.grennlife.Recycle.presenter;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.reoger.grennlife.R;
-import com.reoger.grennlife.Recycle.model.Garbager;
 import com.reoger.grennlife.Recycle.model.OldThing;
 import com.reoger.grennlife.Recycle.view.IPublishingResouresView;
 import com.reoger.grennlife.loginMVP.model.UserMode;
@@ -17,9 +18,13 @@ import com.yuyh.library.imgsel.ImageLoader;
 import com.yuyh.library.imgsel.ImgSelActivity;
 import com.yuyh.library.imgsel.ImgSelConfig;
 
+import java.util.List;
+
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UploadBatchListener;
 
 /**
  * Created by 24540 on 2016/9/19.
@@ -27,9 +32,42 @@ import cn.bmob.v3.listener.SaveListener;
 public class PublishResourcesPresenterCompl implements IPublishResourcesPresenter{
 
     private Context mContext;
+    private String bomeFileUrl;
     private IPublishingResouresView mIPublishingResouresView;
+    private OldThing oldThing;
 
     UserMode user;
+
+    private final static int UPLOAD_SUCESS = 123;
+
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case UPLOAD_SUCESS:
+                    oldThing.setImageUrl(bomeFileUrl);
+                    oldThing.save(new SaveListener<String>() {
+                        @Override
+                        public void done(String s, BmobException e) {
+                            if(e == null){
+                                log.d("TAG","保存成功");
+                                mDialog.dismiss();
+                                mIPublishingResouresView.onPublishResulte(true, 1);
+                            }else{
+                                log.d("TAG","保存失败"+"Dynamic"+e.getMessage());
+                                mDialog.dismiss();
+                                mIPublishingResouresView.onPublishResulte(false, 0);
+
+                            }
+                        }
+                    });
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
+
 
     public PublishResourcesPresenterCompl(Context context,IPublishingResouresView s) {
         this.mContext = context;
@@ -80,48 +118,90 @@ public class PublishResourcesPresenterCompl implements IPublishResourcesPresente
 
     //发布资源
     @Override
-    public void doPublishResouerces(String type,String content,String location,String time) {
-        String[] list= mContext.getResources().getStringArray(R.array.type);
-        log.d("TAG","bmob"+list[0]+"--"+list[1]);
-        if(list[0].equals(type)){//资源回收
+    public void doPublishResouerces(String title,String content,String location,String time,List<String> imageUrl) {
+        showDialog();
+        oldThing = new OldThing();
+        oldThing.setAutthor(user);
+        oldThing.setContent(content);
+        oldThing.setNum(time);
+        oldThing.setTitle(title);
 
-            Garbager garbager = new Garbager();
-            garbager.setAutthor(user);
-            garbager.setContent(content);
-            garbager.setNum(time);
-            garbager.setTitle("title");
-            garbager.save(new SaveListener<String>() {
+        if (imageUrl == null){
+            oldThing.save(new SaveListener<String>() {
                 @Override
                 public void done(String s, BmobException e) {
                     if (e == null) {
                         Log.i("bmob", "保存成功");
-                        mIPublishingResouresView.onPublishResulte(true,1);
+                        mDialog.dismiss();
+                        mIPublishingResouresView.onPublishResulte(true, 1);
                     } else {
                         Log.i("bmob", "保存失败：" + e.getMessage());
-                        mIPublishingResouresView.onPublishResulte(false,1);
-                    }
-                }
-            });
-        }else if(list[1].equals(type)){//垃圾利用
-            OldThing thing = new OldThing();
-            thing.setAutthor(user);
-            thing.setContent(content);
-            thing.setNum(time);
-            thing.setTitle("title");
-            thing.save(new SaveListener<String>() {
-                @Override
-                public void done(String s, BmobException e) {
-                    if (e == null) {
-                        Log.i("bmob", "保存成功");
-                        mIPublishingResouresView.onPublishResulte(true,2);
-                    } else {
-                        Log.i("bmob", "保存失败：" + e.getMessage());
-                        mIPublishingResouresView.onPublishResulte(false,2);
+                        mDialog.dismiss();
+                        mIPublishingResouresView.onPublishResulte(false, 1);
                     }
                 }
             });
         }else{
-            mIPublishingResouresView.onPublishResulte(false,-1);
+            String []filesPath = new String[imageUrl.size()];
+            int  j=0;
+            for (String item :
+                    imageUrl) {
+                filesPath[j] = item;
+                j++;
+            }
+            doUploadFiles(filesPath);//上传图片到云端
         }
+    }
+
+    /**
+     * 上传多张图片
+     * @param filePaths
+     */
+    synchronized String doUploadFiles(final String[] filePaths){
+
+        BmobFile.uploadBatch(filePaths, new UploadBatchListener() {
+
+            @Override
+            public void onSuccess(final List<BmobFile> files,List<String> urls) {
+                //1、files-上传完成后的BmobFile集合，是为了方便大家对其上传后的数据进行操作，例如你可以将该文件保存到表中
+                //2、urls-上传文件的完整url地址
+                if(urls.size()==filePaths.length){//如果数量相等，则代表文件全部上传完成
+                    //do something
+                    log.d("TAG",urls.toString());
+                    bomeFileUrl = urls.toString();
+                    Message message = new Message();
+                    message.what = UPLOAD_SUCESS;
+                    handler.sendMessage(message);
+                }
+            }
+
+            @Override
+            public void onError(int statuscode, String errormsg) {
+                log.d("TAg","错误码"+statuscode +",错误描述："+errormsg);
+            }
+
+            @Override
+            public void onProgress(int curIndex, int curPercent, int total,int totalPercent) {
+                //1、curIndex--表示当前第几个文件正在上传
+                //2、curPercent--表示当前上传文件的进度值（百分比）
+                //3、total--表示总的上传文件数
+                //4、totalPercent--表示总的上传进度（百分比）
+                log.d("TAG","进度 "+curIndex+" :"+curPercent+" :"+total+": "+totalPercent);
+                //这里可以用handler将进度信息传出来，反馈给用户
+            }
+        });
+
+        return bomeFileUrl;
+    }
+
+    private ProgressDialog mDialog;
+
+    private void showDialog() {
+        mDialog = new ProgressDialog(mContext);
+        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mDialog.setTitle("publish...");
+        mDialog.setMessage("正在登录，请稍后...");
+        mDialog.setCancelable(true);
+        mDialog.show();
     }
 }

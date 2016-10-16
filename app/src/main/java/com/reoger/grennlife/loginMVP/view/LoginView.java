@@ -54,7 +54,7 @@ public class LoginView extends AppCompatActivity implements ILoginViw, View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login_main);
         Bmob.initialize(this, APP_ID);
-        mILoginPresenter = new LoginPresenterCompl(this);
+        mILoginPresenter = new LoginPresenterCompl(this,this);
         initView();
         //判断是否记住密码，若是则填好账号密码
         mPref = PreferenceManager.getDefaultSharedPreferences(this);

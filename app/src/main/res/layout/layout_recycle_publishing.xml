@@ -1,79 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <Spinner
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/shape_title_text"
-        android:id="@+id/publish_resources_type"
-        >
-    </Spinner>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ef9d9d"
+        android:gravity="center"
+        android:text="发布资源"
+        android:textColor="#ff00f0"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:hint="描述你的资源"
-        android:padding="8dp"
-        android:lines="7"
-        android:ems="12"
+        android:id="@+id/publish_resources_title"
+        android:hint="资源的名称"/>
+    <EditText
+        android:id="@+id/publish_resources_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#440000ff"
-        android:id="@+id/publish_resources_content"/>
+        android:ems="12"
+        android:hint="描述你的资源"
+        android:lines="7"
+        android:padding="8dp"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="240dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"/>
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:background="@color/transparent"
-            android:src="@android:drawable/ic_input_add"
-            android:id="@+id/public_resources_add_photo"/>
 
-    </LinearLayout>
+    <GridView
+        android:id="@+id/public_resources_photo"
+        android:layout_width="290dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="5dp"
+        android:background="#f0f000"
+        android:horizontalSpacing="3dp"
+        android:numColumns="4"
+        android:scrollbars="none"
+        android:verticalSpacing="5dp"></GridView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="335dp"
-        android:layout_marginLeft="8dp">
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="添加地理信息"
-            android:textSize="15sp"
-            android:id="@+id/publish_resources_location"/>
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_lock_idle_alarm"/>
-    </LinearLayout>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:id="@+id/publish_resources_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="添加地理信息"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:id="@+id/publish_resources_num"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="添加联系方式"
-        android:textSize="15sp"
-        android:layout_marginTop="300dp"
-        android:layout_marginLeft="8dp"
-        android:id="@+id/publish_resources_num"/>
+        android:textSize="15sp"/>
+
     <Button
+        android:id="@+id/publish_resources"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_marginTop="390dp"
+        android:background="@drawable/shape_recycle_publishing"
         android:text="发 布"
         android:textColor="@color/white"
-        android:textSize="22sp"
-        android:background="@drawable/shape_recycle_publishing"
-        android:id="@+id/publish_resources"/>
+        android:textSize="22sp"/>
 
-</RelativeLayout>
+</LinearLayout>

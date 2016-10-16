@@ -16,6 +16,15 @@ public class OldThing extends BmobObject{
     private BmobFile image;
     private BmobRelation likes;//多对多的关系，用于存储喜欢该资源的用户
     private String num;//电话号码
+    private String ImageUrl;
+
+    public String getImageUrl() {
+        return ImageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
+    }
 
     public String getTitle() {
         return title;

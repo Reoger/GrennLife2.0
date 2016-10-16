@@ -1,6 +1,7 @@
 package com.reoger.grennlife.MainProject.presenter;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
@@ -34,7 +35,7 @@ public class DynamicPresenter implements IDynamicPresenter {
     private IDynamicView mIDynamicView;
     private Context mContext;
     private String bomeFileUrl;
-    private Dynamic dynamic;
+    private Dynamic Dynamic;
 
 
 
@@ -46,15 +47,17 @@ public class DynamicPresenter implements IDynamicPresenter {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case UPLOAD_SUCESS:
-                    dynamic.setImageUrl(bomeFileUrl);
-                    dynamic.save(new SaveListener<String>() {
+                    Dynamic.setImageUrl(bomeFileUrl);
+                    Dynamic.save(new SaveListener<String>() {
                         @Override
                         public void done(String s, BmobException e) {
                             if(e == null){
                                 log.d("TAG","保存成功");
+                                mDialog.dismiss();
                                 mIDynamicView.onPublishResult(1,s);
                             }else{
-                                log.d("TAG","保存失败"+"dynamic"+e.getMessage());
+                                log.d("TAG","保存失败"+"Dynamic"+e.getMessage());
+                                mDialog.dismiss();
                                 mIDynamicView.onPublishResult(0,s);
                             }
                         }
@@ -115,21 +118,23 @@ public class DynamicPresenter implements IDynamicPresenter {
     //发布
     @Override
     public void doPublish(String titile, String content, List<String> imageUrl) {
-
-        dynamic = new Dynamic();
-        dynamic.setTitle(titile);
-        dynamic.setContent(content);
+        showDialog();
+        Dynamic = new Dynamic();
+        Dynamic.setTitle(titile);
+        Dynamic.setContent(content);
         UserMode user = BmobUser.getCurrentUser(UserMode.class);
-        dynamic.setAuthor(user);
+        Dynamic.setAuthor(user);
         if(imageUrl == null){
-            dynamic.save(new SaveListener<String>() {
+            Dynamic.save(new SaveListener<String>() {
                 @Override
                 public void done(String s, BmobException e) {
                     if(e == null){
                         log.d("TAG","保存成功");
+                        mDialog.dismiss();
                         mIDynamicView.onPublishResult(1,s);
                     }else{
-                        log.d("TAG","保存失败"+"dynamic"+e.getMessage());
+                        mDialog.dismiss();
+                        log.d("TAG","保存失败"+"Dynamic"+e.getMessage());
                         mIDynamicView.onPublishResult(0,s);
                     }
                 }
@@ -212,5 +217,14 @@ public class DynamicPresenter implements IDynamicPresenter {
         });
     }
 
+    private ProgressDialog mDialog;
 
+    private void showDialog() {
+        mDialog = new ProgressDialog(mContext);
+        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mDialog.setTitle("publish...");
+        mDialog.setMessage("正在登录，请稍后...");
+        mDialog.setCancelable(true);
+        mDialog.show();
+    }
 }

@@ -1,6 +1,5 @@
 package com.reoger.grennlife.MainProject.view;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,13 +29,19 @@ import com.reoger.grennlife.news.view.NewsView;
 import com.reoger.grennlife.recyclerPlayView.adapter.BannerViewPagerAdapter;
 import com.reoger.grennlife.recyclerPlayView.gear.BannerViewPager;
 import com.reoger.grennlife.technology.view.TechnologyView;
+import com.reoger.grennlife.user.infomation.View.InfomationActivity;
+import com.reoger.grennlife.user.monitoringHistroy.view.MonitoringHistoryView;
 import com.reoger.grennlife.utils.log;
 import com.reoger.grennlife.utils.toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import space.sye.z.library.RefreshRecyclerView;
@@ -61,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BannerViewPager mBannerView;
     private BannerViewPagerAdapter mBannerAdapter;
     private LinearLayout mMonitorHistory;
+    private LinearLayout mUserInfo;
 
     private Button mComeEnMonitoring;
     private Button mComeRecycle;
@@ -73,7 +79,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mLawsBtn;
     private Button mTechnologyBtn;
 
-    private ProgressDialog mDialog;
+    private ImageButton mPublishDynamic;
+
+
     //轮播图的图ArrayList
     private List<View> mBannerViewDatas;
 //    private ArrayList<String> mDatas;
@@ -103,9 +111,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void recycleViewMethod() {
 
-        showDialog();
-        initializationData();//初始化数据
-        testLALAL();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                initializationData();//初始化数据
+            }
+        }).start();
+
 
         View header = View.inflate(this, R.layout.recycle_header2, null);
         View footer = View.inflate(this, R.layout.dynamic_botton, null);
@@ -118,17 +130,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {
-                        Message msg = new Message();
-                        msg.what = REFRESH;
-                        mHandler.sendMessageDelayed(msg, 1000);
+                        refreshData();
                     }
 
                     //下拉加载更多
                     @Override
                     public void onLoadMore() {
-                        Message msg = new Message();
-                        msg.what = LOAD_MORE;
-                        mHandler.sendMessageDelayed(msg, 1000);
+                        loadMoreData();
                     }
                 })
 //                .setOnItemClickListener(new RefreshRecyclerViewAdapter.OnItemClickListener() {
@@ -144,19 +152,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case INITIALZATION_FINISH://数据初始化完成
+                case INITIALZATION://数据初始化完成
                     new toast(getApplicationContext(), "数据加载完成");
-                    mDialog.dismiss();
                     break;
-                case LOAD_MORE://加载更多
-                    testLALAL();
+                case LOAD_MORE://加载更多完成
+                    new toast(MainActivity.this, "加载完成");
                     break;
                 case REFRESH://刷新
-                    testLALAL();
+                    new toast(MainActivity.this, "刷新完成");
                     break;
             }
-            recyclerView.onRefreshCompleted();
-            mDynamicAdapter.notifyDataSetChanged();
+            if (mDatas.size() > 0) {
+                recyclerView.onRefreshCompleted();
+                mDynamicAdapter.notifyDataSetChanged();
+            } else {
+                new toast(MainActivity.this, "暂时没有任何记录");
+            }
+
         }
     };
 
@@ -169,9 +181,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mNewsBtn.setOnClickListener(this);
         mLawsBtn.setOnClickListener(this);
         mTechnologyBtn.setOnClickListener(this);
+        mPublishDynamic.setOnClickListener(this);
 
         mComeEnMonitoring.setOnClickListener(this);
         mComeRecycle.setOnClickListener(this);
+
+        mMonitorHistory.setOnClickListener(this);
+        mUserInfo.setOnClickListener(this);
 
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -211,23 +227,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     void initializationData() {
 
-        BmobQuery<Dynamic> query = new BmobQuery<>();
+        BmobQuery<Dynamic> query = new BmobQuery<Dynamic>();
         query.addWhereNotEqualTo("title", "null");
+        query.order("-createdAt");
+        query.include("author,likes");// 希望在查询帖子信息的同时也把发布人的信息查询出来
         query.setLimit(10);
         query.findObjects(new FindListener<Dynamic>() {
             @Override
             public void done(List<Dynamic> list, BmobException e) {
                 if (e == null) {
-                    mDatas.addAll(list);
+                    if (list.size() > 0) {
+                        mDatas.addAll(list);
+                    }
                     Message msg = new Message();
-                    msg.what = INITIALZATION_FINISH;
+                    msg.what = INITIALZATION;
                     mHandler.sendMessage(msg);
+
                 } else {
-                    log.d("TAG", "查询失败");
+                    log.d("TAG", "查询失败" + e.toString() + " 原因");
                 }
             }
         });
-
     }
 
     /**
@@ -235,21 +255,107 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @return
      */
-    List<Dynamic> loadMoreData() {
-        List<Dynamic> list = new ArrayList<>();
-        BmobQuery<Dynamic> query = new BmobQuery<>();
+    void loadMoreData() {
+        BmobQuery<Dynamic> query = new BmobQuery<Dynamic>();
+        int position = mDatas.size() - 1;
+        if (position < 0) {
+            new toast(this, "加载不可用");
+        } else {
+            String start = mDatas.get(position).getCreatedAt();
+            log.d("TAG", "加载的最晚的时间是" + start);
+            query.include("author,likes");// 希望在查询帖子信息的同时也把发布人的信息查询出来
+            query.order("-createdAt");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = null;
+            try {
+                date = sdf.parse(start);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
+            query.setLimit(5);//设置每次加载五条数据
+            query.findObjects(new FindListener<Dynamic>() {
+                @Override
+                public void done(List<Dynamic> list, BmobException e) {
+                    if (e == null) {
+                        new toast(getApplicationContext(), "查询成功");
+                        for (Dynamic item : list
+                                ) {
+                            log.d("TAG", "加载更多数据" + item.getContent());
 
-        return list;
+                        }
+                        list.remove(0);
+                        if (list.size() > 0) {
+                            mDatas.addAll(list);
+                        } else {
+                            log.d("TAG", "加载更多没有加载到数据");
+                        }
+                        Message msg = new Message();
+                        msg.what = LOAD_MORE;
+                        mHandler.sendMessage(msg);
+                    } else {
+                        new toast(getApplicationContext(), "查询失败");
+                        log.d("TAG", e.toString() + "错误码");
+                    }
+                }
+            });
+
+        }
+
+
     }
 
     /**
      * 更新数据
      */
-    List<Dynamic> refreshData() {
-        List<Dynamic> list = new ArrayList<>();
-        BmobQuery<Dynamic> query = new BmobQuery<>();
+    void refreshData() {
+        if (mDatas.size() > 0) {
+            BmobQuery<Dynamic> query = new BmobQuery<Dynamic>();
+            String start = mDatas.get(0).getCreatedAt();
+            log.d("TAG", "最新跟新的时间是" + start);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = null;
+            try {
+                date = sdf.parse(start);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            query.include("author,likes");// 希望在查询帖子信息的同时也把发布人的信息查询出来,喜欢信息也需要查询出来
+            //query.order("-createdAt");
+            query.addWhereGreaterThanOrEqualTo("createdAt", new BmobDate(date));
+            query.findObjects(new FindListener<Dynamic>() {
+                @Override
+                public void done(List<Dynamic> list, BmobException e) {
+                    if (e == null) {
+                        new toast(getApplicationContext(), "更新成功");
+                        for (Dynamic item : list
+                                ) {
+                            log.d("TAG", "刷新数据" + item.getContent());
 
-        return list;
+                        }
+                        list.remove(0);
+                        if (list.size() > 0) {
+                            mDatas.addAll(0, list);
+                        } else {
+                            log.d("TAG", "刷新并没有获取到数据");
+                        }
+                        mDatas.addAll(list);
+
+                        Message msg = new Message();
+                        msg.what = REFRESH;
+                        mHandler.sendMessage(msg);
+
+                    } else {
+                        new toast(getApplicationContext(), "查询失败");
+                        log.d("TAG", "查询失败的原因" + e.toString());
+                    }
+                }
+            });
+
+        } else {
+            log.d("TAG", "暂时还没有做这方面的加载");
+        }
+
     }
 
     private void initView() {
@@ -262,7 +368,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mHomeImg = (ImageButton) findViewById(R.id.main_bottom_home_img);
         mDynamicImg = (ImageButton) findViewById(R.id.main_bottom_dynamic_img);
         mUserImg = (ImageButton) findViewById(R.id.main_bottom_user_img);
-
 
 
         mainPresenter = new MainPresenterComple(this);
@@ -297,8 +402,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mComeEnMonitoring = (Button) tab01.findViewById(R.id.home_en_control);
         mComeRecycle = (Button) tab01.findViewById(R.id.home_resources_recycle);
 
-        mMonitorHistory = (LinearLayout) tab03.findViewById(R.id.user_monitoring_history);
+        mPublishDynamic = (ImageButton) tab02.findViewById(R.id.dynamic_add_publish_main);
 
+        mMonitorHistory = (LinearLayout) tab03.findViewById(R.id.user_monitoring_history);
+        mUserInfo = (LinearLayout) tab03.findViewById(R.id.user_monitoring_detail);
         recyclerView = (RefreshRecyclerView) tab02.findViewById(R.id.dynamic_recyclerView);
 
         mViews.add(tab01);
@@ -346,7 +453,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //用于轮播图增加图片用方法
     private void addOneResourceToData(int resId) {
         ImageView one = new ImageView(this);
-        one.setImageResource(resId);
+        one.setImageResource(R.mipmap.ic_launcher);
         one.setScaleType(ImageView.ScaleType.FIT_XY);
         mBannerViewDatas.add(one);
     }
@@ -385,8 +492,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d("debug", "baike btn");
                 Intent intent = new Intent(this, EncyclopaediaView.class);
                 startActivity(intent);
-            case R.id.user_monitoring_history:
-                break;
             case R.id.home_en_news:
                 Intent newsIntent = new Intent(this, NewsView.class);
                 startActivity(newsIntent);
@@ -399,30 +504,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent technologyIntent = new Intent(this, TechnologyView.class);
                 startActivity(technologyIntent);
                 break;
-
+            case R.id.user_monitoring_history://监控历史
+                startActivity(new Intent(this, MonitoringHistoryView.class));
+                break;
+            case R.id.dynamic_add_publish_main:
+                startActivity(new Intent(this, DynamicActivity.class));
+                break;
+            case R.id.user_monitoring_detail:
+                startActivity(new Intent(this, InfomationActivity.class));
+                break;
         }
     }
 
-    public void addNewsDynamic(View view) {
-        new toast(this, "点击事件测试");
-        startActivity(new Intent(this, DynamicActivity.class));
-    }
 
-
-    private void showDialog() {
-        mDialog = new ProgressDialog(this);
-        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mDialog.setTitle("Loading...");
-        mDialog.setMessage("正在加载中，请稍后...");
-        mDialog.setCancelable(true);
-        mDialog.show();
-    }
-
-    private void testLALAL() {
-        Dynamic item = new Dynamic();
-        item.setContent("sds");
-        item.setTitle("123");
-        item.setImageUrl("[http://bmob-cdn-6268.b0.upaiyun.com/2016/10/05/17bf2a2321db4d008dc7b20fc3b1e755.png, http://bmob-cdn-6268.b0.upai");
-        mDatas.add(item);
-    }
 }

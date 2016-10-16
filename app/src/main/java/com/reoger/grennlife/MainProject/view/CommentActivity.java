@@ -27,7 +27,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     private EditText mEditComment;
     private Button mButtonPublish;
 
-    private Dynamic dynamic;
+    private Dynamic Dynamic;
 
 
 
@@ -45,8 +45,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initData() {
-         dynamic = (Dynamic) getIntent().getSerializableExtra(DynamicAdapter.COMMENTS);
-        mDynamicContent.setText(dynamic.getContent().toString());
+         Dynamic = (Dynamic) getIntent().getSerializableExtra(DynamicAdapter.COMMENTS);
+        mDynamicContent.setText(Dynamic.getContent().toString());
     }
 
     private void initView() {
@@ -63,7 +63,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 final Comment comment = new Comment();
                 comment.setContent(mEditComment.getText().toString());
                 comment.setUser(use);
-                comment.setDynamic(dynamic);
+                comment.setDynamic(Dynamic);
                 comment.save(new SaveListener<String>() {
                     @Override
                     public void done(String s, BmobException e) {

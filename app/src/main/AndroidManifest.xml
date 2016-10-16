@@ -38,14 +38,24 @@
             </intent-filter>
         </activity>
         <activity android:name=".register.view.RegisterView" />
-        <activity android:name=".MainProject.view.MainActivity" />
+        <activity android:name=".MainProject.view.MainActivity"
+                  android:label="主界面"/>
         <activity android:name=".monitoring.view.EnvironmentalMonitoring" />
-        <activity android:name=".Recycle.view.RecycleView"/>
-        <activity android:name=".Recycle.view.PublishingResourcesView"/>
-        <activity android:name=".Recycle.view.GarbagerListView"/>
-        <activity android:name=".ResetPassword.view.ResetPasswordView" />
-        <activity android:name=".MainProject.view.CommentActivity"/>
-        <activity android:name=".MainProject.view.DynamicActivity" />
+        <activity android:name=".Recycle.view.RecycleViewActivity"
+                  android:label="回收"/>
+        <activity android:name=".Recycle.view.PublishingResourcesView"
+                  android:label="旧物利用"/>
+        <activity android:name=".ResetPassword.view.ResetPasswordView"
+                  android:label="重置密码"/>
+        <activity android:name=".MainProject.view.CommentActivity"
+                  android:label="评论"
+                  android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".MainProject.view.DynamicActivity"
+            android:label="动态"/>
+        <activity android:name=".user.monitoringHistroy.view.MonitoringHistoryView"
+            android:label="监控历史"/>
+        <activity android:name=".user.infomation.View.InfomationActivity"
+            android:label="详细资料"/>
         <activity android:name=".encyclopaedia.view.EncyclopaediaView"
             android:label="环保百科"/>
         <activity android:name=".news.view.NewsView"

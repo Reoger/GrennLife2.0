@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#edf5f1">
+    </View>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="#edf5f1">
-        </View>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,42 +24,59 @@
                 android:layout_width="80sp"
                 android:layout_height="80sp"
                 android:padding="10dp"
-                android:src="@drawable/photo2" />
+                android:src="@drawable/photo2"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="用户名"
-                    android:textSize="20sp"
                     android:id="@+id/dynamic_item_author"
-                    android:layout_marginTop="18dp" />
-
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="发布的时间+地点"
-                    android:textSize="10sp"
-                    android:padding="5dp"
+                    android:layout_marginTop="18dp"
+                    android:text="用户名"
+                    android:textSize="20sp"/>
+
+                <TextView
                     android:id="@+id/dynamic_item_time_location"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:padding="2dp"
+                    android:text="发布的时间+地点"
+                    android:textSize="10sp"/>
 
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/dynamic_linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/dynamic_item_content"
-            android:text="我真的很需要一个人在我身边，就是那种天天带我学习，张嘴闭嘴就是要考证，约我出去都是要去图书馆学习，看我不学习反手就给我一巴掌的引领我走向人生巅峰的那种人"
-            android:textSize="15sp"
-            android:padding="10dp"
-            android:textColor="@color/pink" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dynamic_item_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="我真的很需要一个人在我身边，就是那种天天带我学习，张嘴闭嘴就是要考证，约我出去都是要去图书馆学习，看我不学习反手就给我一巴掌的引领我走向人生巅峰的那种人"
+                android:textColor="@color/pink"
+                android:textSize="15sp"/>
+
+            <GridLayout
+                android:id="@+id/dynamic_gridlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:orientation="horizontal"
+                android:rowCount="3">
+            </GridLayout>
+        </LinearLayout>
+
 
         <View
             android:layout_width="350dp"
@@ -72,19 +92,19 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/like"
-                android:layout_gravity="center"
                 android:id="@+id/dynamic_item_like"
-                android:layout_marginLeft="50dp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dp"
+                android:src="@mipmap/like"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text=" 喜欢"
-                android:textSize="12sp"
-                android:layout_gravity="center"/>
+                android:textSize="12sp"/>
 
             <View
                 android:layout_width="1dp"
@@ -95,18 +115,19 @@
             </View>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/share__"
-                android:layout_gravity="center"
                 android:id="@+id/dynamic_item_share"
-                android:layout_marginLeft="40dp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="40dp"
+                android:src="@mipmap/share__"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text=" 分享"
-                android:textSize="12sp"
-                android:layout_gravity="center"/>
+                android:textSize="12sp"/>
 
             <View
                 android:layout_width="1dp"
@@ -117,19 +138,19 @@
             </View>
 
             <ImageView
+                android:id="@+id/dynamic_item_comments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/comment_"
                 android:layout_gravity="center"
-                android:id="@+id/dynamic_item_comments"
-                android:layout_marginLeft="40dp"/>
+                android:layout_marginLeft="40dp"
+                android:src="@mipmap/comment_"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text=" 评论"
-                android:textSize="12sp"
-                android:layout_gravity="center" />
+                android:textSize="12sp"/>
         </LinearLayout>
     </LinearLayout>
 

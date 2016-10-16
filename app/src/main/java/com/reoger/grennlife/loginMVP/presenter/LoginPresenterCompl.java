@@ -1,5 +1,6 @@
 package com.reoger.grennlife.loginMVP.presenter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +28,7 @@ public class LoginPresenterCompl implements ILoginPresenter {
     private final static String TAG = "com.reoger.grennlife.loginMVP.presenter";
 
     private ILoginViw mILoginView;
+    private Context mContext;
 
     private SharedPreferences mPref;
     private SharedPreferences.Editor mPasswordEditor;
@@ -36,13 +38,15 @@ public class LoginPresenterCompl implements ILoginPresenter {
         mILoginView = new LoginView();
     }
 
-    public LoginPresenterCompl(ILoginViw mILoginView) {
+    public LoginPresenterCompl(ILoginViw mILoginView,Context context) {
         this.mILoginView = mILoginView;
+        this.mContext= context;
     }
 
     //登陆的逻辑
     @Override
     public void doLogin(final String name, String password) {
+        showDialog();
         BmobUser user = new BmobUser();
         user.setUsername(name);
         user.setPassword(password);
@@ -54,9 +58,12 @@ public class LoginPresenterCompl implements ILoginPresenter {
                     application.setUserName(name);//设置全局的用户名
                     application.setUserMode(BmobUser.getCurrentUser(UserMode.class));//保留当前的用户登录
                     log.d("TAG","login"+application.getUserName()+" use"+application.getUserMode());
-                  mILoginView.onLoginResult(true);
+                    mDialog.dismiss();
+                    mILoginView.onLoginResult(true);
                     log.d(TAG,"登陆成功");
+
                 } else {
+                    mDialog.dismiss();
                     Log.d("TAG","登陆失败~"+"321");
                     mILoginView.onLoginResult(false);
                 }
@@ -93,5 +100,16 @@ public class LoginPresenterCompl implements ILoginPresenter {
     @Override
     public void doComeMainActivity(Context context) {
         context.startActivity(new Intent(context,com.reoger.grennlife.MainProject.view.MainActivity.class));
+    }
+
+    private ProgressDialog mDialog;
+
+    private void showDialog() {
+        mDialog = new ProgressDialog(mContext);
+        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mDialog.setTitle("publish...");
+        mDialog.setMessage("正在登录，请稍后...");
+        mDialog.setCancelable(true);
+        mDialog.show();
     }
 }

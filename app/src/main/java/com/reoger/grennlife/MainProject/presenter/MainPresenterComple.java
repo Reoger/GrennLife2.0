@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.reoger.grennlife.MainProject.view.IMainActivity;
-import com.reoger.grennlife.Recycle.view.RecycleView;
+import com.reoger.grennlife.Recycle.view.RecycleViewActivity;
 import com.reoger.grennlife.monitoring.view.EnvironmentalMonitoring;
 
 /**
@@ -34,7 +34,7 @@ public class MainPresenterComple implements IMainPresenter {
                 intent = new Intent(context,EnvironmentalMonitoring.class);
                 break;
             case RECYCLE:
-                intent = new Intent(context, RecycleView.class);
+                intent = new Intent(context, RecycleViewActivity.class);
         }
         context.startActivity(intent);
     }

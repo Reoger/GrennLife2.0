@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/item_garbager_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#b48a8a"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="我是李某"
+        android:textSize="19sp"></TextView>
+
+    <TextView
+        android:id="@+id/item_garbager_user_phone_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="聯係方式："
+        />
+
+    <TextView
+        android:id="@+id/item_garbager_user_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="位置"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="20"
+        android:gravity="center"
+        android:lines="4"
+        android:text="這裏可以添加個人簡介嘛"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="距离你  100m"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="已認證"
+        android:textColor="#f0ec0101"/>
+
+</LinearLayout>

@@ -65,6 +65,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
+        android:id="@+id/user_monitoring_detail"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="@dimen/user_list_picture"

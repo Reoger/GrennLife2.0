@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.reoger.grennlife.R;
@@ -21,20 +20,15 @@ import java.util.List;
 /**
  * Created by 24540 on 2016/9/18.
  */
-public class RecycleView extends AppCompatActivity implements View.OnClickListener{
+public class RecycleViewActivity extends AppCompatActivity implements View.OnClickListener{
     private ImageButton mAddMsg;
     private IRecyclingOldPresenter mIRecyclingOldPresenter;
-
-    private Button mGarbager;
-    private Button mOldThing;
-
 
 
     private List<Fragment> mTabContents = new ArrayList<Fragment>();
     private FragmentPagerAdapter mAdapter;
     private ViewPager mViewPager;
-    private List<String> mDatas = Arrays.asList("垃圾回收", "旧物利用", "我的关注");
-
+    private List<String> mDatas = Arrays.asList("垃圾回收", "旧物利用");
 
     private ViewPagerIndicator mIndicator;
 
@@ -58,11 +52,12 @@ public class RecycleView extends AppCompatActivity implements View.OnClickListen
     }
 
     private void initDatas() {
-        GarbagerFrament tab01 = new GarbagerFrament();
-        OldThingFrament tab02 = new OldThingFrament();
+
+        GarbagerFragment tab01 = new GarbagerFragment();
+        OldThingFragment tab02 = new OldThingFragment();
+
         mTabContents.add(tab01);
         mTabContents.add(tab02);
-       // mTabContents.add(tab02);
 
         mAdapter = new FragmentPagerAdapter(getSupportFragmentManager())
         {
@@ -82,19 +77,13 @@ public class RecycleView extends AppCompatActivity implements View.OnClickListen
 
     private void setonClickListen() {
         mAddMsg.setOnClickListener(this);
-        mGarbager.setOnClickListener(this);
-        mOldThing.setOnClickListener(this);
+
     }
 
     private void initView() {
 
         mIRecyclingOldPresenter = new RecyclingOldPresenterCompl(this);
         mAddMsg = (ImageButton) findViewById(R.id.recycle_add);
-
-        mGarbager = (Button) findViewById(R.id.recycle_garbage);
-        mOldThing = (Button) findViewById(R.id.recycle_old);
-
-
         ///ttt
         mViewPager = (ViewPager) findViewById(R.id.id_vp);
         mIndicator = (ViewPagerIndicator) findViewById(R.id.id_indicator);
@@ -105,11 +94,6 @@ public class RecycleView extends AppCompatActivity implements View.OnClickListen
         switch(v.getId()){
             case R.id.recycle_add://添加资源信息
                 mIRecyclingOldPresenter.doComeActivity(1);
-                break;
-            case R.id.recycle_garbage://显示垃圾列表
-                mIRecyclingOldPresenter.doComeActivity(2);
-                break;
-            case R.id.recycle_old://显示旧物列表
                 break;
         }
     }
