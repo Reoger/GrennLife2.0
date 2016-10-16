@@ -1,8 +1,6 @@
 package com.reoger.grennlife.MainProject.view;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -28,7 +26,6 @@ import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.view.EncyclopaediaView;
 import com.reoger.grennlife.law.view.LawView;
 import com.reoger.grennlife.news.view.NewsView;
-import com.reoger.grennlife.recyclerPlayView.Utils.ViewPagerScrollerSetter;
 import com.reoger.grennlife.recyclerPlayView.adapter.BannerViewPagerAdapter;
 import com.reoger.grennlife.recyclerPlayView.gear.BannerViewPager;
 import com.reoger.grennlife.technology.view.TechnologyView;
@@ -38,9 +35,6 @@ import com.reoger.grennlife.user.monitoringHistroy.view.MonitoringHistoryView;
 import com.reoger.grennlife.utils.log;
 import com.reoger.grennlife.utils.toast;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -126,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }).start();
 
 
-        View header = View.inflate(this, R.layout.recycle_header2, null);
+        View header = View.inflate(this, R.layout.recycle_header2_tete, null);
      //   View footer = View.inflate(this, R.layout.dynamic_botton, null);
 
         mDynamicAdapter = new DynamicAdapter(MainActivity.this, mDatas);

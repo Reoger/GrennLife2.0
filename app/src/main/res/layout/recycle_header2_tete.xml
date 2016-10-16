@@ -2,24 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    >
 
     <!--<LinearLayout-->
-    <ImageView
+
+
+
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:background="@drawable/tree"-->
+        <!--android:orientation="vertical"-->
+        <!--android:gravity="center"/>-->
+    <LinearLayout
+        android:background="@drawable/tree"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@drawable/tree"
         android:orientation="vertical"
-        android:gravity="center"/>
+        android:gravity="center">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="添加动态"
-                android:onClick="addNewsDynamic"/>
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -49,6 +53,6 @@
                     android:layout_gravity="center"/>
             </LinearLayout>
         </LinearLayout>
-    <!--</LinearLayout>-->
+    </LinearLayout>
 
 </LinearLayout>
