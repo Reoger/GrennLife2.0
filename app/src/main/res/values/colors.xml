@@ -3,20 +3,20 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="toolbar_background">#770000ff</color>
+    <color name="toolbar_background">#4a4a4a</color>
     <color name="transparent">#00000000</color>
-    <color name="black">#000000</color>
+    <color name="black">#aa000000</color>
     <color name="pink">#fcc4e9</color>
     <color name="home_button_text">#8a8a8a</color>
     <color name="white">#ffffff</color>
     <color name="blue">#0000ff</color>
     <color name="user_back">#c6e2ff</color>
-    <color name="grey">#bebebe</color>
+    <color name="grey">#88bebebe</color>
     <color name="DarkSeaGreen">#c1ffc1</color>
     <color name="green">#11cd6e</color>
     <color name="Ivory2">#eeeee0</color>
     <color name="LightCyan1">#e0ffff</color>
     <color name="SeaGreen">#54ff9f</color>
     <color name="Azure">#f0ffff</color>
-    <color name="Gainsboro">#dcdcdc</color>
+    <color name="background_main">#22e0e0e0</color>
 </resources>

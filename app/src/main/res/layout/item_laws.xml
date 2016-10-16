@@ -9,24 +9,25 @@
     <LinearLayout
         android:layout_weight="7"
         android:layout_width="0dip"
-        android:layout_height="120dip"
+        android:layout_height="80dip"
         android:paddingTop="5dip"
         android:orientation="vertical">
         <TextView
             android:id="@+id/laws_title_text"
             android:text="title"
+            android:gravity="center_vertical"
             android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:textStyle="bold"
             android:textSize="25sp"/>
-        <TextView
-            android:id="@+id/laws_content_text"
-            android:text="content  content  content  content  content"
-            android:textSize="15sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="7dip"/>
+        <!--<TextView-->
+            <!--android:id="@+id/laws_content_text"-->
+            <!--android:text="content  content  content  content  content"-->
+            <!--android:textSize="15sp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingTop="7dip"/>-->
 
     </LinearLayout>
 

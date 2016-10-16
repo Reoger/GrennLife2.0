@@ -48,7 +48,7 @@ public class OldThingFragment extends Fragment{
 
     private void initView() {
         Context context = getContext();
-        View header = View.inflate(context,R.layout.recycle_header2,null);
+        View header = View.inflate(context,R.layout.recycle_header2_tete,null);
         recyclerView = (RefreshRecyclerView) rootView.findViewById(R.id.dynamic_recyclerView2);
         //需要先初始化数据
         mOldthingAdapter = new OldThingsAdapter(context,mData);

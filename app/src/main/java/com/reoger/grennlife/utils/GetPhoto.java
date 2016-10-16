@@ -167,42 +167,6 @@ public class GetPhoto {
     /**
      * <p>Activity中onActivityResult()参照以下注释代码</p>
      */
-//  @Override
-//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		super.onActivityResult(requestCode, resultCode, data);
-//		switch (requestCode) {
-//        case ImageUtils.ACTIVITY_RESULT_CAMERA: // 拍照
-//            try {
-//                if (resultCode == -1) {
-//                    imageUtils.cutImageByCamera();
-//                } else {
-//                    // 因为在无任何操作返回时，系统依然会创建一个文件，这里就是删除那个产生的文件
-//                    if (imageUtils.picFile != null) {
-//                        imageUtils.picFile.delete();
-//                    }
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//            break;
-//
-//        case ImageUtils.ACTIVITY_RESULT_ALBUM: // 相册
-//            try {
-//                if (resultCode == -1) {
-//                    Bitmap bm_icon = imageUtils.decodeBitmap();
-//                    if (bm_icon != null) {
-//                        headPic.setImageBitmap(bm_icon);
-//                    }
-//                } else {
-//                    // 因为在无任何操作返回时，系统依然会创建一个文件，这里就是删除那个产生的文件
-//                    if (imageUtils.picFile != null) {
-//                        imageUtils.picFile.delete();
-//                    }
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//            break;
-//        }
+
 
 }

@@ -354,7 +354,7 @@ public class DBOperationCompl implements IDBOperation {
                     db.insert(LawsOpenHelper.TABLE_NAME, null, values);
                     break;
                 case ServerDataCompl.BEAN_TYPE_NEWS:
-                    values.put(NewsDBOpenHelper.NEWS_TITLE, ((NewsBean) one).getContent());
+                    values.put(NewsDBOpenHelper.NEWS_TITLE, ((NewsBean) one).getTitle());
                     values.put(NewsDBOpenHelper.NEWS_CONTENT, ((NewsBean) one).getContent());
                     values.put(NewsDBOpenHelper.NEWS_OUTLINE, ((NewsBean) one).getOutLine());
                     values.put(NewsDBOpenHelper.NEWS_DATE, ((NewsBean) one).getDate());
