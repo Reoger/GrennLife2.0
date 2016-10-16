@@ -34,16 +34,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
     @Override
     public void onBindViewHolder(NewsViewHolder holder, int position) {
-        holder.mContentTextView.setText(
-                (
-                        (NewsBean)(mDatas.get(position) )
-                ).getOutLine()
-        );
-        holder.mTitleTextView.setText(
-                (
-                        (NewsBean) (mDatas.get(position) )
-                ).getTitle()
-        );
+        NewsBean presentBean = (NewsBean) (mDatas.get(position));
+
+        holder.mContentTextView.setText(presentBean.getOutLine());
+        holder.mTitleTextView.setText(presentBean.getTitle() );
     }
 
     @Override

@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:background="#edf5f1">
+    android:layout_height="45dp"
+    android:background="@color/toolbar_background">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="环境监控"
-        android:textColor="@color/green"
+        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:id="@+id/toolbar_text"/>
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/all_return"
+        android:background="@mipmap/all__return"
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
         android:id="@+id/toolbar_button1"/>
 
 
-    </RelativeLayout>
+</RelativeLayout>

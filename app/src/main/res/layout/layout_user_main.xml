@@ -2,71 +2,80 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#22e0e0e0">
 
     <include layout="@layout/user_title"></include>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="10dp"
+        android:background="#22e0e0e0">
+    </View>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#552f4f4f">
+    </View>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/white">
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/picture"/>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="嘻嘻嘻"
+                    android:textSize="17sp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"/>
+                <TextView
+                    android:padding="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:text="简介:就是一个特点：帅@！"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
         android:background="@color/grey">
     </View>
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="120dp"
-       android:orientation="horizontal"
-       android:gravity="center">
-       <ImageView
-           android:layout_width="80dp"
-           android:layout_height="80dp"
-           android:layout_marginLeft="18dp"
-           android:src="@drawable/photo1"/>
-       <LinearLayout
-           android:layout_weight="1"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content">
-           <LinearLayout
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:orientation="vertical">
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="嘻嘻嘻"
-                   android:textSize="20sp"
-                   android:padding="10dp"/>
-               <TextView
-                   android:padding="10dp"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="简介:就是一个特点：帅@！"/>
-           </LinearLayout>
-       </LinearLayout>
-   </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="#662f4f4f">
+        android:layout_marginTop="12dp"
+        android:background="@color/grey">
     </View>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="8dp"
-        android:background="#662f4f4f">
-    </View>
+
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="5dp">
-    </LinearLayout>
-
-    <LinearLayout
+        android:id="@+id/user_monitoring_detail"
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
-        android:id="@+id/user_monitoring_detail"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
         <ImageView
             android:layout_width="@dimen/user_list_picture"
             android:layout_height="@dimen/user_list_picture"
@@ -79,20 +88,30 @@
             android:text="@string/detailed_information"
             android:textSize="@dimen/user__list_text"
             android:layout_gravity="center"
+            android:textColor="@color/black"
             android:layout_marginLeft="@dimen/user_text_marginLeft"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/come_into"
+            android:src="@mipmap/come__into"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/user_into_marginLeft"/>
 
+
+
     </LinearLayout>
+    <View
+        android:layout_width="330dp"
+        android:layout_height="0.3dp"
+        android:layout_gravity="right"
+        android:background="#66e0e0e0">
+    </View>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
         <ImageView
             android:layout_width="@dimen/relater__picture"
             android:layout_height="@dimen/user_list_picture"
@@ -105,20 +124,28 @@
             android:text="@string/related_to_me"
             android:textSize="@dimen/user__list_text"
             android:layout_gravity="center"
+            android:textColor="@color/black"
             android:layout_marginLeft="27dp"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/come_into"
+            android:src="@mipmap/come__into"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/user_into_marginLeft"/>/>
 
     </LinearLayout>
+    <View
+        android:layout_width="330dp"
+        android:layout_height="0.3dp"
+        android:layout_gravity="right"
+        android:background="#66e0e0e0">
+    </View>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
         <ImageView
             android:layout_width="@dimen/user_list_picture"
             android:layout_height="wrap_content"
@@ -131,21 +158,29 @@
             android:text="@string/my_resources"
             android:textSize="@dimen/user__list_text"
             android:layout_gravity="center"
+            android:textColor="@color/black"
             android:layout_marginLeft="@dimen/user_text_marginLeft"/>/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/come_into"
+            android:src="@mipmap/come__into"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/user_into_marginLeft"/>/>
 
     </LinearLayout>
+    <View
+        android:layout_width="330dp"
+        android:layout_height="0.3dp"
+        android:layout_gravity="right"
+        android:background="#66e0e0e0">
+    </View>
 
     <LinearLayout
         android:id="@+id/user_monitoring_history"
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
         <ImageView
             android:layout_width="@dimen/relater__picture"
             android:layout_height="@dimen/user_list_picture"
@@ -158,43 +193,39 @@
             android:text="@string/history"
             android:textSize="@dimen/user__list_text"
             android:layout_gravity="center"
+            android:textColor="@color/black"
             android:layout_marginLeft="27dp"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/come_into"
+            android:src="@mipmap/come__into"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/user_into_marginLeft"/>/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="5dp">
-    </LinearLayout>
+
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="#662f4f4f">
+        android:background="@color/grey">
     </View>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_marginTop="10dp"
-        android:background="#662f4f4f">
+        android:layout_marginTop="12dp"
+        android:background="@color/grey">
     </View>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="5dp">
-    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -207,20 +238,28 @@
             android:text="@string/feedback"
             android:textSize="@dimen/user__list_text"
             android:layout_gravity="center"
+            android:textColor="@color/black"
             android:layout_marginLeft="@dimen/user_text_ml"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/come_into"
+            android:src="@mipmap/come__into"
             android:layout_gravity="center"
-            android:layout_marginLeft="218dp"/>
+            android:layout_marginLeft="238dp"/>
 
     </LinearLayout>
+    <View
+        android:layout_width="330dp"
+        android:layout_height="0.3dp"
+        android:layout_gravity="right"
+        android:background="#66e0e0e0">
+    </View>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -233,20 +272,28 @@
             android:text="@string/about_APP"
             android:textSize="@dimen/user__list_text"
             android:layout_gravity="center"
+            android:textColor="@color/black"
             android:layout_marginLeft="@dimen/user_text_marginLeft"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/come_into"
+            android:src="@mipmap/come__into"
             android:layout_gravity="center"
-            android:layout_marginLeft="189dp"/>
+            android:layout_marginLeft="209dp"/>
 
     </LinearLayout>
+    <View
+        android:layout_width="320dp"
+        android:layout_height="0.3dp"
+        android:layout_gravity="right"
+        android:background="#66e0e0e0">
+    </View>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -259,14 +306,20 @@
             android:text="@string/set_up"
             android:textSize="@dimen/user__list_text"
             android:layout_gravity="center"
+            android:textColor="@color/black"
             android:layout_marginLeft="@dimen/user_text_ml"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/come_into"
+            android:src="@mipmap/come__into"
             android:layout_gravity="center"
-            android:layout_marginLeft="217dp"/>/>
+            android:layout_marginLeft="237dp"/>/>
 
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey">
+    </View>
 
 </LinearLayout>

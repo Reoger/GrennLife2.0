@@ -1,5 +1,6 @@
 package com.reoger.grennlife.encyclopaedia.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,11 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.adapter.EncyclopaediaAdapter;
+import com.reoger.grennlife.encyclopaedia.model.EncyclopaediaBean;
 import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.IServerData;
 import com.reoger.grennlife.utils.ServerDataOperation.ServerDataCompl;
@@ -66,26 +67,24 @@ public class EncyclopaediaView extends AppCompatActivity implements IEncyclopaed
         //判定是否需要从网络后台读取数据
         if (mData.size() > 0) {
             //成功从数据库读入
+            mEncyclopaediaAdapter = new EncyclopaediaAdapter(this, mData);
+            mEncyclopaediaAdapter.notifyDataSetChanged();
             Log.d("in encyclopaedia view", "succeed in reading from local db");
         } else {
             //耗时操作
-            mData = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA);
-            Log.d("qqe", "initAttr: " + (mData == null)+ " "+mData.size());
-//            //存入数据库
-//            mDBOperationComl.doSaveDataIntoDB(mData);
-//            Log.d("qqe","成功存入数据库哦"+mData.size());
+            mData = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_ENCYCLOPAEDIA,this);
+            mEncyclopaediaAdapter = new EncyclopaediaAdapter(this, mData);
         }
-        mEncyclopaediaAdapter = new EncyclopaediaAdapter(this, mData);
 
     }
 
 
     private void recycleViewMethod() {
-        View footer = View.inflate(this, R.layout.dynamic_botton, null);
+      //  View footer = View.inflate(this, R.layout.dynamic_botton, null);
         RecyclerViewManager.with(mEncyclopaediaAdapter, new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
 //                .addHeaderView(header)
-                .addFooterView(footer)
+          //      .addFooterView(footer)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {
@@ -109,6 +108,12 @@ public class EncyclopaediaView extends AppCompatActivity implements IEncyclopaed
                 }).setOnItemClickListener(new RefreshRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+                EncyclopaediaBean one = (EncyclopaediaBean) mData.get(position);
+
+                Intent encyclopaediaIntent = new Intent(getApplicationContext(),EncyclopaediaDetailView.class);
+                encyclopaediaIntent.putExtra(EncyclopaediaDetailView.ARG_ENCYCLOPAEDIA_TITLE,one.getmTitle());
+                encyclopaediaIntent.putExtra(EncyclopaediaDetailView.ARG_ENCYLCOPAEDIA_CONTENT,one.getmContent());
+                startActivity(encyclopaediaIntent);
                 Toast.makeText(CustomApplication.getContext(), "position:" + position, Toast.LENGTH_SHORT)
                         .show();
             }
@@ -116,7 +121,7 @@ public class EncyclopaediaView extends AppCompatActivity implements IEncyclopaed
 
     }
 
-    private Handler mHandler = new Handler() {
+    public Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {

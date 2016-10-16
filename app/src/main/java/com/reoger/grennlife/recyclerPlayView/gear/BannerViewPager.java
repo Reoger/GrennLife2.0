@@ -22,7 +22,7 @@ public class BannerViewPager extends FrameLayout implements ViewPager.OnPageChan
     private int mCurrentPosition;
     private int mViewPagerScrollState;
 
-    private int mAutoRollingTime = 3000;
+    private int mAutoRollingTime = 5000;
     private int mViewRealeseTime = 0;
     private static final int MESSAGE_AUTO_ROLLING = 0X1001;
     private static final int MESSAGE_AUTO_ROLLING_CANCEL = 0X1002;
@@ -75,7 +75,7 @@ public class BannerViewPager extends FrameLayout implements ViewPager.OnPageChan
             switch (msg.what) {
                 case MESSAGE_AUTO_ROLLING:
                     if (mCurrentPosition == mAdapter.getCount() - 1) {
-                        mPager.setCurrentItem(0, true);
+                        mPager.setCurrentItem(0, false);
                     } else {
                         mPager.setCurrentItem(mCurrentPosition+1, true);
                     }
