@@ -34,6 +34,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
 
     private ListView mListView;
     private CommentAdapter mAdapter;
+    private TextView mNone;
 
     private List<Comment> commentList = new ArrayList<>();
 
@@ -53,7 +54,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
 
     private void initData() {
         mDynamic = (Dynamic) getIntent().getSerializableExtra(DynamicAdapter.COMMENTS);
-        mICommentPresenter.doGetComment(mDynamic);
+        mICommentPresenter.doGetComment(mDynamic);//获取评论列表
+        mNone.setVisibility(View.VISIBLE);
         mDynamicContent.setText(mDynamic.getContent().toString());
     }
 
@@ -62,6 +64,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         mEditComment = (EditText) findViewById(R.id.dynamic_comments_content);
         mButtonPublish = (Button) findViewById(R.id.dynamic_comments_publish);
         mListView = (ListView) findViewById(R.id.dynamic_comments_list);
+        mNone = (TextView) findViewById(R.id.dynamic_comments_none);
 
         mICommentPresenter = new CommentPresenter(this,this);
         mAdapter = new CommentAdapter(this, commentList);
@@ -89,12 +92,15 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onResultGetComment(boolean flag, List<Comment> list) {
         if(true){
-            commentList = list;
+            commentList.addAll(list);
+            if(commentList.size()>0){
+                mNone.setVisibility(View.INVISIBLE);
+            }
             mAdapter.notifyDataSetChanged();
             log.d("TAG","數據更新成功");
         }else{
             new toast(this,"數據查詢失敗");
-            log.d("TAG","評論數據查詢失敗");
+
         }
     }
 }

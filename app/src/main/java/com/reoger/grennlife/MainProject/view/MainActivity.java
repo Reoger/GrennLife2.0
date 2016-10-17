@@ -9,7 +9,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +28,7 @@ import com.reoger.grennlife.news.view.NewsView;
 import com.reoger.grennlife.recyclerPlayView.adapter.BannerViewPagerAdapter;
 import com.reoger.grennlife.recyclerPlayView.gear.BannerViewPager;
 import com.reoger.grennlife.technology.view.TechnologyView;
+import com.reoger.grennlife.user.myResuouers.activity.MyResources;
 import com.reoger.grennlife.utils.ServerDataOperation.GlideUtil;
 import com.reoger.grennlife.user.infomation.View.InfomationActivity;
 import com.reoger.grennlife.user.monitoringHistroy.view.MonitoringHistoryView;
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BannerViewPagerAdapter mBannerAdapter;
     private LinearLayout mMonitorHistory;
     private LinearLayout mUserInfo;
+    private LinearLayout mResources;
 
     private Button mComeEnMonitoring;
     private Button mComeRecycle;
@@ -189,6 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mMonitorHistory.setOnClickListener(this);
         mUserInfo.setOnClickListener(this);
+        mResources.setOnClickListener(this);
 
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -257,11 +259,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @return
      */
     void loadMoreData() {
-        BmobQuery<Dynamic> query = new BmobQuery<Dynamic>();
         int position = mDatas.size() - 1;
         if (position < 0) {
             new toast(this, "加载不可用");
         } else {
+            BmobQuery<Dynamic> query = new BmobQuery<Dynamic>();
             String start = mDatas.get(position).getCreatedAt();
             log.d("TAG", "加载的最晚的时间是" + start);
             query.include("author,likes");// 希望在查询帖子信息的同时也把发布人的信息查询出来
@@ -413,6 +415,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMonitorHistory = (LinearLayout) tab03.findViewById(R.id.user_monitoring_history);
         mUserInfo = (LinearLayout) tab03.findViewById(R.id.user_monitoring_detail);
         recyclerView = (RefreshRecyclerView) tab02.findViewById(R.id.dynamic_recyclerView);
+        mResources = (LinearLayout) tab03.findViewById(R.id.user_monitoring_resources);
 
         mViews.add(tab01);
         mViews.add(tab02);
@@ -498,7 +501,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mainPresenter.doComeActivity(MainActivity.this, MainPresenterComple.RECYCLE);
                 break;
             case R.id.home_en_baike:
-                Log.d("debug", "baike btn");
                 Intent intent = new Intent(this, EncyclopaediaView.class);
                 startActivity(intent);
             case R.id.home_en_news:
@@ -521,6 +523,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.user_monitoring_detail:
                 startActivity(new Intent(this, InfomationActivity.class));
+                break;
+            case R.id.user_monitoring_resources://跳转到我的资源界面
+                startActivity(new Intent(this, MyResources.class));
                 break;
         }
     }

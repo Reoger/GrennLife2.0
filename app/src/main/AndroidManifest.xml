@@ -1,115 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.reoger.grennlife">
+          package="com.reoger.grennlife">
 
 
     <!--以下是SharedSDK的权限-->
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <!-- 蓝牙分享所需的权限 -->
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
     <!--以下是bmob的权限-->
     <!--允许联网 -->
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <!--获取GSM（2g）、WCDMA（联通3g）等网络状态的信息  -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <!--获取wifi网络状态的信息 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <!--获取sd卡写的权限，用于文件上传和下载-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!--允许读取手机状态 用于创建BmobInstallation-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!--允许读取手机当前位置 -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <!-- 请求摄像头的权限-->
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
 
     <application
+        android:name=".utils.CustomApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".utils.CustomApplication"
         android:theme="@style/AppTheme">
         <activity android:name=".loginMVP.view.LoginView">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".register.view.RegisterView" />
-        <activity android:name=".MainProject.view.MainActivity"
-                  android:label="主界面"/>
-        <activity android:name=".monitoring.view.EnvironmentalMonitoring" />
-        <activity android:name=".Recycle.view.RecycleViewActivity"
-                  android:label="回收"/>
-        <activity android:name=".Recycle.view.PublishingResourcesView"
-                  android:label="旧物利用"/>
-        <activity android:name=".ResetPassword.view.ResetPasswordView"
-                  android:label="重置密码"/>
-        <activity android:name=".MainProject.view.CommentActivity"
-                  android:label="评论"
-                  android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".MainProject.view.DynamicActivity"
+        <activity android:name=".register.view.RegisterView"/>
+        <activity
+            android:name=".MainProject.view.MainActivity"
+            android:label="主界面"/>
+        <activity android:name=".monitoring.view.EnvironmentalMonitoring"/>
+        <activity
+            android:name=".Recycle.view.RecycleViewActivity"
+            android:label="回收"/>
+        <activity
+            android:name=".Recycle.view.PublishingResourcesView"
+            android:label="旧物利用"/>
+        <activity
+            android:name=".ResetPassword.view.ResetPasswordView"
+            android:label="重置密码"/>
+        <activity
+            android:name=".MainProject.view.CommentActivity"
+            android:label="评论"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".MainProject.view.DynamicActivity"
             android:label="动态"/>
-        <activity android:name=".user.monitoringHistroy.view.MonitoringHistoryView"
+        <activity
+            android:name=".user.monitoringHistroy.view.MonitoringHistoryView"
             android:label="监控历史"/>
-        <activity android:name=".user.infomation.View.InfomationActivity"
+        <activity
+            android:name=".user.infomation.View.InfomationActivity"
             android:label="详细资料"/>
-        <activity android:name=".encyclopaedia.view.EncyclopaediaView"
+        <activity
+            android:name=".encyclopaedia.view.EncyclopaediaView"
             android:label="环保百科"/>
-        <activity android:name=".news.view.NewsView"
-            android:label="环保新闻" />
-        <activity android:name=".law.view.LawView"
-            android:label="法律法规" />
-        <activity android:name=".technology.view.TechnologyView"
-            android:label="环保新闻" />
-
+        <activity
+            android:name=".news.view.NewsView"
+            android:label="环保新闻"/>
+        <activity
+            android:name=".law.view.LawView"
+            android:label="法律法规"/>
+        <activity
+            android:name=".technology.view.TechnologyView"
+            android:label="环保新闻"/>
+        <activity
+            android:name=".user.myResuouers.activity.MyResources"
+            android:label="我的资源"/>
+        <activity
+            android:name=".user.myResuouers.activity.ResourcesDetailActivity"
+            android:label="我的资源详细界面"/>
 
         <!--SharedSDK所需要的-->
         <activity
             android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <!-- QQ和QQ空间分享 QQ登录的回调必须要配置的 -->
             <intent-filter>
-                <data android:scheme="tencent100371282" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="tencent100371282"/>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
 
             <!-- 新浪微博客户端分享回调必须配置 -->
             <intent-filter>
-                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <!--微信分享回调 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait" />
-
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
 
     </application>

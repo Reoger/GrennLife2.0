@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.reoger.grennlife.MainProject.model.Dynamic;
@@ -21,7 +20,9 @@ import com.reoger.grennlife.utils.log;
 import com.reoger.grennlife.utils.toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
@@ -39,6 +40,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private Context mContext;
     private List<Dynamic> mDatas = new ArrayList<>();
     boolean mIsLikes = false;//默认是不喜欢的
+    private List<Map<Integer,Object>> likes = new ArrayList<>();
 
     public static final String COMMENTS = "comments";
 
@@ -65,8 +67,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder> {
             holder.mItemAuthor.setText(dynamic.getAuthor().getUsername().toString());
 
             holder.mItemTimeAndLocation.setText(dynamic.getCreatedAt().toString());
-            getIsLike(position);
-//holder.mDynamicLike需要先查找返回的自己是否喜欢过，然后在决定用什么图片。进而选择相应的操作
+//            getIsLike(position);
             holder.mDynamicLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -103,19 +104,31 @@ public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 holder.mL.removeAllViews();
                 //这里需要动态的加载图片到item中
                 String a = dynamic.getImageUrl();
-                String b = a.substring(1, a.length() - 1);
-                log.d("TAG", "TTT" + b);
+                String b = a.substring(1,a.length()-1);
+                log.d("TAG","TTT"+b);
                 String[] bb = b.split(", ");
-                log.d("TAG", "这里是图片的url" + dynamic.getObjectId() + ":" + a);
-                for (int i = 0; i < bb.length; i++) {
+                log.d("TAG","这里是图片的url"+dynamic.getObjectId()+":"+a);
+                for(int i=0;i<bb.length;i++){
                     ImageView imageView = new ImageView(mContext);
                     Glide.with(mContext).load(bb[i])
                             .placeholder(R.mipmap.ic_launcher)//设置占位图片
                             .error(android.R.drawable.stat_notify_error)//图片加载失败的显示
                             .crossFade()//设置淡入淡出效果
-                            .override(600, 200)//设置图片大小
+                            .override(600,200)//设置图片大小
                             .into(imageView);
                     holder.mL.addView(imageView);
+                   final  String path = bb[i];
+                    holder.mL.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+//                            final ImageView imageView1 = new ImageView(mContext);
+//                            Glide.with(mContext).load(path)
+//                                    .placeholder(R.mipmap.ic_launcher)//设置占位图片
+//                                    .override(800,800)
+//                                    .into(imageView1);
+//                            holder.mLinearLayout.addView(imageView1);
+                        }
+                    });
                 }
             }
         }
@@ -154,17 +167,31 @@ public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder> {
      *
      * @return
      */
-    private boolean getIsLike(int position) {
+    private boolean getIsLike(final int position) {
         Dynamic dynamic = mDatas.get(position);
         BmobQuery<UserMode> query = new BmobQuery<>();
         query.addWhereNotEqualTo("likes", new BmobPointer(dynamic));
         query.findObjects(new FindListener<UserMode>() {
             @Override
             public void done(List<UserMode> list, BmobException e) {
-                if (e == null) {
-                    log.d("TAG", "查询喜欢成功");
-                } else {
-                    log.d("TAG", "连这个都查询失败了，还活者干嘛" + e.toString());
+                if(e == null){
+                   log.d("TAG","查询喜欢成功");
+                    for (UserMode item:list
+                         ) {
+                        log.d("TAG","查询到的喜欢数据  :"+position+"::"+item.getUsername());
+                    }
+                    UserMode user = BmobUser.getCurrentUser(UserMode.class);
+                    Map<Integer,Object> item = new HashMap<Integer, Object>();
+                    if(list.contains(user)){
+                        item.put(position,true);
+                        log.d("TAG","-----哈哈 我已经点赞了");
+                    }else{
+                        item.put(position,false);
+                        log.d("TAG","-----哈哈 我还没赞了");
+                    }
+                    likes.add(item);
+                }else{
+                    log.d("TAG","连这个都查询失败了，还活者干嘛"+e.toString());
                 }
             }
         });

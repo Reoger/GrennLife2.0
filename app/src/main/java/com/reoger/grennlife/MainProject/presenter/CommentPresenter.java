@@ -51,6 +51,7 @@ public class CommentPresenter implements ICommentPresenter{
         });
     }
 
+
     //獲取該記錄的評論列表
     @Override
     public void doGetComment(Dynamic dynamic) {
@@ -58,20 +59,15 @@ public class CommentPresenter implements ICommentPresenter{
         query.addWhereEqualTo("dynamic",new BmobPointer(dynamic));
         //希望同时查询该記錄的发布者的信息，以及该記錄的作者的信息
         query.include("user,dynamic.author");
+        query.order("-createdAt");
+        query.setLimit(8);
         query.findObjects(new FindListener<Comment>() {
             @Override
             public void done(List<Comment> list, BmobException e) {
                 if(e == null){
-                    log.d("TAG","數據評論查詢陳宮");
-                    for (Comment item:list
-                         ) {
-                        log.d("TAG","標題"+item.getDynamic().getTitle());
-                        log.d("TAG","作者"+item.getUser());
-                        log.d("TAG","内容"+item.getContent());
-                    }
                     iCommentView.onResultGetComment(true,list);
                 }else{
-                    log.d("TAG","數據評論查詢s失敗");
+                    iCommentView.onResultGetComment(false,null);
                 }
             }
         });

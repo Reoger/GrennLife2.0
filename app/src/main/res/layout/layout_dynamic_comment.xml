@@ -26,6 +26,8 @@
             android:layout_height="150dp"
             android:text="暫時沒有任何評論"
             android:gravity="center"
+            android:id="@+id/dynamic_comments_none"
+            android:visibility="invisible"
             />
       <ListView
           android:id="@+id/dynamic_comments_list"

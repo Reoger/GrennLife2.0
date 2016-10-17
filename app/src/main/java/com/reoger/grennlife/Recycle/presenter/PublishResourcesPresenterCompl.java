@@ -121,7 +121,7 @@ public class PublishResourcesPresenterCompl implements IPublishResourcesPresente
     public void doPublishResouerces(String title,String content,String location,String time,List<String> imageUrl) {
         showDialog();
         oldThing = new OldThing();
-        oldThing.setAutthor(user);
+        oldThing.setAuthor(user);
         oldThing.setContent(content);
         oldThing.setNum(time);
         oldThing.setTitle(title);
