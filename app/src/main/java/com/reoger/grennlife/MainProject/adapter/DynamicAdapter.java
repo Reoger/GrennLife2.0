@@ -116,7 +116,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder> {
                             .crossFade()//设置淡入淡出效果
                             .override(600,200)//设置图片大小
                             .into(imageView);
-                    holder.mL.addView(imageView);
+                    holder.mL.addView(imageView,600,300);
                    final  String path = bb[i];
                     holder.mL.setOnClickListener(new View.OnClickListener() {
                         @Override

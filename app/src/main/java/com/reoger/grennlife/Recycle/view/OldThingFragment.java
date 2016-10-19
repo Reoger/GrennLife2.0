@@ -98,17 +98,18 @@ public class OldThingFragment extends Fragment implements IOldthing{
             if(flag){
                 switch (type){
                     case  INITIALZATION:
+                        mData.addAll(lists);
                         new toast(getContext(),"添加数据成功");
                         break;
                     case LOAD_MORE:
                         new toast(getContext(),"加载更多成功");
                         break;
                     case REFRESH:
+                        mData.addAll(0,lists);
                         new toast(getContext(),"刷新成功");
                         break;
                 }
                 if(lists.size()>0){
-                    mData.addAll(lists);
                     mOldthingAdapter.notifyDataSetChanged();
                 }
             }else{

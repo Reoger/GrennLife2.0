@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.reoger.grennlife.ResetPassword.view.ResetPasswordView;
 import com.reoger.grennlife.loginMVP.model.UserMode;
@@ -64,8 +63,8 @@ public class LoginPresenterCompl implements ILoginPresenter {
 
                 } else {
                     mDialog.dismiss();
-                    Log.d("TAG","登陆失败~"+"321");
                     mILoginView.onLoginResult(false);
+                    log.d("TAG","错误代码为"+e);
                 }
             }
         });

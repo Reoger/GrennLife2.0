@@ -42,15 +42,17 @@
                 android:layout_width="50dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
-                android:src="@drawable/blue"
+                android:background="@drawable/get_msg_code"
                 android:id="@+id/register_getMSMCheckCode"/>
             <TextView
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="60s"/>
+                android:textColor="@color/LightCyan1"
+                android:id="@+id/register_time"
+                android:text="获取"/>
         </FrameLayout>
     </LinearLayout>
     <EditText
@@ -91,10 +93,5 @@
         android:textColor="#ffffff"
         android:textSize="21dp"
         android:id="@+id/register_load"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="clear"
-        android:id="@+id/register_clear"/>
     </LinearLayout>
 </RelativeLayout>

@@ -4,15 +4,31 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ef9d9d"
-        android:gravity="center"
-        android:text="发布资源"
-        android:textColor="#ff00f0"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:layout_height="45dp"
+        android:background="@color/toolbar_background"
+        android:orientation="horizontal">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/all__return"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_button1"/>
+        <TextView
+            android:id="@+id/toolbar_text"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="发布资源"
+            android:paddingEnd="50dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </LinearLayout>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

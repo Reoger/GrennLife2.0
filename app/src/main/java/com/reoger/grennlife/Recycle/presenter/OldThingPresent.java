@@ -57,7 +57,7 @@ public class OldThingPresent implements IOldThingPresent{
         BmobQuery<OldThing> query = new BmobQuery<>();
         String start = oldThing.getCreatedAt();
         query.include("author");
-        query.order("-createdAt");
+       query.order("-createdAt");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = null;
         try {
@@ -99,13 +99,15 @@ public class OldThingPresent implements IOldThingPresent{
             e.printStackTrace();
         }
         query.include("author");
+       // query.order("-createdAt");
         query.addWhereGreaterThanOrEqualTo("createdAt", new BmobDate(date));
         query.findObjects(new FindListener<OldThing>() {
             @Override
             public void done(List<OldThing> list, BmobException e) {
                 if(e == null){
-                    list.remove(0);
-                    if (list.size()>0){
+
+                    if (list.size()>1){
+                        list.remove(0);
                         mIOldthing.onGetResultData(true,TypeGetData.REFRESH,list);
                     }else{
                         log.d("TAG","刷新数据成功，但是没有添加数据");

@@ -9,7 +9,6 @@ import com.reoger.grennlife.register.view.IRegisterView;
 import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 
@@ -41,6 +40,7 @@ public class RegisterPresenter implements IRegisterPresenter {
                 if (e == null) {
                     Log.d("TAG", "验证码发送成功 " + integer);
                     mIRegisterView.getMSMCodeResult(true, integer.toString());
+
                 } else {
                     Log.d("TAG", "验证码发送failed " + integer);
                     mIRegisterView.getMSMCodeResult(false, e.toString());
@@ -82,8 +82,5 @@ public class RegisterPresenter implements IRegisterPresenter {
         });
     }
 
-    @Override
-    public void doLoginWithPassword(String num, String password) {
-        mloginPresenterCompl.doLogin(num, password);
-    }
+
 }

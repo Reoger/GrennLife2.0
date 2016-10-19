@@ -74,6 +74,9 @@
                 android:layout_height="wrap_content"
                 android:columnCount="3"
                 android:orientation="horizontal"
+                android:useDefaultMargins="true"
+                android:alignmentMode="alignMargins"
+                android:layout_margin="10dp"
                 android:rowCount="3">
             </GridLayout>
         </LinearLayout>

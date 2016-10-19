@@ -45,13 +45,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".loginMVP.view.LoginView">
+        <activity android:name=".guide.activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".loginMVP.view.LoginView"
+            android:label="登录界面"/>
+        <activity
+            android:name=".guide.activity.GuideActivity"
+            android:label="引导界面"/>
         <activity android:name=".register.view.RegisterView"/>
         <activity
             android:name=".MainProject.view.MainActivity"
@@ -97,6 +103,18 @@
         <activity
             android:name=".user.myResuouers.activity.ResourcesDetailActivity"
             android:label="我的资源详细界面"/>
+        <activity
+            android:name=".user.feedback.view.FeedBackActivity"
+            android:label="反馈"/>
+        <activity
+            android:name=".user.aboutUser.view.AboutActivity"
+            android:label="与我相关"/>
+        <activity
+            android:name=".user.aboutUser.view.AppAboutActivity"
+            android:label="关于app"/>
+        <activity
+            android:name=".user.setting.view.SettingActivity"
+            android:label="设置"/>
 
         <!--SharedSDK所需要的-->
         <activity
