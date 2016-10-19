@@ -384,7 +384,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          * 轮播图控件初始化
          */
         //这句话用于设置轮播图切换图片速度
-//        new ViewPagerScrollerSetter(this).initViewPagerScroll(mViewPager);
         mBannerView = (BannerViewPager) tab01.findViewById(R.id.home_en_recycler_play_view);
         mBannerViewDatas = new ArrayList<>();
 
@@ -446,17 +445,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
-
-    //用于轮播图增加图片用方法
-    private void addOneResourceToData(int resId) {
-        ImageView one = new ImageView(this);
-        one.setImageResource(R.mipmap.ic_launcher);
-        one.setScaleType(ImageView.ScaleType.FIT_XY);
-        mBannerViewDatas.add(one);
-    }
-
-
     //用于轮播图增加wangluo图片用方法
     private void addOneResourceToData(String resURL) {
         ImageView one = new ImageView(this);
@@ -464,8 +452,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         one.setScaleType(ImageView.ScaleType.FIT_XY);
         mBannerViewDatas.add(one);
     }
-
-
 
     /**
      * 将所有的图片切换为暗色的

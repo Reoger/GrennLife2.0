@@ -56,10 +56,7 @@ public class LoginView extends AppCompatActivity implements ILoginViw, View.OnCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login_main);
-        //bmob初始化
-        Bmob.initialize(this, APP_ID);
-        //SharedSDK初始化(xml方式配置好应用)
-        ShareSDK.initSDK(this);
+
         mILoginPresenter = new LoginPresenterCompl(this,this);
         initView();
         //判断是否记住密码，若是则填好账号密码
@@ -80,18 +77,6 @@ public class LoginView extends AppCompatActivity implements ILoginViw, View.OnCl
     }
 
 
-//    private void initSharedSDK() {
-//        ShareSDK.initSDK(this,"你的应用在Sharesdk注册时返回的AppKey");
-//        HashMap<String,Object> hashMap = new HashMap<String, Object>();
-//        hashMap.put("Id","1");
-//        hashMap.put("SortId","1");
-//        hashMap.put("AppKey","568898243");
-//        hashMap.put("AppSecret","38a4f8204cc784f81f9f0daaf31e02e3");
-//        hashMap.put("RedirectUrl","http://www.sharesdk.cn");
-//        hashMap.put("ShareByAppClient","true");
-//        hashMap.put("Enable","true");
-//        ShareSDK.setPlatformDevInfo(SinaWeibo.NAME,hashMap);
-//    }
     @Override
     public void onClear() {
 
