@@ -23,6 +23,8 @@ public class MyViewHolder extends RecyclerView.ViewHolder{
     public ImageView mDynamicComment;
 
     public GridLayout  mL;
+    public LinearLayout mLinearLayout;
+
 
     public MyViewHolder(View itemView) {
         super(itemView);
@@ -35,6 +37,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder{
         mDynamicComment = (ImageView) itemView.findViewById(R.id.dynamic_item_comments);
 
         mL = (GridLayout) itemView.findViewById(R.id.dynamic_gridlayout);
+        mLinearLayout = (LinearLayout) itemView.findViewById(R.id.dynamic_linearLayout_main);
 
     }
 }

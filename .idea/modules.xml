@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GrennLife.iml" filepath="$PROJECT_DIR$/GrennLife.iml" />
-      <module fileurl="file://$PROJECT_DIR$/GrennLife0.iml" filepath="$PROJECT_DIR$/GrennLife0.iml" />
-      <module fileurl="file://$PROJECT_DIR$/GrennLife2.iml" filepath="$PROJECT_DIR$/GrennLife2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/GrennLife3.iml" filepath="$PROJECT_DIR$/GrennLife3.iml" />
       <module fileurl="file://$PROJECT_DIR$/GrennLife4.iml" filepath="$PROJECT_DIR$/GrennLife4.iml" />
       <module fileurl="file://$PROJECT_DIR$/GrennLifeA.iml" filepath="$PROJECT_DIR$/GrennLifeA.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
     </modules>
   </component>

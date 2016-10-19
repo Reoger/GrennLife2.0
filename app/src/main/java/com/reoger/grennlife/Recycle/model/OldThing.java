@@ -12,11 +12,22 @@ import cn.bmob.v3.datatype.BmobRelation;
 public class OldThing extends BmobObject{
     private String title;
     private String content;
-    private UserMode autthor;
+    private UserMode author;
     private BmobFile image;
     private BmobRelation likes;//多对多的关系，用于存储喜欢该资源的用户
+    private String locations;
     private String num;//电话号码
     private String ImageUrl;
+
+    public String getLocations() {
+        return locations;
+    }
+
+    public void setLocations(String locations) {
+        this.locations = locations;
+    }
+
+
 
     public String getImageUrl() {
         return ImageUrl;
@@ -42,12 +53,12 @@ public class OldThing extends BmobObject{
         this.content = content;
     }
 
-    public UserMode getAutthor() {
-        return autthor;
+    public UserMode getAuthor() {
+        return author;
     }
 
-    public void setAutthor(UserMode autthor) {
-        this.autthor = autthor;
+    public void setAuthor(UserMode author) {
+        this.author = author;
     }
 
     public BmobFile getImage() {

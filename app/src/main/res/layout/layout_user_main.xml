@@ -110,6 +110,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
+        android:id="@+id/use_information_about"
         android:orientation="horizontal"
         android:background="@color/white">
         <ImageView
@@ -145,6 +146,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
         android:orientation="horizontal"
+        android:id="@+id/user_monitoring_resources"
         android:background="@color/white">
         <ImageView
             android:layout_width="@dimen/user_list_picture"
@@ -225,6 +227,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
         android:orientation="horizontal"
+        android:id="@+id/user_information_feedback"
         android:background="@color/white">
         <ImageView
             android:layout_width="wrap_content"
@@ -259,6 +262,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
         android:orientation="horizontal"
+        android:id="@+id/user_information_app"
         android:background="@color/white">
         <ImageView
             android:layout_width="wrap_content"
@@ -293,6 +297,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
         android:orientation="horizontal"
+        android:id="@+id/user_information_setting"
         android:background="@color/white">
         <ImageView
             android:layout_width="wrap_content"

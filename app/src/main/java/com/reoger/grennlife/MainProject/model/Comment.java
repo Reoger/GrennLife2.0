@@ -10,7 +10,7 @@ import cn.bmob.v3.BmobObject;
 public class Comment extends BmobObject{
     private String content;//评论的内容
     private UserMode user;//评论用户
-    private Dynamic Dynamic;//所评论的动态
+    private Dynamic dynamic;//所评论的动态
 
     public String getContent() {
         return content;
@@ -29,10 +29,10 @@ public class Comment extends BmobObject{
     }
 
     public Dynamic getDynamic() {
-        return Dynamic;
+        return dynamic;
     }
 
     public void setDynamic(Dynamic Dynamic) {
-        this.Dynamic = Dynamic;
+        this.dynamic = Dynamic;
     }
 }

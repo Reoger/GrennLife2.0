@@ -9,7 +9,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.reoger.grennlife.MainProject.adapter.DynamicAdapter;
 import com.reoger.grennlife.MainProject.model.Dynamic;
@@ -25,13 +27,20 @@ import com.reoger.grennlife.MainProject.presenter.MainPresenterComple;
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.encyclopaedia.view.EncyclopaediaView;
 import com.reoger.grennlife.law.view.LawView;
+import com.reoger.grennlife.loginMVP.model.UserMode;
+import com.reoger.grennlife.loginMVP.view.LoginView;
 import com.reoger.grennlife.news.view.NewsView;
 import com.reoger.grennlife.recyclerPlayView.adapter.BannerViewPagerAdapter;
 import com.reoger.grennlife.recyclerPlayView.gear.BannerViewPager;
 import com.reoger.grennlife.technology.view.TechnologyView;
-import com.reoger.grennlife.utils.ServerDataOperation.GlideUtil;
+import com.reoger.grennlife.user.aboutUser.view.AboutActivity;
+import com.reoger.grennlife.user.aboutUser.view.AppAboutActivity;
+import com.reoger.grennlife.user.feedback.view.FeedBackActivity;
 import com.reoger.grennlife.user.infomation.View.InfomationActivity;
 import com.reoger.grennlife.user.monitoringHistroy.view.MonitoringHistoryView;
+import com.reoger.grennlife.user.myResuouers.activity.MyResources;
+import com.reoger.grennlife.user.setting.view.SettingActivity;
+import com.reoger.grennlife.utils.ServerDataOperation.GlideUtil;
 import com.reoger.grennlife.utils.log;
 import com.reoger.grennlife.utils.toast;
 
@@ -42,6 +51,7 @@ import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
@@ -68,6 +78,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BannerViewPagerAdapter mBannerAdapter;
     private LinearLayout mMonitorHistory;
     private LinearLayout mUserInfo;
+    private LinearLayout mResources;
+    private LinearLayout mFeedBack;
+    private LinearLayout mAbout;
+    private LinearLayout mAboutApp;
+    private LinearLayout mSetting;
 
     private Button mComeEnMonitoring;
     private Button mComeRecycle;
@@ -81,11 +96,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mTechnologyBtn;
 
     private ImageButton mPublishDynamic;
+    private TextView mNone;
 
 
     //轮播图的图ArrayList
     private List<View> mBannerViewDatas;
-//    private ArrayList<String> mDatas;
 
 
     private List<Dynamic> mDatas = new ArrayList<>();
@@ -103,11 +118,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
+        initActivity();
         initView();
         initEvents();
 
         recycleViewMethod();
 
+    }
+
+    private void initActivity() {
+        UserMode userMode = BmobUser.getCurrentUser(UserMode.class);
+        if (userMode == null) {
+            startActivity(new Intent(this, LoginView.class));
+            finish();
+        } else {
+            log.d("TAG", "已经登录过了");
+        }
     }
 
     private void recycleViewMethod() {
@@ -121,13 +147,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         View header = View.inflate(this, R.layout.recycle_header2_tete, null);
-     //   View footer = View.inflate(this, R.layout.dynamic_botton, null);
 
         mDynamicAdapter = new DynamicAdapter(MainActivity.this, mDatas);
         RecyclerViewManager.with(mDynamicAdapter, new LinearLayoutManager(this))
                 .setMode(RecyclerMode.BOTH)
                 .addHeaderView(header)
-          //      .addFooterView(footer)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {
@@ -154,7 +178,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case INITIALZATION://数据初始化完成
-                    new toast(getApplicationContext(), "数据加载完成");
+//                    new toast(getApplicationContext(), "数据加载完成");
+                    if(mDatas.size()==0){
+                        mNone.setVisibility(View.VISIBLE);
+                    }else{
+                        mNone.setVisibility(View.INVISIBLE);
+                    }
                     break;
                 case LOAD_MORE://加载更多完成
                     new toast(MainActivity.this, "加载完成");
@@ -189,6 +218,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mMonitorHistory.setOnClickListener(this);
         mUserInfo.setOnClickListener(this);
+        mResources.setOnClickListener(this);
+        mFeedBack.setOnClickListener(this);
+        mAbout.setOnClickListener(this);
+        mAboutApp.setOnClickListener(this);
+        mSetting.setOnClickListener(this);
 
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -211,7 +245,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         mUserImg.setImageResource(R.mipmap.my_bright);
                         break;
                 }
-
             }
 
             @Override
@@ -246,6 +279,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 } else {
                     log.d("TAG", "查询失败" + e.toString() + " 原因");
+                    mNone.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -257,11 +291,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @return
      */
     void loadMoreData() {
-        BmobQuery<Dynamic> query = new BmobQuery<Dynamic>();
         int position = mDatas.size() - 1;
         if (position < 0) {
             new toast(this, "加载不可用");
         } else {
+            BmobQuery<Dynamic> query = new BmobQuery<Dynamic>();
             String start = mDatas.get(position).getCreatedAt();
             log.d("TAG", "加载的最晚的时间是" + start);
             query.include("author,likes");// 希望在查询帖子信息的同时也把发布人的信息查询出来
@@ -280,11 +314,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void done(List<Dynamic> list, BmobException e) {
                     if (e == null) {
                         new toast(getApplicationContext(), "查询成功");
-                        for (Dynamic item : list
-                                ) {
-                            log.d("TAG", "加载更多数据" + item.getContent());
-
-                        }
                         list.remove(0);
                         if (list.size() > 0) {
                             mDatas.addAll(list);
@@ -322,23 +351,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 e.printStackTrace();
             }
             query.include("author,likes");// 希望在查询帖子信息的同时也把发布人的信息查询出来,喜欢信息也需要查询出来
-            //query.order("-createdAt");
             query.addWhereGreaterThanOrEqualTo("createdAt", new BmobDate(date));
             query.findObjects(new FindListener<Dynamic>() {
                 @Override
                 public void done(List<Dynamic> list, BmobException e) {
                     if (e == null) {
                         new toast(getApplicationContext(), "更新成功");
-                        for (Dynamic item : list
-                                ) {
-                            log.d("TAG", "刷新数据" + item.getContent());
-
-                        }
                         list.remove(0);
                         if (list.size() > 0) {
                             mDatas.addAll(0, list);
                         } else {
-                            log.d("TAG", "刷新并没有获取到数据");
                         }
                         mDatas.addAll(list);
 
@@ -383,7 +405,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         /**
          * 轮播图控件初始化
          */
-        //这句话用于设置轮播图切换图片速度
         mBannerView = (BannerViewPager) tab01.findViewById(R.id.home_en_recycler_play_view);
         mBannerViewDatas = new ArrayList<>();
 
@@ -392,8 +413,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addOneResourceToData("http://oeznvpnrn.bkt.clouddn.com/IMG_20160727_190625_980.jpg");
 
 
-
-//        addOneResourceToData(R.drawable.picture_2);
         mBannerAdapter = new BannerViewPagerAdapter(mBannerViewDatas);
         mBannerView.setAdapter(mBannerAdapter);
         mBannerAdapter.notifyDataSetChanged();
@@ -408,10 +427,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mComeRecycle = (Button) tab01.findViewById(R.id.home_resources_recycle);
 
         mPublishDynamic = (ImageButton) tab02.findViewById(R.id.dynamic_add_publish_main);
+        mNone = (TextView) tab02.findViewById(R.id.dynamic_item_none);
 
         mMonitorHistory = (LinearLayout) tab03.findViewById(R.id.user_monitoring_history);
         mUserInfo = (LinearLayout) tab03.findViewById(R.id.user_monitoring_detail);
         recyclerView = (RefreshRecyclerView) tab02.findViewById(R.id.dynamic_recyclerView);
+        mResources = (LinearLayout) tab03.findViewById(R.id.user_monitoring_resources);
+        mFeedBack = (LinearLayout) tab03.findViewById(R.id.user_information_feedback);
+        mAbout = (LinearLayout) tab03.findViewById(R.id.use_information_about);
+        mAboutApp = (LinearLayout) tab03.findViewById(R.id.user_information_app);
+        mSetting = (LinearLayout) tab03.findViewById(R.id.user_information_setting);
 
         mViews.add(tab01);
         mViews.add(tab02);
@@ -445,13 +470,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    //用于轮播图增加wangluo图片用方法
-    private void addOneResourceToData(String resURL) {
+
+    //用于轮播图增加图片用方法
+    private void addOneResourceToData(int resId) {
         ImageView one = new ImageView(this);
-        GlideUtil.loadImage(getApplicationContext(),resURL,one);
+        one.setImageResource(R.mipmap.ic_launcher);
         one.setScaleType(ImageView.ScaleType.FIT_XY);
         mBannerViewDatas.add(one);
     }
+
+
+    //用于轮播图增加wangluo图片用方法
+    private void addOneResourceToData(String resURL) {
+        ImageView one = new ImageView(this);
+        GlideUtil.loadImage(getApplicationContext(), resURL, one);
+        one.setScaleType(ImageView.ScaleType.FIT_XY);
+        mBannerViewDatas.add(one);
+    }
+
 
     /**
      * 将所有的图片切换为暗色的
@@ -484,7 +520,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mainPresenter.doComeActivity(MainActivity.this, MainPresenterComple.RECYCLE);
                 break;
             case R.id.home_en_baike:
-                Log.d("debug", "baike btn");
                 Intent intent = new Intent(this, EncyclopaediaView.class);
                 startActivity(intent);
             case R.id.home_en_news:
@@ -508,7 +543,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.user_monitoring_detail:
                 startActivity(new Intent(this, InfomationActivity.class));
                 break;
+            case R.id.user_monitoring_resources://跳转到我的资源界面
+                startActivity(new Intent(this, MyResources.class));
+                break;
+            case R.id.user_information_feedback:
+                startActivity(new Intent(this, FeedBackActivity.class));
+                break;
+            case R.id.use_information_about://与我相关的界面
+                startActivity(new Intent(this, AboutActivity.class));
+                break;
+            case R.id.user_information_app://关于app
+                startActivity(new Intent(this, AppAboutActivity.class));
+                break;
+            case R.id.user_information_setting://设置
+                startActivity(new Intent(this, SettingActivity.class));
+                break;
+        }
+
+    }
+
+    private long exitTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public void exit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(getApplicationContext(), "再按一次退出程序",
+                    Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
         }
     }
+
 
 }

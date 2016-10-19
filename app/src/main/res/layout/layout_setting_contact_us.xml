@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:src="@drawable/picture_2"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="180dp"
+            android:layout_height="148dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/grey">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#552f4f4f"
+                android:layout_marginTop="12dp">
+            </View>
+            <TextView
+                android:text="通信地址：湖南工业大学计痛楼604"
+                android:textSize="25sp"
+                android:layout_gravity="left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#552f4f4f"
+                android:layout_marginTop="12dp">
+            </View>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#552f4f4f"
+                android:layout_marginTop="12dp">
+            </View>
+            <TextView
+                android:text="客服QQ：850565405"
+                android:textSize="25sp"
+                android:layout_gravity="left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#552f4f4f"
+                android:layout_marginTop="12dp">
+            </View>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#552f4f4f"
+                android:layout_marginTop="12dp">
+            </View>
+            <TextView
+                android:text="联系电话：18773380156"
+                android:textSize="25sp"
+                android:layout_gravity="left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#552f4f4f"
+                android:layout_marginTop="12dp">
+            </View>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

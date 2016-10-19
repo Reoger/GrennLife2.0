@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:background="@color/toolbar_background"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:text="资源详情"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="名字:"
+        android:layout_marginTop="5dp"
+        android:id="@+id/resources_detail_name"
+        android:padding="2dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="5"
+        android:id="@+id/resources_detail_content"
+        android:text="详细描述"
+        android:padding="2dp"/>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:id="@+id/resources_detail_add_photo"
+        android:layout_height="wrap_content">
+        <!-- 在这里添加图片-->
+    </GridLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="联系方式"
+        android:id="@+id/resources_detail_phone"
+        android:padding="2dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:id="@+id/resources_detail_location"
+        android:text="地址"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="时间"
+        android:id="@+id/resources_detail_time"
+        android:padding="2dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/resources_detail_state"
+        android:text="领取状态"/>
+</LinearLayout>

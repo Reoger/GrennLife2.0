@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-  <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:textSize="20sp"
-      android:gravity="center"
-      android:text="環保圈"/><!-- 這裏添加環保圈的title-->
- <FrameLayout
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content">
-   <include layout="@layout/dynamic_content_main"/>
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-   <ImageButton
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_gravity="bottom|end"
-       android:id="@+id/dynamic_add_publish_main"
-       android:src="@android:drawable/ic_input_add"/>
- </FrameLayout>
+    <TextView
+        android:id="@+id/toolbar_text"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@color/toolbar_background"
+        android:gravity="center"
+        android:text="主页"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/dynamic_content_main"/>
+
+        <ImageButton
+            android:id="@+id/dynamic_add_publish_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:src="@android:drawable/ic_input_add"/>
+
+        <TextView
+            android:id="@+id/dynamic_item_none"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:gravity="center"
+            android:text="暂时没有加载到任何的记录，请检查你的网络连接"
+            android:visibility="invisible"/>
+    </FrameLayout>
 
 
 </LinearLayout>

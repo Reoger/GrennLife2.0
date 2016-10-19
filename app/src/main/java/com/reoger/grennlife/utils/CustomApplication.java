@@ -53,6 +53,11 @@ public class CustomApplication extends Application{
         //SharedSDK初始化(xml方式配置好应用)
         ShareSDK.initSDK(this);
         context = getApplicationContext();
+        //bmob初始化
+        Bmob.initialize(this, APP_ID);
+        //SharedSDK初始化(xml方式配置好应用)
+        ShareSDK.initSDK(this);
+
     }
 
 
