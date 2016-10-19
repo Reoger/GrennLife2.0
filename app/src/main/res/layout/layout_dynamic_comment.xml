@@ -1,194 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/dynamic_comments_history"
+        android:paddingTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="#44e0e0e0">
-        </View>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        android:text="这里要显示的内容就是动态的具体内容了，这里先不做"/>
 
-            <ImageView
-                android:layout_width="80sp"
-                android:layout_height="80sp"
-                android:padding="10dp"
-                android:src="@drawable/photo2" />
+    <TextView
+        android:paddingTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下面显示的评论列表"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="用户名"
-                    android:textSize="18sp"
-                    android:id="@+id/dynamic_item_author"
-                    android:layout_marginTop="18dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="发布的时间"
-                    android:id="@+id/dynamic_item_time_location"
-                    android:textSize="10sp"
-                    android:padding="5dp" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="标题"
-                android:textColor="#71C671"
-                android:padding="5dp"
-                android:gravity="center"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="#88e0e0e0"></View>
-        </LinearLayout>
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/dynamic_item_content"
-            android:text="我真的很需要一个人在我身边，就是那种天天带我学习，张嘴闭嘴就是要考证，约我出去都是要去图书馆学习，看我不学习反手就给我一巴掌的引领我走向人生巅峰的那种人"
-            android:textSize="15sp"
-            android:padding="10dp"
-            android:textColor="#bebebe" />
-
-        <View
-            android:layout_width="350dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:background="#88e0e0e0">
-        </View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/dynamic_item_like">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/like"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="45dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" 喜欢"
-                    android:textSize="12sp"
-                    android:layout_gravity="center"/>
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="40dp"
-                    android:background="#88e0e0e0">
-                </View>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/dynamic_item_share">
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center"
-                    android:background="#88e0e0e0">
-                </View>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/share__"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="40dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" 分享"
-                    android:textSize="12sp"
-                    android:layout_gravity="center"/>
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="40dp"
-                    android:background="#88e0e0e0">
-                </View>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/dynamic_item_comments">
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center"
-                    android:background="#88e0e0e0">
-                </View>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/comment_"
-                    android:layout_gravity="center"
-
-                    android:layout_marginLeft="40dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" 评论         "
-                    android:textSize="12sp"
-                    android:layout_gravity="center" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="#44e0e0e0">
-        </View>
-
-    </LinearLayout>
-
-
+            android:layout_height="150dp"
+            android:text="暫時沒有任何評論"
+            android:gravity="center"
+            android:id="@+id/dynamic_comments_none"
+            android:visibility="invisible"
+            />
+      <ListView
+          android:id="@+id/dynamic_comments_list"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          ></ListView>
+  </FrameLayout>
+<LinearLayout
+    android:layout_gravity="bottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <EditText
+        android:drawableLeft="@android:drawable/dark_header"
+        android:layout_width="0dp"
+        android:id="@+id/dynamic_comments_content"
+        android:layout_weight="6"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:padding="5dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:id="@+id/dynamic_comments_publish"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/ic_delete"/>
+</LinearLayout>
 </LinearLayout>
