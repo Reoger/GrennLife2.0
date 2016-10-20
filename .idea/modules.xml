@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GrennLife4.iml" filepath="$PROJECT_DIR$/GrennLife4.iml" />
       <module fileurl="file://$PROJECT_DIR$/GrennLifeA.iml" filepath="$PROJECT_DIR$/GrennLifeA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GrennLifeB.iml" filepath="$PROJECT_DIR$/GrennLifeB.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
     </modules>
