@@ -363,7 +363,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         } else {
                         }
                         mDatas.addAll(list);
-
                         Message msg = new Message();
                         msg.what = REFRESH;
                         mHandler.sendMessage(msg);

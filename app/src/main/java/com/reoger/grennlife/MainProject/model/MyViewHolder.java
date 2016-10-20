@@ -2,7 +2,6 @@ package com.reoger.grennlife.MainProject.model;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,12 +16,13 @@ public class MyViewHolder extends RecyclerView.ViewHolder{
     public TextView mItemContent;
     public TextView mItemAuthor;
     public TextView mItemTimeAndLocation;
+    public TextView mItemTitle;
 
-    public ImageView mDynamicShare;
+    public LinearLayout mDynamicShare;
     public ImageView mDynamicLike;
-    public ImageView mDynamicComment;
+    public LinearLayout mDynamicComment;
 
-    public GridLayout  mL;
+//    public GridLayout  mL;
     public LinearLayout mLinearLayout;
 
 
@@ -32,11 +32,12 @@ public class MyViewHolder extends RecyclerView.ViewHolder{
         mItemContent = (TextView) itemView.findViewById(R.id.dynamic_item_content);
         mItemTimeAndLocation = (TextView) itemView.findViewById(R.id.dynamic_item_time_location);
 
-        mDynamicShare = (ImageView) itemView.findViewById(R.id.dynamic_item_share);
+        mDynamicShare = (LinearLayout) itemView.findViewById(R.id.dynamic_item_share);
         mDynamicLike = (ImageView) itemView.findViewById(R.id.dynamic_item_like);
-        mDynamicComment = (ImageView) itemView.findViewById(R.id.dynamic_item_comments);
+        mDynamicComment = (LinearLayout) itemView.findViewById(R.id.dynamic_item_comments);
+        mItemTitle = (TextView) itemView.findViewById(R.id.dynamic_item_title);
 
-        mL = (GridLayout) itemView.findViewById(R.id.dynamic_gridlayout);
+//        mL = (GridLayout) itemView.findViewById(R.id.dynamic_gridlayout);
         mLinearLayout = (LinearLayout) itemView.findViewById(R.id.dynamic_linearLayout_main);
 
     }

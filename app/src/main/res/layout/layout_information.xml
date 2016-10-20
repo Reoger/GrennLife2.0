@@ -10,14 +10,16 @@
         android:layout_height="45dp"
         android:background="@color/toolbar_background"
         android:orientation="horizontal">
+
         <ImageButton
+            android:id="@+id/toolbar_button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/all__return"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
             android:layout_gravity="center"
-            android:id="@+id/toolbar_button1"/>
+            android:layout_marginLeft="20dp"
+            android:background="@mipmap/all__return"/>
+
         <TextView
             android:id="@+id/toolbar_text"
             android:layout_width="match_parent"
@@ -25,11 +27,12 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:text="详细信息"
             android:paddingEnd="50dp"
+            android:text="详细信息"
             android:textColor="@color/white"
             android:textSize="18sp"/>
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
@@ -52,14 +55,20 @@
             android:textColor="@color/black"
             android:textSize="15sp"/>
 
-        <TextView
-            android:id="@+id/user_information_username"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="250dp"
-            android:text="小明啊"
-            android:textSize="15sp"/>
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:text="小明啊"
+                android:id="@+id/user_information_username"
+                android:textSize="15sp"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <View
@@ -81,18 +90,23 @@
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
             android:text="手机号"
-
             android:textColor="@color/black"
             android:textSize="15sp"/>
 
-        <TextView
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="220dp"
-            android:id="@+id/user_information_phone_num"
-            android:text="13272131185"
-            android:textSize="15sp"/>
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:text="13272131185"
+                android:textSize="15sp"
+                android:id="@+id/user_information_phone_num"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <View
@@ -126,18 +140,9 @@
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
             android:text="真实姓名"
+
             android:textColor="@color/black"
             android:textSize="15sp"/>
-
-        <Button
-            android:layout_width="55dp"
-            android:layout_height="28dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="245dp"
-            android:background="@drawable/shape_feedback_button"
-            android:text="认证"
-            android:id="@+id/user_information_authentication"
-            android:textColor="@color/white"/>
 
     </LinearLayout>
 
@@ -158,8 +163,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
-            android:id="@+id/user_information_username_true"
+            android:background="@color/transparent"
             android:hint="填写真实姓名"
+            android:id="@+id/user_information_username_true"
             android:textColor="@color/black"
             android:textSize="15sp"/>
 
@@ -206,8 +212,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
-            android:id="@+id/user_information_Id"
+            android:background="@color/transparent"
             android:hint="填写身份证号码"
+            android:id="@+id/user_information_Id"
             android:textColor="@color/black"
             android:textSize="15sp"/>
 
@@ -255,8 +262,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
-            android:id="@+id/user_information_location"
+            android:background="@color/transparent"
             android:hint="湖南省株洲市天元区泰山路88号"
+            android:id="@+id/user_information_location"
             android:textColor="@color/black"
             android:textSize="15sp"/>
 
@@ -267,10 +275,28 @@
         android:layout_height="0.5dp"
         android:background="#552f4f4f">
     </View>
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/user_information_status"
-    android:gravity="center"
-    android:text="认证状态"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/user_information_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textColor="#ff0000"
+            android:text="认证状态:"/>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/shape_feedback_button"
+            android:text="认  证"
+            android:id="@+id/user_information_authentication"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
 </LinearLayout>

@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -49,11 +50,12 @@ public class EnvironmentalMonitoring extends AppCompatActivity implements IEnvir
     private EditText mTitle;
     private EditText mContent;
     private EditText mNum;
+    private ImageButton mBack;
 
     private static final int REQUEST_CODE = 0x12;
 
     private Button mMonitoring;
-    private Button mClear;
+
 
 
 
@@ -68,8 +70,8 @@ public class EnvironmentalMonitoring extends AppCompatActivity implements IEnvir
     private void initEvents() {
         mIMonitoringPresenter = new MonitoringPresenterCompl(this,EnvironmentalMonitoring.this);
         mIMonitoringPresenter.doGetCurrentLocation(this);
+        mBack.setOnClickListener(this);
 
-        mClear.setOnClickListener(this);
         mMonitoring.setOnClickListener(this);
 
         mAdapter = new SimpleAdapter(this, getData(), R.layout.item_gridview, new String[]{"image", "text"}, new int[]{R.id.gridview_photo, R.id.gridview_text});
@@ -119,12 +121,13 @@ public class EnvironmentalMonitoring extends AppCompatActivity implements IEnvir
         mTitle = (EditText) findViewById(R.id.monitoring_title);
         mContent = (EditText) findViewById(R.id.monitoring_content);
         mNum = (EditText) findViewById(R.id.monitoring_num);
+        mBack = (ImageButton) findViewById(R.id.toolbar_button1);
 
         mPhotoView = (GridView) findViewById(R.id.monitoring_photo);
 
 
         mMonitoring = (Button) findViewById(R.id.monitoring_button);
-        mClear = (Button)findViewById(R.id.monitoring_clear);
+
     }
 
     @Override
@@ -177,8 +180,8 @@ public class EnvironmentalMonitoring extends AppCompatActivity implements IEnvir
                     mIMonitoringPresenter.doUploadMonitoringInfo(title,content,num,location,pathList);
                 }
                 break;
-            case R.id.monitoring_clear:
-                mIMonitoringPresenter.doClear();
+            case R.id.toolbar_button1:
+                finish();
         }
     }
 

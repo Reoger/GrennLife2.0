@@ -7,9 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.reoger.grennlife.MainProject.model.Dynamic;
 import com.reoger.grennlife.MainProject.model.MyViewHolder;
 import com.reoger.grennlife.MainProject.view.CommentActivity;
@@ -40,7 +38,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private Context mContext;
     private List<Dynamic> mDatas = new ArrayList<>();
     boolean mIsLikes = false;//默认是不喜欢的
-    private List<Map<Integer,Object>> likes = new ArrayList<>();
+    private List<Map<Integer, Object>> likes = new ArrayList<>();
 
     public static final String COMMENTS = "comments";
 
@@ -65,7 +63,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder> {
         } else {
             holder.mItemContent.setText(dynamic.getContent().toString());
             holder.mItemAuthor.setText(dynamic.getAuthor().getUsername().toString());
-
+            holder.mItemTitle.setText(dynamic.getTitle());
             holder.mItemTimeAndLocation.setText(dynamic.getCreatedAt().toString());
 //            getIsLike(position);
             holder.mDynamicLike.setOnClickListener(new View.OnClickListener() {
@@ -95,45 +93,11 @@ public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder> {
             holder.mDynamicShare.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new toast(mContext,"position: " +position);
-                    doShare();
+                   Dynamic dynamic1 = mDatas.get(position);
+                    doShare(dynamic1);
                 }
             });
-
-            if (dynamic.getImageUrl() != null) {
-                holder.mL.removeAllViews();
-                //这里需要动态的加载图片到item中
-                String a = dynamic.getImageUrl();
-                String b = a.substring(1,a.length()-1);
-                log.d("TAG","TTT"+b);
-                String[] bb = b.split(", ");
-                log.d("TAG","这里是图片的url"+dynamic.getObjectId()+":"+a);
-                for(int i=0;i<bb.length;i++){
-                    ImageView imageView = new ImageView(mContext);
-                    Glide.with(mContext).load(bb[i])
-                            .placeholder(R.mipmap.ic_launcher)//设置占位图片
-                            .error(android.R.drawable.stat_notify_error)//图片加载失败的显示
-                            .crossFade()//设置淡入淡出效果
-                            .override(600,200)//设置图片大小
-                            .into(imageView);
-                    holder.mL.addView(imageView,600,300);
-                   final  String path = bb[i];
-                    holder.mL.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-//                            final ImageView imageView1 = new ImageView(mContext);
-//                            Glide.with(mContext).load(path)
-//                                    .placeholder(R.mipmap.ic_launcher)//设置占位图片
-//                                    .override(800,800)
-//                                    .into(imageView1);
-//                            holder.mLinearLayout.addView(imageView1);
-                        }
-                    });
-                }
-            }
         }
-
-
     }
 
     private void addLike(int position, final boolean mIsLikess) {
@@ -141,7 +105,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder> {
         Dynamic dynamic = mDatas.get(position);
         dynamic.getLikes();
         BmobRelation relation = new BmobRelation();
-        if (!mIsLikess) {//如果不喜欢的话，就变成喜欢
+        if (!mIsLikess) {
             relation.add(user);
         } else {
             relation.remove(user);
@@ -174,24 +138,19 @@ public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder> {
         query.findObjects(new FindListener<UserMode>() {
             @Override
             public void done(List<UserMode> list, BmobException e) {
-                if(e == null){
-                   log.d("TAG","查询喜欢成功");
-                    for (UserMode item:list
-                         ) {
-                        log.d("TAG","查询到的喜欢数据  :"+position+"::"+item.getUsername());
-                    }
+                if (e == null) {
                     UserMode user = BmobUser.getCurrentUser(UserMode.class);
-                    Map<Integer,Object> item = new HashMap<Integer, Object>();
-                    if(list.contains(user)){
-                        item.put(position,true);
-                        log.d("TAG","-----哈哈 我已经点赞了");
-                    }else{
-                        item.put(position,false);
-                        log.d("TAG","-----哈哈 我还没赞了");
+                    Map<Integer, Object> item = new HashMap<Integer, Object>();
+                    if (list.contains(user)) {
+                        item.put(position, true);
+                        log.d("TAG", "-----哈哈 我已经点赞了");
+                    } else {
+                        item.put(position, false);
+                        log.d("TAG", "-----哈哈 我还没赞了");
                     }
                     likes.add(item);
-                }else{
-                    log.d("TAG","连这个都查询失败了，还活者干嘛"+e.toString());
+                } else {
+                    log.d("TAG", "连这个都查询失败了，还活者干嘛" + e.toString());
                 }
             }
         });
@@ -200,7 +159,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder> {
     }
 
 
-    private void doShare() {
+    private void doShare(Dynamic dynamic) {
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
         oks.disableSSOWhenAuthorize();
@@ -208,23 +167,28 @@ public class DynamicAdapter extends RecyclerView.Adapter<MyViewHolder> {
 // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
         //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
         // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-        oks.setTitle("标题");
+        oks.setTitle(dynamic.getTitle());
         // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-        oks.setTitleUrl("http://sharesdk.cn");
+      //  oks.setTitleUrl("http://sharesdk.cn");
         // text是分享文本，所有平台都需要这个字段
-        oks.setText("我是分享文本");
+        oks.setText(dynamic.getContent());
         //分享网络图片，新浪微博分享网络图片需要通过审核后申请高级写入接口，否则请注释掉测试新浪微博
-        oks.setImageUrl("http://f1.sharesdk.cn/imgs/2014/02/26/owWpLZo_638x960.jpg");
+       if(dynamic.getImageUrl()!= null) {
+           String a = dynamic.getImageUrl();
+           String b = a.substring(1, a.length() - 1);
+           String ss[] = b.split(", ");
+           oks.setImageUrl(ss[0]);
+       }
         // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
         //oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
         // url仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl("http://sharesdk.cn");
+       // oks.setUrl("http://sharesdk.cn");
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-        oks.setComment("我是测试评论文本");
+      //  oks.setComment("我是测试评论文本");
         // site是分享此内容的网站名称，仅在QQ空间使用
-        oks.setSite("ShareSDK");
+       // oks.setSite("ShareSDK");
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用
-        oks.setSiteUrl("http://sharesdk.cn");
+      //  oks.setSiteUrl("http://sharesdk.cn");
 
 // 启动分享GUI
         oks.show(mContext);

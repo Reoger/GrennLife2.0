@@ -4,54 +4,204 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/dynamic_comments_history"
-        android:paddingTop="20dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="这里要显示的内容就是动态的具体内容了，这里先不做"/>
+        android:layout_height="45dp"
+        android:background="@color/toolbar_background"
+        android:orientation="horizontal">
 
-    <TextView
-        android:paddingTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="下面显示的评论列表"/>
-
-  <FrameLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/toolbar_button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:background="@mipmap/all__return"/>
 
         <TextView
+            android:id="@+id/toolbar_text"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:text="暫時沒有任何評論"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:gravity="center"
-            android:id="@+id/dynamic_comments_none"
-            android:visibility="invisible"
+            android:paddingEnd="50dp"
+            android:text="详情"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dynamic_comments_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:padding="8dp"
+            android:text="标题"
+            android:textColor="#aa000000"
+            android:textSize="21sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="35dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_button"
+                android:padding="2dp"
+                android:text="发布"
+                android:textColor="#662f4f4f"
+                android:textSize="11dp"/>
+
+
+            <TextView
+                android:id="@+id/dynamic_comments_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2016—10-12 50:12:123"
+                android:textColor="#662f4f4f"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/dynamic_comments_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="by+用户名"
+                android:textColor="#662f4f4f"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="#66000000"
+                >
+            </View>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/dynamic_comments_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="这里是主题"/>
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dynamic_comments_gridlayout">
+
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/recycler_play_b"/>
+    </GridLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"
             />
-      <ListView
-          android:id="@+id/dynamic_comments_list"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          ></ListView>
-  </FrameLayout>
-<LinearLayout
-    android:layout_gravity="bottom"
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/background_main"
+        >
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        >
+
+
+        <EditText
+            android:id="@+id/dynamic_comments_content"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_remark"
+            android:drawableLeft="@mipmap/remark_"
+            android:drawablePadding="5dp"
+            android:hint="输入评论"
+            android:padding="2dp"
+            android:textSize="14sp"/>
+
+        <Button
+            android:id="@+id/dynamic_comments_publish"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/shape_feedback_button"
+            android:text="评论"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+    </LinearLayout>
+</LinearLayout>
+
+<FrameLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+
+<ListView
+    android:id="@+id/dynamic_comments_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <EditText
-        android:drawableLeft="@android:drawable/dark_header"
-        android:layout_width="0dp"
-        android:id="@+id/dynamic_comments_content"
-        android:layout_weight="6"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:padding="5dp"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:id="@+id/dynamic_comments_publish"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/ic_delete"/>
-</LinearLayout>
-</LinearLayout>
+    ></ListView>
+
+<TextView
+    android:id="@+id/dynamic_comments_none"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center"
+    android:text="—— 暂无评论 ——"
+    android:textSize="14sp"/>
+</FrameLayout>
+
+<View
+android:layout_width="match_parent"
+android:layout_height="8dp"
+android:background="@color/background_main">
+</View>
+
+
+    </LinearLayout>
