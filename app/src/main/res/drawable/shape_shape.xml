@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <stroke android:width="2dp" android:color="#88fafafa" />
+    <stroke android:width="0.5dp" android:color="#662f4f4f" />
     <!-- 描边，边框宽度、颜色 -->
-    <corners android:radius="20dp"/>
+    <corners android:radius="8dp"/>
     <!-- 边角圆弧的半径 -->
-    <solid android:color="#aab9aad2" />
+    <solid android:color="#77ffffff" />
     <!-- 背景填充颜色 -->
 </shape>

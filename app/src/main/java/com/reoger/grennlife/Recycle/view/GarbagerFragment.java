@@ -62,13 +62,13 @@ public class GarbagerFragment extends Fragment{
 
     private void initView() {
         Context context = getContext();
-        View header = View.inflate(context,R.layout.recycle_header2_tete,null);
+//        View header = View.inflate(context,R.layout.recycle_header2_tete,null);
         recyclerView = (RefreshRecyclerView) rootView.findViewById(R.id.dynamic_recyclerView2);
         initData();
         mAdapter = new GarbagerAdapter(context,mDatas);
         RecyclerViewManager.with(mAdapter,new LinearLayoutManager(context))
                 .setMode(RecyclerMode.BOTH)
-                .addHeaderView(header)
+//                .addHeaderView(header)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {

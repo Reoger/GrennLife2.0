@@ -4,11 +4,10 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="@color/toolbar_background"
-        android:orientation="horizontal">
+        android:background="@color/toolbar_background">
 
         <ImageButton
             android:id="@+id/toolbar_button1"
@@ -22,28 +21,22 @@
         <TextView
             android:id="@+id/toolbar_text"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:gravity="center"
-            android:paddingEnd="50dp"
-            android:paddingLeft="100dp"
-            android:text="发布资源"
+            android:text="环境监测"
             android:textColor="@color/white"
             android:textSize="18sp"/>
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="55dp"
             android:layout_height="45dp"
-            android:layout_gravity="end"
-            android:layout_marginLeft="80dp"
-            android:gravity="center"
-            android:paddingEnd="10dp"
-            android:background="@color/toolbar_background"
-            android:textSize="18sp"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:textSize="15sp"
             android:id="@+id/monitoring_button"
-            android:textColor="#ffffff"
+            android:textColor="@color/green"
             android:text="发布"/>
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,16 +47,16 @@
         <EditText
             android:id="@+id/monitoring_title"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:background="@drawable/shape_title_text"
+            android:background="@drawable/shape_shape"
             android:hint=" 请输入标题"
             android:padding="10dp"
             android:layout_marginTop="10dp"
             android:lines="1"
-            android:textSize="19sp"
-            android:drawableLeft="@mipmap/title" />
+            android:textSize="18sp"
+            android:drawableLeft="@mipmap/title_" />
     </LinearLayout>
 
     <LinearLayout
@@ -76,11 +69,14 @@
             android:id="@+id/monitoring_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             android:lines="8"
             android:hint="详细描述"
-            android:padding="8dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
             android:textSize="16sp"
-            android:background="@color/white"/>
+            android:background="@drawable/shape_feedback_text"/>
 
         <View
             android:layout_width="match_parent"
@@ -93,13 +89,14 @@
         android:id="@+id/monitoring_photo"
         android:layout_width="match_parent"
         android:layout_height="95dp"
+        android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
         android:background="@color/white"
         android:horizontalSpacing="3dp"
         android:numColumns="4"
         android:scrollbars="none"
         android:verticalSpacing="5dp"
-        android:layout_marginTop="5dp"></GridView>
+        android:layout_marginTop="10dp"></GridView>
 
     <View
         android:layout_width="match_parent"
@@ -107,18 +104,18 @@
         android:background="@color/grey"></View>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_width="200dp"
+        android:layout_height="32dp"
         android:layout_marginTop="15dp"
         android:layout_gravity="right"
         android:layout_marginRight="5dp"
         android:orientation="horizontal"
-        android:background="@drawable/shape_title_text">
+        android:background="@drawable/shape_shape">
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="wrap_content"
-            android:src="@mipmap/tel_"
+            android:src="@mipmap/tel"
             android:padding="2dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"/>
@@ -131,20 +128,20 @@
             android:ems="11"
             android:lines="1"
             android:hint="输入联系方式"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:background="@color/transparent"
             android:inputType="number"/>
     </LinearLayout>
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="200dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         android:layout_marginRight="5dp"
         android:layout_gravity="right"
-        android:background="@drawable/shape_title_text">
+        android:background="@drawable/shape_shape">
 
         <ImageView
             android:layout_width="20dp"
@@ -160,7 +157,7 @@
             android:layout_height="match_parent"
             android:ems="11"
             android:hint="举报的地点"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:background="@color/transparent"
             />
     </LinearLayout>

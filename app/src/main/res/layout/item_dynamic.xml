@@ -57,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="标题"
+                android:textSize="15sp"
                 android:textColor="#71C671"
                 android:padding="5dp"
                 android:id="@+id/dynamic_item_title"
@@ -78,8 +79,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/dynamic_item_content"
                 android:text="我真的很需要一个人在我身边，就是那种天天带我学习，张嘴闭嘴就是要考证，约我出去都是要去图书馆学习，看我不学习反手就给我一巴掌的引领我走向人生巅峰的那种人"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 android:padding="10dp"
+                android:layout_marginLeft="5dp"
                 android:textColor="#bebebe" />
 
         <GridLayout

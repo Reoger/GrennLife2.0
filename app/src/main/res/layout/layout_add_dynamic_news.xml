@@ -15,7 +15,9 @@
         android:layout_height="42dp"
         android:layout_marginTop="15dp"
         android:padding="3dp"
-        android:background="@drawable/shape_text"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/shape_shape"
         android:id="@+id/dynamic_add_title"
         android:hint="   动态标题" />
 
@@ -27,29 +29,27 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/shape_text"
-        android:lines="3"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_feedback_text"
+        android:lines="8"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:padding="5dp"
         android:id="@+id/dynamic_add_content"
         android:hint="详细描述"/>
 
     <GridView
         android:id="@+id/dynamic_add_gridview"
-        android:layout_width="350dp"
-        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="8dp"
         android:horizontalSpacing="3dp"
         android:numColumns="4"
         android:scrollbars="none"
-        android:background="#f0f000"
+        android:background="@color/white"
         android:verticalSpacing="5dp" ></GridView>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/dynamic_add_publish"
-        android:layout_marginTop="30dp"
-        android:text="发  布"
-        android:textSize="18dp"
-        />
+
 
 </LinearLayout>

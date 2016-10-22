@@ -53,14 +53,14 @@ public class OldThingFragment extends Fragment implements IOldthing{
     private void initView() {
         Context context = getContext();
         mOllThingPresent = new OldThingPresent(this,context);
-        View header = View.inflate(context,R.layout.recycle_header2_tete,null);
+//        View header = View.inflate(context,R.layout.recycle_header2_tete,null);
         recyclerView = (RefreshRecyclerView) rootView.findViewById(R.id.dynamic_recyclerView2);
         //需要先初始化数据
         mOllThingPresent.doInvailData();
         mOldthingAdapter = new OldThingsAdapter(context,mData);
         RecyclerViewManager.with(mOldthingAdapter,new LinearLayoutManager(context))
                 .setMode(RecyclerMode.BOTH)
-                .addHeaderView(header)
+//                .addHeaderView(header)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {

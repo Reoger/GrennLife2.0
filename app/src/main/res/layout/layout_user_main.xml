@@ -41,7 +41,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="嘻嘻嘻"
+                    android:text="用户名"
                     android:textSize="17sp"
                     android:textColor="@color/black"
                     android:padding="5dp"/>
