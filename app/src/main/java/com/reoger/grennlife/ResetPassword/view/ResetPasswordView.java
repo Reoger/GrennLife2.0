@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.ResetPassword.presenter.IResetPasswordPresenter;
 import com.reoger.grennlife.ResetPassword.presenter.ResetPasswordPresenter;
+import com.reoger.grennlife.utils.toast;
 
 import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.BmobUser;
@@ -49,7 +50,7 @@ public class ResetPasswordView extends AppCompatActivity implements IResetPasswo
     }
 
     private void initAttr() {
-        mIResetPasswordPresenter = new ResetPasswordPresenter();
+        mIResetPasswordPresenter = new ResetPasswordPresenter(this);
     }
 
     private void initView() {
@@ -72,18 +73,12 @@ public class ResetPasswordView extends AppCompatActivity implements IResetPasswo
                 break;
             case R.id.reset_reset_password_btn:
                 //执行重置密码逻辑
-                if (mPassword.getText().toString().equals(mPasswordAgain.getText().toString())) {
-                    //验证两次输入密码相同
-                    mIResetPasswordPresenter.doSendResetRequest(mPassword.getText().toString(),
-                            mResetVeryfiedCode.toString());
+                if (!mPassword.getText().toString().equals(mPasswordAgain.getText().toString())) {
+                    new toast(this,"两次输入密码需要一致");
                     break;
-                } else {
-                    //两次密码输入不同,要求重新输入
-                    Toast.makeText(this,"两次输入密码不同，请重新输入密码",Toast.LENGTH_SHORT).show();
-                    mPassword.setText("");
-                    mPasswordAgain.setText("");
-
                 }
+                mIResetPasswordPresenter.doResetPwByCode(mResetVeryfiedCode.getText().toString(),mPasswordAgain.getText().toString());
+                break;
         }
 
 

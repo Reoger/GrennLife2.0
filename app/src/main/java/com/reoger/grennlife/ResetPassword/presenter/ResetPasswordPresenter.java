@@ -1,10 +1,14 @@
 package com.reoger.grennlife.ResetPassword.presenter;
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 
-
+import com.reoger.grennlife.utils.CustomApplication;
+import com.reoger.grennlife.utils.toast;
 
 import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.BmobUser;
@@ -16,6 +20,12 @@ import cn.bmob.v3.listener.UpdateListener;
  * Created by Zimmerman on 2016/9/13.
  */
 public class ResetPasswordPresenter implements IResetPasswordPresenter {
+
+    private Context mContext;
+
+    public ResetPasswordPresenter(Context mContext) {
+        this.mContext = mContext;
+    }
 
     /**
      *
@@ -38,19 +48,19 @@ public class ResetPasswordPresenter implements IResetPasswordPresenter {
     }
 
     @Override
-    public void doSendResetRequest(String newPassword, String SMSCode) {
-
-            BmobUser.resetPasswordBySMSCode(SMSCode, newPassword, new UpdateListener() {
-                @Override
-                public void done(BmobException ex) {
-                    if(ex==null){
-                        Log.i("smile", "密码重置成功");
-                    }else{
-//                        Toast.makeText(MyApplication.getContext(),"重置失败："+ex.getLocalizedMessage(),
-//                                Toast.LENGTH_SHORT).show();
-                        Log.i("smile", "重置失败：code ="+ex.getErrorCode()+",msg = "+ex.getLocalizedMessage());
-                    }
+    public void doResetPwByCode(String SMSCode, String newPW) {
+        BmobUser.resetPasswordBySMSCode(SMSCode, newPW, new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    new toast(mContext,"充值成功");
+                    ((AppCompatActivity)mContext).finish();
+                    Log.d("qqe","重置成功");
+                } else {
+                    Log.d("qqe","充值失败：code:"+e.getErrorCode()+"meg:"+e.getMessage());
                 }
-            });
+            }
+        });
     }
+
 }
