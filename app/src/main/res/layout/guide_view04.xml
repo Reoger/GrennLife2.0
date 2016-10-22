@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" 
-    android:background="#ff00ff"
+    android:background="@drawable/guide_4"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
   
@@ -13,5 +13,5 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="120dp"
-        android:background="@drawable/watering2"/>
+        android:background="#5e5ec7"/>
 </RelativeLayout>

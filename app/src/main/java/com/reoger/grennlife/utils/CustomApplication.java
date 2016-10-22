@@ -5,7 +5,9 @@ import android.content.Context;
 
 import com.reoger.grennlife.loginMVP.model.UserMode;
 
+import cn.bmob.push.BmobPush;
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobInstallation;
 import cn.sharesdk.framework.ShareSDK;
 
 /**
@@ -51,9 +53,12 @@ public class CustomApplication extends Application{
         context = getApplicationContext();
         //bmob初始化
         Bmob.initialize(this, APP_ID);
+        // 使用推送服务时的初始化操作
+        BmobInstallation.getCurrentInstallation().save();
+        // 启动推送服务
+        BmobPush.startWork(this);
         //SharedSDK初始化(xml方式配置好应用)
         ShareSDK.initSDK(this);
-
     }
 
 

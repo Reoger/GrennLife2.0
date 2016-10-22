@@ -110,6 +110,16 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
+    public void onGetUpdataUserInfo(boolean flag, String Code) {
+        if(flag){
+
+        }else{
+            new toast(this,"修改失败"+Code);
+        }
+        finish();
+    }
+
+    @Override
     public void onGetUserMode(boolean flag, UserMode user) {
         if(flag){//数据更新成功
             log.d("TTT","数据查询陈宫1234567*-*-*-*89-------------++++++++");
@@ -117,7 +127,7 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
             mID.setText(user.getId().toString());
             mLocation.setText(user.getLocations());
             mState.setText(States[user.getState()]);
-            if(user.getState() == 1||user.getState()==3){
+            if(user.getState() == 1||user.getState()==2){
                 setEdit(false);
             }else{
                 setEdit(true);

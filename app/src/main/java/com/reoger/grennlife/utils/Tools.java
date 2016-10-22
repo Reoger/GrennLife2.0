@@ -1,12 +1,18 @@
 package com.reoger.grennlife.utils;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.NotificationCompat;
+
+import com.reoger.grennlife.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -114,5 +120,17 @@ public class Tools {
     }
 
 
-
+    public void  showNotification(Context context,String title,String content){
+        NotificationManager manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        Notification notification = builder
+                .setContentTitle(title)
+                .setContentText(content)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(
+                        context.getResources(), R.mipmap.ic_launcher))
+                .build();
+        manager.notify(1, notification);
+    }
 }

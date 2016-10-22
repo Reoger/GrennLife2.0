@@ -9,5 +9,6 @@ import com.reoger.grennlife.loginMVP.model.UserMode;
  */
 public interface IInfomationView {
     void onGetLocation(boolean flay,Location location);
+    void onGetUpdataUserInfo(boolean flag,String Code);
     void onGetUserMode(boolean flag, UserMode usermode);
 }

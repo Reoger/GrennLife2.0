@@ -73,16 +73,15 @@ public class InfomationPresenterCompl implements InfomationPresenter {
     @Override
     public void doAuthentication(String name, String Id, String address) {
         UserMode userMode = BmobUser.getCurrentUser(UserMode.class);
-        UserMode user = new UserMode();
-        user.setObjectId(userMode.getObjectId());
-        user.setReallyName(name);
-        user.setId(Id);
-        user.setState(1);
-        user.setLocations(address);
+        userMode.setObjectId(userMode.getObjectId());
+        userMode.setReallyName(name);
+        userMode.setId(Id);
+        userMode.setState(1);
+        userMode.setLocations(address);
         if(location!= null){
            // BmobGeoPoint point = new BmobGeoPoint(location.getLatitude(),location.getLongitude());
             BmobGeoPoint point = new BmobGeoPoint(10.0,20.0);
-            user.setGpsAdd(point);
+            userMode.setGpsAdd(point);
         }
 
         if(location!= null){
@@ -90,13 +89,15 @@ public class InfomationPresenterCompl implements InfomationPresenter {
             +"location.getLongitude()"+location.getLongitude());
         }
 
-        user.update(new UpdateListener() {
+        userMode.update(new UpdateListener() {
             @Override
             public void done(BmobException e) {
                 if(e == null){
+                    mIInfomationView.onGetUpdataUserInfo(true,null);
                     log.d("TAG","成功更新数据");
                 }else{
                     log.d("TAg","更新失败"+e.toString());
+                    mIInfomationView.onGetUpdataUserInfo(false,e.toString());
                 }
             }
         });
