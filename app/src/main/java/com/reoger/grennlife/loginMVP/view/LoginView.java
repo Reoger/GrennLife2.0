@@ -68,18 +68,6 @@ public class LoginView extends AppCompatActivity implements ILoginViw, View.OnCl
     }
 
 
-//    private void initSharedSDK() {
-//        ShareSDK.initSDK(this,"你的应用在Sharesdk注册时返回的AppKey");
-//        HashMap<String,Object> hashMap = new HashMap<String, Object>();
-//        hashMap.put("Id","1");
-//        hashMap.put("SortId","1");
-//        hashMap.put("AppKey","568898243");
-//        hashMap.put("AppSecret","38a4f8204cc784f81f9f0daaf31e02e3");
-//        hashMap.put("RedirectUrl","http://www.sharesdk.cn");
-//        hashMap.put("ShareByAppClient","true");
-//        hashMap.put("Enable","true");
-//        ShareSDK.setPlatformDevInfo(SinaWeibo.NAME,hashMap);
-//    }
     @Override
     public void onClear() {
 

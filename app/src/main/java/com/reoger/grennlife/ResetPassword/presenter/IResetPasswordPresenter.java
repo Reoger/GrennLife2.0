@@ -10,6 +10,5 @@ public interface IResetPasswordPresenter {
 //    获取充值密码手机验证码
     void doGetMSMCodeForReset(String num);
 
-    //确认发送重置请求
-    void doSendResetRequest(String newPassword, String SMSCode);
+    void doResetPwByCode(String SMSCode,String newPW);
 }

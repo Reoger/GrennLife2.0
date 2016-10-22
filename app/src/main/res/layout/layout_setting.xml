@@ -16,7 +16,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_gravity="center"
-            android:id="@+id/toolbar_button1"/>
+            android:id="@+id/toolbar_button_return"/>
         <TextView
             android:id="@+id/toolbar_text"
             android:layout_width="match_parent"
@@ -95,6 +95,7 @@
     </View>
 
     <LinearLayout
+        android:id="@+id/setting_layout_privacy"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/white">
@@ -124,6 +125,7 @@
     </View>
 
     <LinearLayout
+        android:id="@+id/setting_layout_share"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/white">
@@ -153,6 +155,7 @@
     </View>
 
     <LinearLayout
+        android:id="@+id/setting_layout_contact_us"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/white">
@@ -187,6 +190,7 @@
         android:layout_marginTop="12dp">
     </View>
     <LinearLayout
+        android:id="@+id/setting_layout_logout"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/white">

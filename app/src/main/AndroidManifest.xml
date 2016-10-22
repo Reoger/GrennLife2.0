@@ -118,6 +118,10 @@
         <activity
             android:name=".user.setting.view.SettingActivity"
             android:label="设置"/>
+        <activity android:name=".user.setting.view.ContactUsView"
+            android:label="联系我们" />
+        <activity android:name=".user.setting.view.PrivacyActivity"
+            android:label="隐私条款"/>
 
         <!--SharedSDK所需要的-->
         <activity
