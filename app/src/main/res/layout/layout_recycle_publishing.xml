@@ -4,19 +4,27 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="#552f4f4f"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/toolbar_background"
         android:orientation="horizontal">
+
         <ImageButton
+            android:id="@+id/toolbar_button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/all__return"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
             android:layout_gravity="center"
-            android:id="@+id/toolbar_button1"/>
+            android:layout_marginLeft="20dp"
+            android:background="@mipmap/all__return"/>
+
         <TextView
             android:id="@+id/toolbar_text"
             android:layout_width="match_parent"
@@ -24,16 +32,18 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:text="发布资源"
             android:paddingEnd="50dp"
+            android:text="发布资源"
             android:textColor="@color/white"
             android:textSize="18sp"/>
     </LinearLayout>
+
     <EditText
+        android:id="@+id/publish_resources_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/publish_resources_title"
         android:hint="资源的名称"/>
+
     <EditText
         android:id="@+id/publish_resources_content"
         android:layout_width="match_parent"

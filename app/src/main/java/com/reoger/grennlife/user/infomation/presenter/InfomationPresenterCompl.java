@@ -16,9 +16,11 @@ import com.reoger.grennlife.utils.log;
 
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 
@@ -54,18 +56,15 @@ public class InfomationPresenterCompl implements InfomationPresenter {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-
-       // Location location = mLocationManager.getLastKnownLocation(mProvider);
           location = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
 
         if (location != null) {
             mIInfomationView.onGetLocation(true,location);
-            //这里传出location对象
             log.d("Tag","location"+location.getLatitude()+"::location.getLongitude()"+location.getLongitude()+"::"+
                     location.getAltitude());
         }else{
-            log.d("TAG","操，这里为空了：~？");
+            log.d("TAG","操，这里为空了？");
             mIInfomationView.onGetLocation(false,null);
         }
         mLocationManager.requestLocationUpdates(mProvider, 5000, 1, locationListener);
@@ -74,16 +73,15 @@ public class InfomationPresenterCompl implements InfomationPresenter {
     @Override
     public void doAuthentication(String name, String Id, String address) {
         UserMode userMode = BmobUser.getCurrentUser(UserMode.class);
-        UserMode user = new UserMode();
-        user.setObjectId(userMode.getObjectId());
-        user.setReallyName(name);
-        user.setId(Id);
-        user.setState(1);
-        user.setLocations(address);
+        userMode.setObjectId(userMode.getObjectId());
+        userMode.setReallyName(name);
+        userMode.setId(Id);
+        userMode.setState(1);
+        userMode.setLocations(address);
         if(location!= null){
            // BmobGeoPoint point = new BmobGeoPoint(location.getLatitude(),location.getLongitude());
             BmobGeoPoint point = new BmobGeoPoint(10.0,20.0);
-            user.setGpsAdd(point);
+            userMode.setGpsAdd(point);
         }
 
         if(location!= null){
@@ -91,17 +89,43 @@ public class InfomationPresenterCompl implements InfomationPresenter {
             +"location.getLongitude()"+location.getLongitude());
         }
 
-        user.update(new UpdateListener() {
+        userMode.update(new UpdateListener() {
             @Override
             public void done(BmobException e) {
                 if(e == null){
+                    mIInfomationView.onGetUpdataUserInfo(true,null);
                     log.d("TAG","成功更新数据");
                 }else{
                     log.d("TAg","更新失败"+e.toString());
+                    mIInfomationView.onGetUpdataUserInfo(false,e.toString());
                 }
             }
         });
 
+    }
+
+    //更新个人信息
+    @Override
+    public void doUpdataUserInfo() {
+        UserMode userMode = BmobUser.getCurrentUser(UserMode.class);
+        BmobQuery<UserMode> query = new BmobQuery<>();
+        query.addWhereEqualTo("username",userMode.getUsername());
+        query.findObjects(new FindListener<UserMode>() {
+            @Override
+            public void done(List<UserMode> list, BmobException e) {
+                if(e == null ){
+                    log.d("TTT","数据查询陈宫123456789");
+                    if(list.get(0)!=null){
+                        mIInfomationView.onGetUserMode(true,list.get(0));
+                    }else{
+                        mIInfomationView.onGetUserMode(true,null);
+                    }
+                }else{
+                    mIInfomationView.onGetUserMode(false,null);
+                    log.d("TTT","数据查询陈宫1234567*-*-*-*89");
+                }
+            }
+        });
     }
 
     LocationListener locationListener = new LocationListener() {

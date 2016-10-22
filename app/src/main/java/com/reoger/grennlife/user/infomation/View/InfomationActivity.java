@@ -13,10 +13,10 @@ import com.reoger.grennlife.loginMVP.model.UserMode;
 import com.reoger.grennlife.user.infomation.presenter.InfomationPresenter;
 import com.reoger.grennlife.user.infomation.presenter.InfomationPresenterCompl;
 import com.reoger.grennlife.utils.log;
+import com.reoger.grennlife.utils.toast;
 
 import cn.bmob.v3.BmobUser;
 
-import static com.reoger.grennlife.R.id.user_information_username;
 
 /**
  * Created by 24540 on 2016/10/11.
@@ -48,25 +48,22 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
     private void initData() {
         infomationPresenter = new InfomationPresenterCompl(this,this);
         infomationPresenter.doGetCurrentLocation(this);
-         userMode = BmobUser.getCurrentUser(UserMode.class);
+        infomationPresenter.doUpdataUserInfo();
+        userMode = BmobUser.getCurrentUser(UserMode.class);
+        //这里还是需要先去查询一下数据
+
         mUsername.setText(userMode.getUsername().toString());
         mPhoneNum.setText(userMode.getMobilePhoneNumber().toString());
         if(userMode.getState()==null)return;
+        mReallyName.setText(userMode.getReallyName().toString());
+        mID.setText(userMode.getId().toString());
+        mLocation.setText(userMode.getLocations());
+        mState.setText(States[userMode.getState()]);
+
         if(userMode.getState()==1||userMode.getState()==2){
-            mReallyName.setText(userMode.getReallyName().toString());
-            mID.setText(userMode.getId().toString());
-            mLocation.setText(userMode.getLocations());
-            mReallyName.setEnabled(false);//设置为不可编写
-            mID.setEnabled(false);
-            mLocation.setEnabled(false);
-            mAuthentication.setEnabled(false);
-            mState.setText(States[userMode.getState()]);
+            setEdit(false);
         }else if(userMode.getState()==3){
-            mReallyName.setEnabled(true);
-            mID.setEnabled(true);
-            mLocation.setEnabled(true);
-            mAuthentication.setEnabled(true);
-            mState.setText(States[userMode.getState()]);
+            setEdit(true);
         }
     }
 
@@ -76,7 +73,7 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void initView() {
-        mUsername = (TextView) findViewById(user_information_username);
+        mUsername = (TextView) findViewById(R.id.user_information_username);
         mPhoneNum = (TextView) findViewById(R.id.user_information_phone_num);
         mID = (EditText) findViewById(R.id.user_information_Id);
         mReallyName = (EditText) findViewById(R.id.user_information_username_true);
@@ -93,6 +90,10 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
                 String name = mReallyName.getText().toString();
                 String Id = mID.getText().toString();
                 String location = mLocation.getText().toString();
+                if("".equals(name)||"".equals(Id)||"".equals(location)){
+                    new toast(this,"需要将所有的信息填写完整");
+                    return;
+                }
                 infomationPresenter.doAuthentication(name,Id,location);
                 break;
         }
@@ -106,5 +107,40 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
             }else{
                 log.d("TAg","获得位置信息失败");
             }
+    }
+
+    @Override
+    public void onGetUpdataUserInfo(boolean flag, String Code) {
+        if(flag){
+
+        }else{
+            new toast(this,"修改失败"+Code);
+        }
+        finish();
+    }
+
+    @Override
+    public void onGetUserMode(boolean flag, UserMode user) {
+        if(flag){//数据更新成功
+            log.d("TTT","数据查询陈宫1234567*-*-*-*89-------------++++++++");
+            mReallyName.setText(user.getReallyName().toString());
+            mID.setText(user.getId().toString());
+            mLocation.setText(user.getLocations());
+            mState.setText(States[user.getState()]);
+            if(user.getState() == 1||user.getState()==2){
+                setEdit(false);
+            }else{
+                setEdit(true);
+            }
+        }else{
+            log.d("TAG","数据更新失败");
+        }
+    }
+
+    private void setEdit(boolean flag){
+        mReallyName.setEnabled(flag);
+        mID.setEnabled(flag);
+        mLocation.setEnabled(flag);
+        mAuthentication.setEnabled(flag);
     }
 }

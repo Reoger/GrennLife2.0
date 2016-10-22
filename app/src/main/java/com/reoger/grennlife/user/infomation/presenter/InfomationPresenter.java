@@ -9,4 +9,5 @@ public interface InfomationPresenter {
     /** 获取当前位置信息*/
     void doGetCurrentLocation(Context context);
     void doAuthentication(String name,String Id,String address);
+    void doUpdataUserInfo();
 }

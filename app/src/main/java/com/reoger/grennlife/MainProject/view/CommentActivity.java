@@ -5,9 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.reoger.grennlife.MainProject.adapter.CommentAdapter;
 import com.reoger.grennlife.MainProject.adapter.DynamicAdapter;
 import com.reoger.grennlife.MainProject.model.Comment;
@@ -36,6 +40,12 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     private CommentAdapter mAdapter;
     private TextView mNone;
 
+    private TextView mTitle;
+    private TextView mTime;
+    private TextView mUsername;
+    private ImageButton mBack;
+    private GridLayout mGridLayout;
+
     private List<Comment> commentList = new ArrayList<>();
 
     @Override
@@ -50,6 +60,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     private void setEvent() {
         mButtonPublish.setOnClickListener(this);
         mListView.setAdapter(mAdapter);
+        mBack.setOnClickListener(this);
     }
 
     private void initData() {
@@ -57,6 +68,28 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         mICommentPresenter.doGetComment(mDynamic);//获取评论列表
         mNone.setVisibility(View.VISIBLE);
         mDynamicContent.setText(mDynamic.getContent().toString());
+        mTime.setText(mDynamic.getCreatedAt().toString());
+        mUsername.setText("by"+mDynamic.getAuthor().getUsername());
+        mTitle.setText(mDynamic.getTitle());
+        if(mDynamic.getImageUrl()!= null){
+            mGridLayout.removeAllViews();
+            String a = mDynamic.getImageUrl();
+            String b = a.substring(1,a.length()-1);
+            log.d("TAG","TTT"+b);
+            String[] bb = b.split(", ");
+            log.d("TAG","这里是图片的url"+mDynamic.getObjectId()+":"+a);
+            for(int i=0;i<bb.length;i++){
+                ImageView imageView = new ImageView(this);
+                Glide.with(this).load(bb[i])
+                        .placeholder(R.mipmap.ic_launcher)//设置占位图片
+                        .error(android.R.drawable.stat_notify_error)//图片加载失败的显示
+                        .crossFade()//设置淡入淡出效果
+                        .override(600,200)//设置图片大小
+                        .into(imageView);
+                mGridLayout.addView(imageView);
+            }
+        }
+
     }
 
     private void initView() {
@@ -65,6 +98,12 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         mButtonPublish = (Button) findViewById(R.id.dynamic_comments_publish);
         mListView = (ListView) findViewById(R.id.dynamic_comments_list);
         mNone = (TextView) findViewById(R.id.dynamic_comments_none);
+        mTitle = (TextView) findViewById(R.id.dynamic_comments_title);
+        mUsername = (TextView) findViewById(R.id.dynamic_comments_name);
+        mTime = (TextView) findViewById(R.id.dynamic_comments_time);
+        mBack = (ImageButton) findViewById(R.id.toolbar_button1);
+        mGridLayout = (GridLayout) findViewById(R.id.dynamic_comments_gridlayout);
+
 
         mICommentPresenter = new CommentPresenter(this,this);
         mAdapter = new CommentAdapter(this, commentList);
@@ -75,6 +114,9 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.dynamic_comments_publish://发表评论
                 mICommentPresenter.doPublishAdapter(mDynamic,mEditComment.getText().toString());
+                break;
+            case R.id.toolbar_button1:
+                finish();
                 break;
         }
     }

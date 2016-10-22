@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#66bebebe">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/toolbar_background"
+        android:orientation="horizontal">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/all__return"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_button1"/>
+        <TextView
+            android:id="@+id/toolbar_text"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="用户反馈"
+            android:paddingEnd="50dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="8"
+        android:id="@+id/feedback_content"
+        android:hint="欢迎您提出宝贵的建议和意见，帮助我们做的更好！"
+        android:padding="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:textSize="16sp"
+        android:background="@drawable/shape_feedback_text"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/transparent"
+        android:lines="1"
+        android:hint="  请填写您的邮箱"
+        android:padding="5dp"
+        android:id="@+id/feedback_email"
+        android:drawableLeft="@mipmap/email_"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#66000000"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="18dp"></View>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="38dp"
+        android:text="发 送"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_feedback_button"
+        android:id="@+id/feedback_publish"
+        android:textSize="17dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>

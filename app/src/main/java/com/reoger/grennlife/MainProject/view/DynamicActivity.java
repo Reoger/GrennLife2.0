@@ -45,6 +45,7 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
     private List<String> pathList;
 
 
+
     private final static int REQUEST_CODE = 123;
 
     @Override
