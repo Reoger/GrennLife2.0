@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //轮播图界面与adapter
     private BannerViewPager mBannerView;
     private BannerViewPagerAdapter mBannerAdapter;
+
     private LinearLayout mMonitorHistory;
     private LinearLayout mUserInfo;
     private LinearLayout mResources;
@@ -521,6 +522,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.home_en_baike:
                 Intent intent = new Intent(this, EncyclopaediaView.class);
                 startActivity(intent);
+                break;
             case R.id.home_en_news:
                 Intent newsIntent = new Intent(this, NewsView.class);
                 startActivity(newsIntent);

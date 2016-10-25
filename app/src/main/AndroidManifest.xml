@@ -18,6 +18,10 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
     <!--以下是bmob的权限-->
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <!--允许联网 -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <!--获取GSM（2g）、WCDMA（联通3g）等网络状态的信息  -->
@@ -41,6 +45,9 @@
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+
+    <meta-data android:value="Channel ID" android:name="BMOB_CHANNEL"/>
+
     <application
         android:name=".utils.CustomApplication"
         android:allowBackup="true"
@@ -53,6 +60,11 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="cn.bmob.v3.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
 
         <activity
@@ -91,15 +103,20 @@
         <activity
             android:name=".encyclopaedia.view.EncyclopaediaView"
             android:label="环保百科"/>
+        <activity android:name=".encyclopaedia.view.EncyclopaediaDetailView"
+            android:label="百科详情" />
         <activity
             android:name=".news.view.NewsView"
             android:label="环保新闻"/>
+        <activity android:name=".news.view.NewsDetailView"
+            android:label="新闻详情" />
         <activity
             android:name=".law.view.LawView"
             android:label="法律法规"/>
-        <activity
-            android:name=".technology.view.TechnologyView"
-            android:label="环保新闻"/>
+        <activity android:name=".law.view.LawDetailView"/>
+        <activity android:name=".technology.view.TechnologyView"
+            android:label="环保科技" />
+        <activity android:name=".technology.view.TechnologyDetailView"/>
         <activity
             android:name=".user.myResuouers.activity.MyResources"
             android:label="我的资源"/>

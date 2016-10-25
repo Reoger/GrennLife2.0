@@ -23,8 +23,8 @@ public class CustomApplication extends Application{
     private static Context context;
 
 //        杰哥的
-    private final static String APP_ID = "bd11c4f379b3dce8ec40ed462494ba25";
-//      public final static String APP_ID = "92df55f29a323c8c205a15c39d0c63bc";
+//    private final static String APP_ID = "bd11c4f379b3dce8ec40ed462494ba25";
+      public final static String APP_ID = "92df55f29a323c8c205a15c39d0c63bc";
 
     public static Context getContext() {
         return context;
