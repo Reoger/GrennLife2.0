@@ -8,7 +8,12 @@ import com.reoger.grennlife.loginMVP.view.LoginView;
 import com.reoger.grennlife.onekeyshare.OnekeyShare;
 import com.reoger.grennlife.utils.toast;
 
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobQueryResult;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SQLQueryListener;
+import cn.bmob.v3.update.AppVersion;
 
 /**
  * Created by Zimmerman on 2016/10/19.
@@ -66,4 +71,5 @@ public class SettingCompl implements ISettingView {
 // 启动分享GUI
         oks.show(mContext);
     }
+
 }

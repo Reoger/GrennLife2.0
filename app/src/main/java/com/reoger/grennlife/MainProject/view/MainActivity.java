@@ -1,9 +1,11 @@
 package com.reoger.grennlife.MainProject.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -33,6 +35,7 @@ import com.reoger.grennlife.news.view.NewsView;
 import com.reoger.grennlife.recyclerPlayView.adapter.BannerViewPagerAdapter;
 import com.reoger.grennlife.recyclerPlayView.gear.BannerViewPager;
 import com.reoger.grennlife.technology.view.TechnologyView;
+import com.reoger.grennlife.upDate.presenter.PresenterCompl;
 import com.reoger.grennlife.user.aboutUser.view.AboutActivity;
 import com.reoger.grennlife.user.aboutUser.view.AppAboutActivity;
 import com.reoger.grennlife.user.feedback.view.FeedBackActivity;
@@ -55,6 +58,7 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.update.BmobUpdateAgent;
 import space.sye.z.library.RefreshRecyclerView;
 import space.sye.z.library.listener.OnBothRefreshListener;
 import space.sye.z.library.manager.RecyclerMode;
@@ -64,6 +68,7 @@ import space.sye.z.library.manager.RecyclerViewManager;
  * Created by 24540 on 2016/9/10.
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, IMainActivity {
+    private SharedPreferences mPref;
 
     private ViewPager mViewPager;
     private PagerAdapter mAdapter;
@@ -118,6 +123,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //自动更新检测
+        mPref = PreferenceManager.getDefaultSharedPreferences(this);
+        if (mPref.getBoolean(PresenterCompl.NET_UPDATE_AUTO_IS_CHECK, true)) {
+            BmobUpdateAgent.update(this);
+            new toast(this, "update");
+        }
         setContentView(R.layout.layout_main);
         initActivity();
         initView();
@@ -180,9 +191,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (msg.what) {
                 case INITIALZATION://数据初始化完成
 //                    new toast(getApplicationContext(), "数据加载完成");
-                    if(mDatas.size()==0){
+                    if (mDatas.size() == 0) {
                         mNone.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         mNone.setVisibility(View.INVISIBLE);
                     }
                     break;

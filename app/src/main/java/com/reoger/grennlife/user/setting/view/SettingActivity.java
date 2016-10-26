@@ -9,8 +9,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.reoger.grennlife.R;
+import com.reoger.grennlife.upDate.view.updateView;
 import com.reoger.grennlife.user.setting.presenter.ISettingView;
 import com.reoger.grennlife.user.setting.presenter.SettingCompl;
+import com.reoger.grennlife.utils.toast;
+
+import cn.bmob.v3.update.BmobUpdateAgent;
 
 /**
  * Created by 24540 on 2016/10/19.
@@ -22,6 +26,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout mContactUsLayout;
     private LinearLayout mSharedLayout;
     private LinearLayout mPrivacyLayout;
+    private LinearLayout mUpdateLayout;
 
     private ImageButton mToolBarBackBtn;
 
@@ -44,11 +49,14 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         mSharedLayout = (LinearLayout) findViewById(R.id.setting_layout_share);
         //隐私条款按钮条
         mPrivacyLayout = (LinearLayout) findViewById(R.id.setting_layout_privacy);
+        //更新按钮
+        mUpdateLayout = (LinearLayout) findViewById(R.id.setting_layout_update);
 
         mPrivacyLayout.setOnClickListener(this);
         mContactUsLayout.setOnClickListener(this);
         mSharedLayout.setOnClickListener(this);
         mExitLayout.setOnClickListener(this);
+        mUpdateLayout.setOnClickListener(this);
         mToolBarBackBtn.setOnClickListener(this);
     }
 
@@ -70,6 +78,12 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.setting_layout_privacy:
                 startActivity(new Intent(this,PrivacyActivity.class));
                 break;
+            case R.id.setting_layout_update:
+//                建表用↓↓
+//                BmobUpdateAgent.initAppVersion();
+                startActivity(new Intent(this,updateView.class));
+                break;
         }
     }
+
 }

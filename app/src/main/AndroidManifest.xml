@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:versionCode="1"
           package="com.reoger.grennlife">
 
 
@@ -46,7 +47,6 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 
-    <meta-data android:value="Channel ID" android:name="BMOB_CHANNEL"/>
 
     <application
         android:name=".utils.CustomApplication"
@@ -67,6 +67,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
 
+        <activity android:name=".upDate.view.updateView"
+            android:label="版本更新" />
         <activity
             android:name=".loginMVP.view.LoginView"
             android:label="登录界面"/>
