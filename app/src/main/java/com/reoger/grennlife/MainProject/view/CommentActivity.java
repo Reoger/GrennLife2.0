@@ -1,5 +1,6 @@
 package com.reoger.grennlife.MainProject.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.reoger.grennlife.MainProject.model.Dynamic;
 import com.reoger.grennlife.MainProject.presenter.CommentPresenter;
 import com.reoger.grennlife.MainProject.presenter.ICommentPresenter;
 import com.reoger.grennlife.R;
+import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.log;
 import com.reoger.grennlife.utils.toast;
 
@@ -83,10 +85,30 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 Glide.with(this).load(bb[i])
                         .placeholder(R.mipmap.ic_launcher)//设置占位图片
                         .error(android.R.drawable.stat_notify_error)//图片加载失败的显示
+//                        .bitmapTransform()//剪成正方形
                         .crossFade()//设置淡入淡出效果
-                        .override(600,200)//设置图片大小
+//                        .override(300,300)//设置图片大小
                         .into(imageView);
+                        imageView.setPadding(0,0,10,10);
+
                 mGridLayout.addView(imageView);
+                final String picPath = bb[i];
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(CommentActivity.this,ShowPicView.class);
+                        i.putExtra("Pic",picPath);
+                        startActivity(i);
+                    }
+                });
+                GridLayout.LayoutParams para;
+                para = (GridLayout.LayoutParams) imageView.getLayoutParams();
+                if(para != null) {
+                    CustomApplication application = CustomApplication.getApplication();
+                    para.height = (application.getmWidth()-30)/3;
+                    para.width = (application.getmWidth()-30)/3;
+                    imageView.setLayoutParams(para);
+                }
             }
         }
 

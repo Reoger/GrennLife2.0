@@ -41,6 +41,12 @@ public class MonitoringHistoryView extends AppCompatActivity{
                     new toast(MonitoringHistoryView.this,"数据查询成功");
                     break;
             }
+            if(mData.size()==0){
+                mNoInfo.setVisibility(View.VISIBLE);
+            }else{
+                mNoInfo.setVisibility(View.INVISIBLE);
+
+            }
             mAdapter.notifyDataSetChanged();
         }
     };
@@ -56,12 +62,7 @@ public class MonitoringHistoryView extends AppCompatActivity{
     private void initData() {
         getDate();
         mAdapter = new MonitoringHistoryAdapter(this,mData);
-        if(mData.size()==0){
-            mNoInfo.setVisibility(View.VISIBLE);
-        }else{
-            mNoInfo.setVisibility(View.INVISIBLE);
 
-        }
         mHistory.setAdapter(mAdapter);
     }
 

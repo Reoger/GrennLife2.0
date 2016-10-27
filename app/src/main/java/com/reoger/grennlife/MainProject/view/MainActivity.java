@@ -59,6 +59,7 @@ import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.update.BmobUpdateAgent;
+import cn.bmob.v3.listener.SaveListener;
 import space.sye.z.library.RefreshRecyclerView;
 import space.sye.z.library.listener.OnBothRefreshListener;
 import space.sye.z.library.manager.RecyclerMode;
@@ -68,8 +69,6 @@ import space.sye.z.library.manager.RecyclerViewManager;
  * Created by 24540 on 2016/9/10.
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, IMainActivity {
-    private SharedPreferences mPref;
-
     private ViewPager mViewPager;
     private PagerAdapter mAdapter;
     private List<View> mViews = new ArrayList<View>();
@@ -119,6 +118,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final static int REFRESH = 0x12;
     private final static int INITIALZATION_FINISH = 0x20;
 
+    private SharedPreferences mPref;
+    public final static String ACCOUNT = "account";
+    public final static String PASSWORD = "password";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -144,6 +146,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, LoginView.class));
             finish();
         } else {
+            mPref = PreferenceManager.getDefaultSharedPreferences(this);
+            String account = mPref.getString(ACCOUNT, "");
+            String password = mPref.getString(PASSWORD, "");
+            userMode.setUsername(account);
+            userMode.setPassword(password);
+            userMode.login(new SaveListener<Object>() {
+                @Override
+                public void done(Object o, BmobException e) {
+                    if(e == null ){
+                        log.d("TAG","登录成功");
+                    }else{
+                        log.d("TAG","登录失败"+e.toString());
+                    }
+                }
+            });
             log.d("TAG", "已经登录过了");
         }
     }

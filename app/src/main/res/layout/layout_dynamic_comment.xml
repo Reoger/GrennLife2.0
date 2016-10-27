@@ -74,17 +74,12 @@
                 android:text="2016—10-12 50:12:123"
                 android:textColor="#662f4f4f"
                 android:textSize="12sp"/>
-    <TextView
-        android:paddingTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="下面显示的评论列表"/>
 
             <TextView
                 android:id="@+id/dynamic_comments_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="15dp"
                 android:text="by+用户名"
                 android:textColor="#662f4f4f"
                 android:textSize="12sp"/>
@@ -116,13 +111,10 @@
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="3"
+            android:layout_margin="5dp"
             android:id="@+id/dynamic_comments_gridlayout">
-
-        <ImageView
-            android:layout_margin="10dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/recycler_play_b"/>
     </GridLayout>
 
 

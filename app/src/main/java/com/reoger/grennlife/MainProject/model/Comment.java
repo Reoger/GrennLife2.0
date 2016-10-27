@@ -11,6 +11,15 @@ public class Comment extends BmobObject{
     private String content;//评论的内容
     private UserMode user;//评论用户
     private Dynamic dynamic;//所评论的动态
+    private String postAuthor;
+
+    public String getPostAuthor() {
+        return postAuthor;
+    }
+
+    public void setPostAuthor(String postAuthor) {
+        this.postAuthor = postAuthor;
+    }
 
     public String getContent() {
         return content;

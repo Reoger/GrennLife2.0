@@ -2,26 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#31d1dc"
-              android:orientation="vertical">
+              android:orientation="vertical"
+    android:background="@color/white">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="5dp">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/name_"
+        android:layout_marginLeft="8dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:id="@+id/item_myresources_username"
-        android:text="用户名字"/>
+        android:text="用户名字"
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:textSize="16sp"
+        android:padding="2dp"/>
+</LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
         android:id="@+id/item_myresources_time"
-        android:text="2016.5.27"/>
+        android:text="2016.5.27"
+        android:paddingRight="5dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/item_myresources_state"
+        android:padding="2dp"
+        android:layout_marginLeft="5dp"
         android:text="领取状态:可用"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/background_main"/>
 </LinearLayout>

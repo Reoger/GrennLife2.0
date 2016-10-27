@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 
@@ -53,6 +54,7 @@ public class PublishingResourcesView extends AppCompatActivity implements View.O
     private List<HashMap<String, Object>> list;
     private List<String> pathList;
 
+    private ImageButton mBack;
 
     private static final int REQUEST_CODE = 0x1001;
 
@@ -71,6 +73,7 @@ public class PublishingResourcesView extends AppCompatActivity implements View.O
     private void setEvent() {
 
         mPublisResources.setOnClickListener(this);
+        mBack.setOnClickListener(this);
 
         mAdapter.setViewBinder(new SimpleAdapter.ViewBinder() {
             @Override
@@ -107,6 +110,7 @@ public class PublishingResourcesView extends AppCompatActivity implements View.O
         mPhoneNum = (EditText) findViewById(R.id.publish_resources_num);
         mLocation = (EditText) findViewById(R.id.publish_resources_location);
         mTitle = (EditText) findViewById(R.id.publish_resources_title);
+        mBack = (ImageButton) findViewById(R.id.all__return);
 
         mPhotoView = (GridView) findViewById(R.id.public_resources_photo);
         mIPublishResourcesPresenter = new PublishResourcesPresenterCompl(PublishingResourcesView.this,this);
@@ -125,6 +129,9 @@ public class PublishingResourcesView extends AppCompatActivity implements View.O
                 mIPublishResourcesPresenter.doPublishResouerces(mTitle.getText().toString(),mContent.getText().toString(),mLocation.getText().toString()
                         ,mPhoneNum.getText().toString(),pathList);
                 break;
+            case R.id.all__return:
+                finish();
+                break;
         }
     }
 
@@ -132,8 +139,10 @@ public class PublishingResourcesView extends AppCompatActivity implements View.O
     public void onPublishResulte(boolean flag, int code) {
         if(flag){
             new toast(this,"资源发布成功");
+            finish();
         }else{
             new toast(this,"资源发布失败");
+            finish();
         }
     }
 

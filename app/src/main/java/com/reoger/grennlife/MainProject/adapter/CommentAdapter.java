@@ -45,18 +45,18 @@ public class CommentAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Holder holder = null;
+        Holder holder ;
         if (convertView == null) {
             holder = new Holder();
             convertView = mLayoutInflater.inflate(R.layout.item_comments, null);
             holder.mUserName = (TextView) convertView.findViewById(R.id.item_comments_username);
             holder.mComments = (TextView) convertView.findViewById(R.id.item_comments_content);
-            holder.mUserName.setText(mData.get(position).getUser().getUsername());
-            holder.mComments.setText(mData.get(position).getContent());
             convertView.setTag(holder);
         } else {
-            convertView.getTag();
+            holder = (Holder) convertView.getTag();
         }
+        holder.mUserName.setText(mData.get(position).getUser().getUsername());
+        holder.mComments.setText(mData.get(position).getContent());
         return convertView;
     }
 

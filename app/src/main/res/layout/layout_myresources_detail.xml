@@ -4,57 +4,187 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:gravity="center"
-        android:padding="5dp"
-        android:background="@color/toolbar_background"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:text="资源详情"/>
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/toolbar_background"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="资源详情"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+        <ImageButton
+            android:id="@+id/all__return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:background="@mipmap/all__return"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/background_main"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:padding="5dp"
+            android:src="@mipmap/name_"/>
+
+        <TextView
+            android:id="@+id/resources_detail_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="5dp"
+            android:text="用户名"
+            android:textSize="16sp"/>
+    </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="名字:"
-        android:layout_marginTop="5dp"
-        android:id="@+id/resources_detail_name"
-        android:padding="2dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lines="5"
         android:id="@+id/resources_detail_content"
-        android:text="详细描述"
-        android:padding="2dp"/>
-    <GridLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:lines="5"
+        android:padding="5dp"
+        android:text="详细描述"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/background_main"/>
+
+    <GridLayout
         android:id="@+id/resources_detail_add_photo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <!-- 在这里添加图片-->
+
     </GridLayout>
-    <TextView
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:padding="5dp"
+            android:src="@mipmap/tel__"/>
+
+        <TextView
+            android:id="@+id/resources_detail_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="2dp"
+            android:text="联系方式："
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:padding="5dp"
+            android:src="@mipmap/laca"/>
+
+        <TextView
+            android:id="@+id/resources_detail_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="2dp"
+            android:text="地址"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:padding="5dp"
+            android:src="@mipmap/time"/>
+
+        <TextView
+            android:id="@+id/resources_detail_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="2dp"
+            android:text="时间"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="联系方式"
-        android:id="@+id/resources_detail_phone"
-        android:padding="2dp"/>
-    <TextView
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="12dp"
+            android:src="@mipmap/yes__"/>
+
+        <TextView
+            android:id="@+id/resources_detail_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:text="领取状态"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="2dp"
-        android:id="@+id/resources_detail_location"
-        android:text="地址"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="时间"
-        android:id="@+id/resources_detail_time"
-        android:padding="2dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/resources_detail_state"
-        android:text="领取状态"/>
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp"
+                android:checked="true"
+                android:textOff="已领取"
+                android:textOn="可领取"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
 </LinearLayout>

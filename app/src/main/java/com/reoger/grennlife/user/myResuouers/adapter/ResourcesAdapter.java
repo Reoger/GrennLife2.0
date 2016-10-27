@@ -25,7 +25,6 @@ public class ResourcesAdapter extends BaseAdapter {
         this.mContext = mContext;
         this.mInflater = LayoutInflater.from(mContext);
         mData = data;
-
     }
 
     @Override
@@ -57,6 +56,11 @@ public class ResourcesAdapter extends BaseAdapter {
 
             holder.mUserName.setText(info.getAuthor().getUsername());
             holder.mTime.setText(info.getCreatedAt().toString());
+            if(info.isAvailable()){
+                holder.mState.setText("领取状态：可用");
+            }else{
+                holder.mState.setText("领取状态：已领取");
+            }
             convertView.setTag(holder);
         }else{
             convertView.getTag();

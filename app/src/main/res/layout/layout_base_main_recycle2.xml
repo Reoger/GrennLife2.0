@@ -4,9 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-     <space.sye.z.library.RefreshRecyclerView
-         android:id="@+id/dynamic_recyclerView2"
+     <FrameLayout
          android:layout_width="match_parent"
-         android:layout_height="wrap_content"/>
-
+         android:layout_height="match_parent">
+          <space.sye.z.library.RefreshRecyclerView
+              android:id="@+id/dynamic_recyclerView2"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"/>
+          <ImageButton
+              android:id="@+id/recycle_add"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="end|bottom"
+              android:layout_marginBottom="25dp"
+              android:layout_marginRight="20dp"
+              android:background="@color/transparent"
+              android:src="@mipmap/addd"/>
+     </FrameLayout>
 </LinearLayout>

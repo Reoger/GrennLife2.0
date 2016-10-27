@@ -272,6 +272,27 @@
 
     <View
         android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_marginLeft="15dp"
+        android:background="#66e0e0e0">
+    </View>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:background="@color/transparent"
+            android:hint="請輸入個人簡介"
+            android:id="@+id/user_information_reduce"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="#552f4f4f">
     </View>

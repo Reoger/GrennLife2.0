@@ -43,7 +43,6 @@ public class InfomationPresenterCompl implements InfomationPresenter {
     @Override
     public void doGetCurrentLocation(Context context) {
         mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        //获取所有可用的位置提供器
         List<String> providerList = mLocationManager.getProviders(true);
         if (providerList.contains(LocationManager.GPS_PROVIDER)) {
             mProvider = LocationManager.GPS_PROVIDER;
@@ -71,17 +70,20 @@ public class InfomationPresenterCompl implements InfomationPresenter {
     }
 
     @Override
-    public void doAuthentication(String name, String Id, String address) {
+    public void doAuthentication(String name, String Id, String address,String introduction) {
         UserMode userMode = BmobUser.getCurrentUser(UserMode.class);
-        userMode.setObjectId(userMode.getObjectId());
-        userMode.setReallyName(name);
-        userMode.setId(Id);
-        userMode.setState(1);
-        userMode.setLocations(address);
+        UserMode user = new UserMode();
+        user.setObjectId(userMode.getObjectId());
+        user.setReallyName(name);
+        user.setId(Id);
+        user.setState(1);
+        user.setIntroduction(introduction);
+        user.setLocations(address);
         if(location!= null){
-           // BmobGeoPoint point = new BmobGeoPoint(location.getLatitude(),location.getLongitude());
-            BmobGeoPoint point = new BmobGeoPoint(10.0,20.0);
-            userMode.setGpsAdd(point);
+            BmobGeoPoint point = new BmobGeoPoint(location.getLongitude(),location.getLatitude());
+           //经度-180-180 location.getAltitude()
+            //维度 0-90 location.getLongitude()
+            user.setGpsAdd(point);
         }
 
         if(location!= null){
@@ -89,7 +91,7 @@ public class InfomationPresenterCompl implements InfomationPresenter {
             +"location.getLongitude()"+location.getLongitude());
         }
 
-        userMode.update(new UpdateListener() {
+        user.update(new UpdateListener() {
             @Override
             public void done(BmobException e) {
                 if(e == null){

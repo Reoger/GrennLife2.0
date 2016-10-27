@@ -99,7 +99,7 @@ public class OldThingPresent implements IOldThingPresent{
             e.printStackTrace();
         }
         query.include("author");
-       // query.order("-createdAt");
+        query.order("-createdAt");
         query.addWhereGreaterThanOrEqualTo("createdAt", new BmobDate(date));
         query.findObjects(new FindListener<OldThing>() {
             @Override

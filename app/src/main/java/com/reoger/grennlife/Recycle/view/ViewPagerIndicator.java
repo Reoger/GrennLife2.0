@@ -65,7 +65,7 @@ public class ViewPagerIndicator extends LinearLayout {
     /**
      * 默认的Tab数量
      */
-    private static final int COUNT_DEFAULT_TAB = 4;
+    private static final int COUNT_DEFAULT_TAB = 2;
     /**
      * tab数量
      */
@@ -83,11 +83,13 @@ public class ViewPagerIndicator extends LinearLayout {
     /**
      * 标题正常时的颜色
      */
-    private static final int COLOR_TEXT_NORMAL = 0x77FFFFFF;
+    private static final int COLOR_TEXT_NORMAL =0x77000000;//这里透明度，即应该有8位数据
     /**
      * 标题选中时的颜色
      */
-    private static final int COLOR_TEXT_HIGHLIGHTCOLOR = 0xFFFFFFFF;
+    private static final int COLOR_TEXT_HIGHLIGHTCOLOR = 0xff000000;
+
+    private static final String  COLOR_TRIGNG = "#000000";//三角形状的颜色
 
     public ViewPagerIndicator(Context context) {
         this(context, null);
@@ -108,7 +110,7 @@ public class ViewPagerIndicator extends LinearLayout {
         // 初始化画笔
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mPaint.setColor(Color.parseColor("#ffffffff"));
+        mPaint.setColor(Color.parseColor(COLOR_TRIGNG));
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setPathEffect(new CornerPathEffect(3));
 

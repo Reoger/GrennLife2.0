@@ -1,69 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:zhy="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#29f9f900">
+              xmlns:zhy="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
         android:background="@color/toolbar_background"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
         <ImageView
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_marginLeft="18dp"
-            android:src="@mipmap/toolbar_return"/>
+            android:id="@+id/all__return"
+            android:src="@mipmap/all__return"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="90dp"
             android:text="资源回收"
-            android:textSize="22sp"/>
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="90dp"
-            android:src="@mipmap/set_up"
-            android:background="@drawable/shape_transparent"
-            android:id="@+id/recycle_add"/>
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
     </LinearLayout>
 
 
-    <com.reoger.grennlife.Recycle.view.ViewPagerIndicator
-        android:id="@+id/id_indicator"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="#000000"
-        android:orientation="horizontal"
-        zhy:item_count="2">
+        <com.reoger.grennlife.Recycle.view.ViewPagerIndicator
+            android:id="@+id/id_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            zhy:item_count="2">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="短信1"
-            android:textColor="#CCFFFFFF"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="垃圾回收"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="收藏2"
-            android:textColor="#CCFFFFFF"
-            android:textSize="16sp" />
-    </com.reoger.grennlife.Recycle.view.ViewPagerIndicator>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/id_vp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-    </android.support.v4.view.ViewPager>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="旧物利用"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+        </com.reoger.grennlife.Recycle.view.ViewPagerIndicator>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/id_vp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </android.support.v4.view.ViewPager>
 
 </LinearLayout>

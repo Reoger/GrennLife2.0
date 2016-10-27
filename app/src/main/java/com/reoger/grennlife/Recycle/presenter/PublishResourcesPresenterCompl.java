@@ -125,6 +125,8 @@ public class PublishResourcesPresenterCompl implements IPublishResourcesPresente
         oldThing.setContent(content);
         oldThing.setNum(time);
         oldThing.setTitle(title);
+        oldThing.setAvailable(true);
+        oldThing.setLocations(location);
 
         if (imageUrl == null){
             oldThing.save(new SaveListener<String>() {

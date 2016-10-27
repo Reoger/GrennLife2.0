@@ -14,6 +14,16 @@ public class UserMode extends BmobUser implements IUserModel {
     private String locations;
     private Integer State;
     private BmobGeoPoint gpsAdd;
+    private String introduction;
+
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
 
     public String getReallyName() {
         return ReallyName;

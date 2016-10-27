@@ -34,6 +34,7 @@ public class ResourcesPresents implements  IResourcesPresntens {
         UserMode userMode = BmobUser.getCurrentUser(UserMode.class);
         query.addWhereEqualTo("author",userMode.getObjectId());
         query.setLimit(10);
+        query.include("author");
         log.d("TAG","id "+userMode.getObjectId());
         query.order("-createdAt");
         query.findObjects(new FindListener<OldThing>() {

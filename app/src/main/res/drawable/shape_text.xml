@@ -4,6 +4,6 @@
     <!-- 描边，边框宽度、颜色 -->
     <corners android:radius="30dp"/>
     <!-- 边角圆弧的半径 -->
-    <solid android:color="#bbffffff" />
+    <solid android:color="#88ffffff" />
     <!-- 背景填充颜色 -->
 </shape>
