@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" 
-    android:background="#352475"
+    android:background="@drawable/guide01"
     android:layout_width="fill_parent" 
     android:layout_height="fill_parent">
-    
-  
+
+    <Button
+        android:id="@+id/startBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="120dp"
+        android:text="开启绿色生活"
+        android:background="#5e5ec7"/>
 </RelativeLayout>

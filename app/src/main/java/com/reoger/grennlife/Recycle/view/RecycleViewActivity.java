@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.Recycle.presenter.IRecyclingOldPresenter;
@@ -21,7 +21,7 @@ import java.util.List;
  * Created by 24540 on 2016/9/18.
  */
 public class RecycleViewActivity extends AppCompatActivity implements View.OnClickListener{
-    private ImageButton mAddMsg;
+//    private ImageButton mAddMsg;
     private IRecyclingOldPresenter mIRecyclingOldPresenter;
 
 
@@ -31,6 +31,7 @@ public class RecycleViewActivity extends AppCompatActivity implements View.OnCli
     private List<String> mDatas = Arrays.asList("垃圾回收", "旧物利用");
 
     private ViewPagerIndicator mIndicator;
+    private ImageView mBlack;
 
 
 
@@ -41,13 +42,14 @@ public class RecycleViewActivity extends AppCompatActivity implements View.OnCli
 
         initView();
         initDatas();
-        setonClickListen();
 
         //设置Tab上的标题
         mIndicator.setTabItemTitles(mDatas);
         mViewPager.setAdapter(mAdapter);
         //设置关联的ViewPager
         mIndicator.setViewPager(mViewPager,0);
+
+        mBlack.setOnClickListener(this);
 
     }
 
@@ -75,18 +77,14 @@ public class RecycleViewActivity extends AppCompatActivity implements View.OnCli
         };
     }
 
-    private void setonClickListen() {
-        mAddMsg.setOnClickListener(this);
 
-    }
 
     private void initView() {
 
         mIRecyclingOldPresenter = new RecyclingOldPresenterCompl(this);
-        mAddMsg = (ImageButton) findViewById(R.id.recycle_add);
-        ///ttt
         mViewPager = (ViewPager) findViewById(R.id.id_vp);
         mIndicator = (ViewPagerIndicator) findViewById(R.id.id_indicator);
+        mBlack = (ImageView) findViewById(R.id.all__return);
     }
 
     @Override
@@ -94,6 +92,9 @@ public class RecycleViewActivity extends AppCompatActivity implements View.OnCli
         switch(v.getId()){
             case R.id.recycle_add://添加资源信息
                 mIRecyclingOldPresenter.doComeActivity(1);
+                break;
+            case R.id.all__return:
+                finish();
                 break;
         }
     }

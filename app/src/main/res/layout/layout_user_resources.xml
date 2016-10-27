@@ -42,7 +42,8 @@
             android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="暂是没有任何的资源信息记录"
+            android:text="暂时没有查询到你有任何发布的资源信息，
+            赶快去发布资源吧~！"
             android:gravity="center"/>
     </FrameLayout>
 </LinearLayout>

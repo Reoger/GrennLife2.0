@@ -15,6 +15,6 @@
         android:id="@+id/gridview_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="10sp"
         android:text="1"/>
 </LinearLayout>

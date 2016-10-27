@@ -30,8 +30,8 @@ dependencies {
     //bmob-push：Bmob的推送包
     //compile 'cn.bmob.android:bmob-push:0.8'
     //bmob-im：Bmob的即时通讯包，注意每个版本的im依赖特定版本的bmob-sdk，具体的依赖关系可查看下面注释[2]
-    compile 'cn.bmob.android:bmob-im:2.0.5@aar'
-    compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
+    // compile 'cn.bmob.android:bmob-im:2.0.5@aar'
+    //compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
     //bmob-sms ：Bmob单独为短信服务提供的包
     // compile 'cn.bmob.android:bmob-sms:1.0.1'
     //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
@@ -50,7 +50,9 @@ dependencies {
     //还是这个图片加载框架比较好用
     compile 'com.github.bumptech.glide:glide:3.6.1'
     compile files('libs/MobCommons-2016.0830.1940.jar')
-//    compile files('libs/Bmob_Push_V1.0.0beta_20160627.jar')
+    //推送的依賴
+    compile files('libs/Bmob_Push_V1.0.0beta_20160627.jar')
+    compile 'com.google.code.gson:gson-parent:2.7'
 }
 
 

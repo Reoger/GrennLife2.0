@@ -36,6 +36,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <!-- 请求摄像头的权限-->
     <uses-permission android:name="android.permission.CAMERA"/>
+    <!--拨打电话的权限-->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <!--推送所需的权限-->
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
@@ -44,7 +46,7 @@
     <application
         android:name=".utils.CustomApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -91,6 +93,7 @@
         <activity
             android:name=".encyclopaedia.view.EncyclopaediaView"
             android:label="环保百科"/>
+
         <activity
             android:name=".news.view.NewsView"
             android:label="环保新闻"/>
@@ -113,6 +116,9 @@
             android:name=".user.aboutUser.view.AboutActivity"
             android:label="与我相关"/>
         <activity
+            android:name=".MainProject.view.ShowPicView"
+            android:label="显示图片"/>
+        <activity
             android:name=".user.aboutUser.view.AppAboutActivity"
             android:label="关于app"/>
         <activity
@@ -127,11 +133,14 @@
         <activity
             android:name=".law.view.LawDetailView"
             android:label="法律详情"/>
-        <activity android:name=".technology.view.TechnologyDetailView"
+        <activity
+            android:name=".technology.view.TechnologyDetailView"
             android:label="法律法规"/>
-        <activity android:name=".news.view.NewsDetailView"
+        <activity
+            android:name=".news.view.NewsDetailView"
             android:label="环保新闻"/>
-        <activity android:name=".encyclopaedia.view.EncyclopaediaDetailView"
+        <activity
+            android:name=".encyclopaedia.view.EncyclopaediaDetailView"
             android:label="环保百科"/>
         <!--SharedSDK所需要的-->
         <activity
@@ -162,6 +171,17 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
+        <!--以下是bomo推送所需的權限-->
+        <service
+            android:name="cn.bmob.push.lib.service.PushService"
+            android:exported="true"
+            android:label="PushService"
+            android:process=":bmobpush">
+            <intent-filter>
+                <action android:name="cn.bmob.push.lib.service.PushService"/>
+            </intent-filter>
+        </service>
 
         <!-- 用于进程保活 -->
         <service

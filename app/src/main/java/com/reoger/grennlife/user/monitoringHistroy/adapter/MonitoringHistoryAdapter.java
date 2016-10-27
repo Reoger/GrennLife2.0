@@ -53,16 +53,16 @@ public class MonitoringHistoryAdapter extends BaseAdapter{
             h.mContent = (TextView) convertView.findViewById(R.id.item_user_monitoring_content);
             h.mTime = (TextView) convertView.findViewById(R.id.item_user_monitoring_time);
             h.mState = (TextView) convertView.findViewById(R.id.item_user_monitoring_state);
-            ReportInfo info = mData.get(position);
-
-            h.mTitle.setText(info.getTitle());
-            h.mContent.setText(info.getContent());
-            h.mTime.setText(info.getCreatedAt().toString());
-            h.mState.setText(STATE[info.getStatuts()]);
             convertView.setTag(h);
         }else{
-            convertView.getTag();
+           h = (holder) convertView.getTag();
         }
+
+        ReportInfo info = mData.get(position);
+        h.mTitle.setText(info.getTitle());
+        h.mContent.setText(info.getContent());
+        h.mTime.setText(info.getCreatedAt().toString());
+        h.mState.setText(STATE[info.getStatuts()]);
         return convertView;
     }
 

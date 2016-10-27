@@ -38,6 +38,7 @@ public class CommentPresenter implements ICommentPresenter{
         comment.setContent(content);
         comment.setDynamic(dynamic);
         comment.setUser(use);
+        comment.setPostAuthor(dynamic.getAuthor().getUsername());
         comment.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {

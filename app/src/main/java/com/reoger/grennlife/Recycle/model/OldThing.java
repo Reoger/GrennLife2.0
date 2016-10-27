@@ -18,6 +18,15 @@ public class OldThing extends BmobObject{
     private String locations;
     private String num;//电话号码
     private String ImageUrl;
+    private boolean Available;
+
+    public boolean isAvailable() {
+        return Available;
+    }
+
+    public void setAvailable(boolean available) {
+        Available = available;
+    }
 
     public String getLocations() {
         return locations;

@@ -27,7 +27,7 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
     // 定义一个ArrayList来存放View
     private ArrayList<View> views;
     // 定义各个界面View对象
-    private View view1, view2, view3, view4;
+    private View view1, view2;
     //定义开始按钮对象
     private Button startBt;
 
@@ -62,8 +62,8 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
         LayoutInflater mLi = LayoutInflater.from(this);
         view1 = mLi.inflate(R.layout.guide_view01, null);
         view2 = mLi.inflate(R.layout.guide_view02, null);
-        view3 = mLi.inflate(R.layout.guide_view03, null);
-        view4 = mLi.inflate(R.layout.guide_view04, null);
+//        view3 = mLi.inflate(R.layout.guide_view03, null);
+//        view4 = mLi.inflate(R.layout.guide_view04, null);
 
         // 实例化ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -72,12 +72,12 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
         //将要分页显示的View装入数组中
         views.add(view1);
         views.add(view2);
-        views.add(view3);
-        views.add(view4);
+//        views.add(view3);
+//        views.add(view4);
         // 实例化ViewPager适配器
         vpAdapter = new ViewPagerAdapter(views);
         //实例化开始按钮
-        startBt = (Button) view4.findViewById(R.id.startBtn);
+        startBt = (Button) view2.findViewById(R.id.startBtn);
     }
 
     @Override

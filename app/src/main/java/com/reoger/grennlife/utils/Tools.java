@@ -123,13 +123,14 @@ public class Tools {
     public void  showNotification(Context context,String title,String content){
         NotificationManager manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+//        PendingIntent intent = new Intent(context,);
         Notification notification = builder
                 .setContentTitle(title)
                 .setContentText(content)
                 .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.smile)
                 .setLargeIcon(BitmapFactory.decodeResource(
-                        context.getResources(), R.mipmap.ic_launcher))
+                        context.getResources(), R.mipmap.logo))
                 .build();
         manager.notify(1, notification);
     }

@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
+            <com.reoger.grennlife.utils.viewTools.CircularImage
                 android:layout_width="80sp"
                 android:layout_height="80sp"
                 android:padding="10dp"

@@ -30,6 +30,7 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
     private EditText mLocation;
     private Button mAuthentication;
     private TextView mState;
+    private EditText mEditReduce;
 
     private UserMode userMode;
     private InfomationPresenter infomationPresenter;
@@ -59,6 +60,7 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
         mID.setText(userMode.getId().toString());
         mLocation.setText(userMode.getLocations());
         mState.setText(States[userMode.getState()]);
+        mEditReduce.setText(userMode.getIntroduction());
 
         if(userMode.getState()==1||userMode.getState()==2){
             setEdit(false);
@@ -81,6 +83,7 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
         mLocation = (EditText) findViewById(R.id.user_information_location);
         mAuthentication = (Button) findViewById(R.id.user_information_authentication);
         mState = (TextView) findViewById(R.id.user_information_status);
+        mEditReduce = (EditText) findViewById(R.id.user_information_reduce);
     }
 
     @Override
@@ -89,12 +92,13 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
             case R.id.user_information_authentication://认证
                 String name = mReallyName.getText().toString();
                 String Id = mID.getText().toString();
+                String introducation = mEditReduce.getText().toString();
                 String location = mLocation.getText().toString();
                 if("".equals(name)||"".equals(Id)||"".equals(location)){
                     new toast(this,"需要将所有的信息填写完整");
                     return;
                 }
-                infomationPresenter.doAuthentication(name,Id,location);
+                infomationPresenter.doAuthentication(name,Id,location,introducation);
                 break;
         }
     }
@@ -112,7 +116,7 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onGetUpdataUserInfo(boolean flag, String Code) {
         if(flag){
-
+                new toast(this,"修改成功");
         }else{
             new toast(this,"修改失败"+Code);
         }
@@ -142,5 +146,6 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
         mID.setEnabled(flag);
         mLocation.setEnabled(flag);
         mAuthentication.setEnabled(flag);
+        mEditReduce.setEnabled(flag);
     }
 }

@@ -16,6 +16,7 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
+            android:id="@+id/all__return"
             android:background="@mipmap/all__return"/>
 
         <TextView

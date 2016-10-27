@@ -1,9 +1,11 @@
 package com.reoger.grennlife.MainProject.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -55,6 +57,7 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 import space.sye.z.library.RefreshRecyclerView;
 import space.sye.z.library.listener.OnBothRefreshListener;
 import space.sye.z.library.manager.RecyclerMode;
@@ -113,6 +116,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final static int REFRESH = 0x12;
     private final static int INITIALZATION_FINISH = 0x20;
 
+    private SharedPreferences mPref;
+    public final static String ACCOUNT = "account";
+    public final static String PASSWORD = "password";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -132,6 +138,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, LoginView.class));
             finish();
         } else {
+            mPref = PreferenceManager.getDefaultSharedPreferences(this);
+            String account = mPref.getString(ACCOUNT, "");
+            String password = mPref.getString(PASSWORD, "");
+            userMode.setUsername(account);
+            userMode.setPassword(password);
+            userMode.login(new SaveListener<Object>() {
+                @Override
+                public void done(Object o, BmobException e) {
+                    if(e == null ){
+                        log.d("TAG","登录成功");
+                    }else{
+                        log.d("TAG","登录失败"+e.toString());
+                    }
+                }
+            });
             log.d("TAG", "已经登录过了");
         }
     }
@@ -521,6 +542,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.home_en_baike:
                 Intent intent = new Intent(this, EncyclopaediaView.class);
                 startActivity(intent);
+                break;
             case R.id.home_en_news:
                 Intent newsIntent = new Intent(this, NewsView.class);
                 startActivity(newsIntent);
