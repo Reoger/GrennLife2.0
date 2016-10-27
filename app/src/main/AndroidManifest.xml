@@ -149,6 +149,9 @@
         <activity
             android:name=".user.setting.view.PrivacyActivity"
             android:label="隐私条款"/>
+
+        <activity android:name=".utils.viewTools.NotificationView"
+            android:label="通知进入的界面"/>
         <!--SharedSDK所需要的-->
         <activity
             android:name="com.mob.tools.MobUIShell"

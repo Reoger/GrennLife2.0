@@ -24,7 +24,7 @@ public class MyPushMessageReceiver extends BroadcastReceiver {
             log.d("TAG","输出的是objectid"+gson.getObjectId());
             if(userMode.getObjectId().equals(gson.getObjectId())){
                 Tools tools = new Tools();
-                tools.showNotification(context,gson.getTitle(),gson.getContext());
+                tools.showNotification(context,gson.getTitle(),gson.getContext(),gson.getUrl());
             }
         }
     }
