@@ -30,19 +30,13 @@ private static CustomApplication application = null;
     //全局context
     private static Context context;
 
+//        杰哥的
+//    private final static String APP_ID = "bd11c4f379b3dce8ec40ed462494ba25";
+      public final static String APP_ID = "92df55f29a323c8c205a15c39d0c63bc";
     private Location mUserLocation;
 
     private int mWidth;
     private int mHeight;
-
-
-
-
-    //    杰哥的
-    private final static String APP_ID = "bd11c4f379b3dce8ec40ed462494ba25";
-    // public final static String APP_ID = "92df55f29a323c8c205a15c39d0c63bc";
-    //W850565405@163.COM  这个账号的 短信资源不多
-    //public final static String APP_ID = "9d714aa8912264ebcaae79ad4db067ab";
 
     public static Context getContext() {
         return context;

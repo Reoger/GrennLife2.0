@@ -78,6 +78,7 @@
     </View>
 
     <LinearLayout
+        android:id="@+id/setting_layout_update"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/white">

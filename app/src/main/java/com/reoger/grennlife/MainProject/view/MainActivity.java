@@ -35,6 +35,7 @@ import com.reoger.grennlife.news.view.NewsView;
 import com.reoger.grennlife.recyclerPlayView.adapter.BannerViewPagerAdapter;
 import com.reoger.grennlife.recyclerPlayView.gear.BannerViewPager;
 import com.reoger.grennlife.technology.view.TechnologyView;
+import com.reoger.grennlife.upDate.presenter.PresenterCompl;
 import com.reoger.grennlife.user.aboutUser.view.AboutActivity;
 import com.reoger.grennlife.user.aboutUser.view.AppAboutActivity;
 import com.reoger.grennlife.user.feedback.view.FeedBackActivity;
@@ -57,6 +58,7 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.update.BmobUpdateAgent;
 import cn.bmob.v3.listener.SaveListener;
 import space.sye.z.library.RefreshRecyclerView;
 import space.sye.z.library.listener.OnBothRefreshListener;
@@ -67,7 +69,6 @@ import space.sye.z.library.manager.RecyclerViewManager;
  * Created by 24540 on 2016/9/10.
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, IMainActivity {
-
     private ViewPager mViewPager;
     private PagerAdapter mAdapter;
     private List<View> mViews = new ArrayList<View>();
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //轮播图界面与adapter
     private BannerViewPager mBannerView;
     private BannerViewPagerAdapter mBannerAdapter;
+
     private LinearLayout mMonitorHistory;
     private LinearLayout mUserInfo;
     private LinearLayout mResources;
@@ -123,6 +125,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //自动更新检测
+        mPref = PreferenceManager.getDefaultSharedPreferences(this);
+        if (mPref.getBoolean(PresenterCompl.NET_UPDATE_AUTO_IS_CHECK, true)) {
+            BmobUpdateAgent.update(this);
+            new toast(this, "update");
+        }
         setContentView(R.layout.layout_main);
         initActivity();
         initView();
@@ -200,9 +208,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (msg.what) {
                 case INITIALZATION://数据初始化完成
 //                    new toast(getApplicationContext(), "数据加载完成");
-                    if(mDatas.size()==0){
+                    if (mDatas.size() == 0) {
                         mNone.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         mNone.setVisibility(View.INVISIBLE);
                     }
                     break;
