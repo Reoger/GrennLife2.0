@@ -1,6 +1,5 @@
 package com.reoger.grennlife.user.setting.presenter;
 
-import android.app.Activity;
 import android.content.Context;
 
 /**
@@ -9,4 +8,5 @@ import android.content.Context;
 public interface ISettingView {
     void logOut();
     void doAppShare(Context mContext);
+    void doClearData(Context context);
 }

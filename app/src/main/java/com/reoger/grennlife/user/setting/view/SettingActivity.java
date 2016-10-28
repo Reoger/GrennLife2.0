@@ -1,8 +1,10 @@
 package com.reoger.grennlife.user.setting.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,9 +14,8 @@ import com.reoger.grennlife.R;
 import com.reoger.grennlife.upDate.view.updateView;
 import com.reoger.grennlife.user.setting.presenter.ISettingView;
 import com.reoger.grennlife.user.setting.presenter.SettingCompl;
+import com.reoger.grennlife.user.setting.tools.DataCleanManager;
 import com.reoger.grennlife.utils.toast;
-
-import cn.bmob.v3.update.BmobUpdateAgent;
 
 /**
  * Created by 24540 on 2016/10/19.
@@ -27,8 +28,12 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout mSharedLayout;
     private LinearLayout mPrivacyLayout;
     private LinearLayout mUpdateLayout;
+    private LinearLayout mClearData;
 
     private ImageButton mToolBarBackBtn;
+
+    private AlertDialog alertDialog1;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,12 +57,15 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         //更新按钮
         mUpdateLayout = (LinearLayout) findViewById(R.id.setting_layout_update);
 
+        mClearData = (LinearLayout) findViewById(R.id.setting_layout_clear_data);
+
         mPrivacyLayout.setOnClickListener(this);
         mContactUsLayout.setOnClickListener(this);
         mSharedLayout.setOnClickListener(this);
         mExitLayout.setOnClickListener(this);
         mUpdateLayout.setOnClickListener(this);
         mToolBarBackBtn.setOnClickListener(this);
+        mClearData.setOnClickListener(this);
     }
 
     @Override
@@ -83,7 +91,35 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 //                BmobUpdateAgent.initAppVersion();
                 startActivity(new Intent(this,updateView.class));
                 break;
+            case R.id.setting_layout_clear_data:
+                ShowDoalog();
+                break;
         }
     }
 
+    private void ShowDoalog(){
+        DataCleanManager dataCleanManager = new DataCleanManager();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        try {
+            builder.setMessage("共缓存了"+DataCleanManager.getTotalCacheSize(SettingActivity.this)+"数据,确定要全部清除？");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                DataCleanManager.clearAllCache(SettingActivity.this);
+                new toast(SettingActivity.this,"清除缓存成功");
+            }
+        });
+        builder.setTitle("清除缓存");
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        alertDialog1 = builder.create();
+        alertDialog1.show();
+    }
 }

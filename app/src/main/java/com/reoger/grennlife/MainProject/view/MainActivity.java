@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final static int INITIALZATION = 0x10;
     private final static int LOAD_MORE = 0x11;
     private final static int REFRESH = 0x12;
-    private final static int INITIALZATION_FINISH = 0x20;
 
     private SharedPreferences mPref;
     public final static String ACCOUNT = "account";

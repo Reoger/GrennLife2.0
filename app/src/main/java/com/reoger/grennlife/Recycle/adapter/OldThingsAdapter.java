@@ -45,6 +45,7 @@ public class OldThingsAdapter extends RecyclerView.Adapter<OldThingsAdapter.OldT
         final OldThing oldThing = mDatas.get(position);
         //设置
         if(oldThing != null){
+            if(oldThing.getAuthor()!=null)
             holder.mUserName.setText(oldThing.getAuthor().getUsername());
             holder.mContent.setText(oldThing.getContent());
             holder.mLocation.setText(oldThing.getLocations());

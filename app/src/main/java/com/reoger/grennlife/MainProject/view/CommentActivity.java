@@ -156,15 +156,14 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onResultGetComment(boolean flag, List<Comment> list) {
         if(true){
-            commentList.addAll(list);
             if(commentList.size()>0){
+                commentList.addAll(list);
                 mNone.setVisibility(View.INVISIBLE);
             }
             mAdapter.notifyDataSetChanged();
             log.d("TAG","數據更新成功");
         }else{
             new toast(this,"數據查詢失敗");
-
         }
     }
 }

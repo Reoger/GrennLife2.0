@@ -61,7 +61,7 @@ public class OldThingFragment extends Fragment implements IOldthing {
         mOllThingPresent.doInvailData();
         mOldthingAdapter = new OldThingsAdapter(context, mData);
         RecyclerViewManager.with(mOldthingAdapter, new LinearLayoutManager(context))
-                .setMode(RecyclerMode.BOTH)
+                .setMode(RecyclerMode.NONE)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {

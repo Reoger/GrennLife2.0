@@ -52,7 +52,10 @@ dependencies {
     compile files('libs/MobCommons-2016.0830.1940.jar')
     //推送的依賴
     compile files('libs/Bmob_Push_V1.0.0beta_20160627.jar')
+    //解析json的gson
     compile 'com.google.code.gson:gson-parent:2.7'
+    //android6.0权限申请
+    compile 'com.lovedise:permissiongen:0.0.6'
 }
 
 

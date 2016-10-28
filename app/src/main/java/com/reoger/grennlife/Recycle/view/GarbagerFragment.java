@@ -1,5 +1,6 @@
 package com.reoger.grennlife.Recycle.view;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,6 +28,7 @@ import com.reoger.grennlife.utils.toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.co.namee.permissiongen.PermissionGen;
 import space.sye.z.library.RefreshRecyclerView;
 import space.sye.z.library.adapter.RefreshRecyclerViewAdapter;
 import space.sye.z.library.listener.OnBothRefreshListener;
@@ -45,7 +47,6 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
     private IGarbagerFragmentPresent mIGarbager;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,7 +60,8 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
     private void initView() {
         Context context = getContext();
         mIGarbager = new GarbagerFragmentPresent(this, context);
-        mIGarbager.doGetCurrentLocation();//获取当前位置信息
+        mIGarbager.doGetCurrentLocation();//获取当前位置信息+
+        mIGarbager.doInvailData();
         recyclerView = (RefreshRecyclerView) rootView.findViewById(R.id.dynamic_recyclerView);
 
         mAdapter = new GarbagerAdapter(context, mDatas);
@@ -72,7 +74,6 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
                             UserMode userMode = mDatas.get(0);
                             mIGarbager.doRefeshData(userMode);
                         } else {
-                            new toast(getContext(), "刷新不可用");
                         }
                     }
 
@@ -101,7 +102,6 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
             CustomApplication customApplication = CustomApplication.getCustomApplication();
             customApplication.setmUserLocation(location);//设置用户信息位全局公用
             mIGarbager.doInvailData(location);
-
         } else {
             log.d("TAG", "好啦 加载失败了");
 
@@ -138,6 +138,7 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                PermissionGen.needPermission(getActivity(),1001, Manifest.permission.CALL_PHONE);
                 String mobile = mDatas.get(postion).getMobilePhoneNumber();
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+mobile));
                 startActivity(intent);
@@ -150,4 +151,5 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
                 });
         builder.create().show();
     }
+
 }

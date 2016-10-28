@@ -7,9 +7,7 @@ import android.view.WindowManager;
 
 import com.reoger.grennlife.loginMVP.model.UserMode;
 
-import cn.bmob.push.BmobPush;
 import cn.bmob.v3.Bmob;
-import cn.bmob.v3.BmobInstallation;
 import cn.sharesdk.framework.ShareSDK;
 
 /**
@@ -31,8 +29,8 @@ private static CustomApplication application = null;
     private static Context context;
 
 //        杰哥的
-//    private final static String APP_ID = "bd11c4f379b3dce8ec40ed462494ba25";
-      public final static String APP_ID = "92df55f29a323c8c205a15c39d0c63bc";
+    private final static String APP_ID = "bd11c4f379b3dce8ec40ed462494ba25";
+//      public final static String APP_ID = "92df55f29a323c8c205a15c39d0c63bc";
     private Location mUserLocation;
 
     private int mWidth;
@@ -67,15 +65,12 @@ private static CustomApplication application = null;
     public void setmWidth(int mWidth) {
         this.mWidth = mWidth;
     }
-
     public int getmHeight() {
         return mHeight;
     }
-
     public void setmHeight(int mHeight) {
         this.mHeight = mHeight;
     }
-
     public static CustomApplication getApplication() {
         return application;
     }
@@ -92,9 +87,9 @@ private static CustomApplication application = null;
         //bmob初始化
         Bmob.initialize(this, APP_ID);
         // 使用推送服务时的初始化操作
-        BmobInstallation.getCurrentInstallation().save();
+//        BmobInstallation.getCurrentInstallation().save();
         // 启动推送服务
-        BmobPush.startWork(this);
+//        BmobPush.startWork(this);
         //SharedSDK初始化(xml方式配置好应用)
         ShareSDK.initSDK(this);
         initData();

@@ -105,13 +105,12 @@ public class OldThingPresent implements IOldThingPresent{
             @Override
             public void done(List<OldThing> list, BmobException e) {
                 if(e == null){
-
                     if (list.size()>1){
                         list.remove(0);
                         mIOldthing.onGetResultData(true,TypeGetData.REFRESH,list);
                     }else{
                         log.d("TAG","刷新数据成功，但是没有添加数据");
-                        mIOldthing.onGetResultData(false,TypeGetData.REFRESH,null);
+                        mIOldthing.onGetResultData(true,TypeGetData.REFRESH,null);
                     }
                 }else{
                     mIOldthing.onGetResultData(false,TypeGetData.REFRESH,null);

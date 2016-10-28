@@ -1,6 +1,7 @@
 package com.reoger.grennlife.Recycle.presenter;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -26,6 +27,7 @@ import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import kr.co.namee.permissiongen.PermissionGen;
 
 /**
  * Created by 24540 on 2016/10/23.
@@ -44,6 +46,10 @@ public class GarbagerFragmentPresent implements IGarbagerFragmentPresent {
 
     @Override
     public void doGetCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        PermissionGen.needPermission((Activity) context,1002,Manifest.permission.ACCESS_FINE_LOCATION);
         mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         //获取所有可用的位置提供器
         List<String> providerList = mLocationManager.getProviders(true);
@@ -55,9 +61,7 @@ public class GarbagerFragmentPresent implements IGarbagerFragmentPresent {
             Log.d("TAG", "定位失败");
             return;
         }
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
+
        Location location = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
 
@@ -136,6 +140,25 @@ public class GarbagerFragmentPresent implements IGarbagerFragmentPresent {
                 });
             }
 
+    }
+
+    @Override
+    public void doInvailData() {
+        BmobQuery<UserMode> query = new BmobQuery<>();
+        query.addWhereEqualTo("State",2);
+        query.setLimit(10);
+        query.order("-createdAt");
+        query.findObjects(new FindListener<UserMode>() {
+            @Override
+            public void done(List<UserMode> list, BmobException e) {
+                if(e==null){
+                    mGarbager.onGetResultData(true, TypeGetData.INITIALZATION,list);
+                }else{
+                    mGarbager.onGetResultData(false, TypeGetData.INITIALZATION,list);
+                    log.d("TAG","查詢失敗");
+                }
+            }
+        });
     }
 
     @Override
