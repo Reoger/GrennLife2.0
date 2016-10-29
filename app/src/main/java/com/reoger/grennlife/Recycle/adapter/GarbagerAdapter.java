@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.loginMVP.model.UserMode;
 import com.reoger.grennlife.utils.CustomApplication;
-import com.reoger.grennlife.utils.log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,9 +48,7 @@ public class GarbagerAdapter extends RecyclerView.Adapter<GarbagerAdapter.Public
         holder.mLocation.setText(userMode.getLocations().toString());
         holder.mIntroductuon.setText(userMode.getIntroduction().toString());
         if(mApplication.getmUserLocation()!=null){
-            log.d("TAG","全局的变量可以访问");
             if(userMode.getGpsAdd()!=null){
-                log.d("TAG","mdata里面数据正常");
                 Location location1 = mApplication.getmUserLocation();
                 //getLongitude()纬度
                 // getLatitude(); 经度

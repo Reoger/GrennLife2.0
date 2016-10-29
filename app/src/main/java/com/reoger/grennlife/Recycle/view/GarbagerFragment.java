@@ -63,6 +63,7 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
         Context context = getContext();
 
         mIGarbager = new GarbagerFragmentPresent(this, context);
+        PermissionGen.needPermission(this,1002,Manifest.permission.ACCESS_FINE_LOCATION);
         mIGarbager.doGetCurrentLocation();//获取当前位置信息+
 
         recyclerView = (RefreshRecyclerView) rootView.findViewById(R.id.dynamic_recyclerView);
@@ -109,8 +110,7 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
             customApplication.setmUserLocation(location);//设置用户信息位全局公用
             mIGarbager.doInvailData(location);
         } else {
-            log.d("TAG", "好啦 加载失败了");
-
+            new toast(getActivity(),"定位失败，请检查你的网络连接和定位权限");
         }
     }
 
@@ -120,11 +120,8 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
         if (flag) {
             switch (type) {
                 case INITIALZATION:
-                    if(mDatas.size()>0){
-                       log.d("Tag","數據長度"+mDatas.size());
-                    }
+                    mDatas.clear();
                     mDatas.addAll(lists);
-                    log.d("TAG", "数据初始化成功");
                     break;
                 case REFRESH:
                     new toast(getContext(), "刷新成功");

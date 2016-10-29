@@ -2,22 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:background="@color/white"
               android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/item_garbager_user_name"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:background="#aaaac4f1"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="我是李某"
-        android:textSize="14sp"></TextView>
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/user3"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"/>
+        <TextView
+            android:id="@+id/item_garbager_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:text="我是李某"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,8 +48,7 @@
     </LinearLayout>
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -55,8 +67,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:layout_height="wrap_content">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,7 +88,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/white">
+        android:layout_marginRight="30px"
+        android:layout_marginLeft="30px">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,12 +121,11 @@
         android:gravity="center"
         android:text="已認證"
         android:textColor="#f0ec0101"
-        android:background="@color/white"
         />
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:paddingTop="4dp"
+        android:paddingTop="18dp"
         android:background="@color/background_main"/>
 </LinearLayout>
 

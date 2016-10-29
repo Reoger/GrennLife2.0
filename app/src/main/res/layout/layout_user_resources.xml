@@ -8,19 +8,24 @@
        android:layout_width="match_parent"
        android:layout_height="45dp"
        android:background="@color/toolbar_background"
+
        android:orientation="horizontal">
        <ImageButton
-           android:layout_width="wrap_content"
+           android:layout_width="0dp"
+           android:layout_weight="0.2"
            android:layout_height="wrap_content"
-           android:background="@mipmap/all__return"
+           android:src="@mipmap/all__return"
+           android:background="@color/toolbar_background"
            android:layout_centerVertical="true"
            android:layout_marginLeft="20dp"
            android:layout_gravity="center"
            android:id="@+id/toolbar_button1"/>
        <TextView
            android:id="@+id/toolbar_text"
-           android:layout_width="match_parent"
+           android:layout_width="0dp"
+           android:layout_weight="1"
            android:layout_height="45dp"
+           android:layout_gravity="center"
            android:layout_centerHorizontal="true"
            android:layout_centerVertical="true"
            android:gravity="center"
@@ -28,6 +33,14 @@
            android:paddingEnd="50dp"
            android:textColor="@color/white"
            android:textSize="18sp"/>
+       <ImageButton
+           android:layout_width="0dp"
+           android:layout_weight="0.3"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:id="@+id/myresourcer_add"
+           android:background="@color/toolbar_background"
+           android:src="@android:drawable/ic_menu_add"/>
    </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"
@@ -45,5 +58,10 @@
             android:text="暂时没有查询到你有任何发布的资源信息，
             赶快去发布资源吧~！"
             android:gravity="center"/>
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/setProgressBar"
+            android:visibility="visible"/>
     </FrameLayout>
 </LinearLayout>

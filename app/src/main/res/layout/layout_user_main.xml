@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#22e0e0e0">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginLeft="30px"
+              android:layout_marginRight="30px"
+              android:background="#22e0e0e0"
+              android:orientation="vertical">
 
     <include layout="@layout/user_title"></include>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="#22e0e0e0">
     </View>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
@@ -21,37 +25,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="85dp"
-        android:orientation="horizontal"
+        android:background="@color/white"
         android:gravity="center"
-        android:background="@color/white">
+        android:orientation="horizontal">
+
         <com.reoger.grennlife.utils.viewTools.CircularImage
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_marginLeft="15dp"
             android:src="@drawable/picture"/>
+
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingLeft="5dp">
+
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="用户名"
-                    android:textSize="17sp"
                     android:id="@+id/user_monitoring_username"
-                    android:textColor="@color/black"
-                    android:padding="5dp"/>
-                <TextView
-                    android:padding="3dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12dp"
-                    android:text="简介:就是一个特点：帅@！"/>
+                    android:padding="5dp"
+                    android:text="用户名"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="简介:就是一个特点：帅@！"
+                    android:textSize="12dp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -68,38 +77,41 @@
         android:layout_marginTop="12dp"
         android:background="@color/grey">
     </View>
-    
+
 
     <LinearLayout
         android:id="@+id/user_monitoring_detail"
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
-        android:orientation="horizontal"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="@dimen/user_list_picture"
             android:layout_height="@dimen/user_list_picture"
-            android:src="@mipmap/information"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/user_picture_marginLeft"/>
+            android:layout_marginLeft="@dimen/user_picture_marginLeft"
+            android:src="@mipmap/information"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/detailed_information"
-            android:textSize="@dimen/user__list_text"
             android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/user_text_marginLeft"
+            android:text="@string/detailed_information"
             android:textColor="@color/black"
-            android:layout_marginLeft="@dimen/user_text_marginLeft"/>
+            android:textSize="@dimen/user__list_text"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/come__into"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/user_into_marginLeft"/>
-
+            android:layout_marginLeft="@dimen/user_into_marginLeft"
+            android:src="@mipmap/come__into"/>
 
 
     </LinearLayout>
+
     <View
         android:layout_width="330dp"
         android:layout_height="0.3dp"
@@ -108,33 +120,37 @@
     </View>
 
     <LinearLayout
+        android:id="@+id/use_information_about"
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
-        android:id="@+id/use_information_about"
-        android:orientation="horizontal"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="@dimen/relater__picture"
             android:layout_height="@dimen/user_list_picture"
-            android:src="@mipmap/related_tome"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/user_picture_ml"/>
+            android:layout_marginLeft="@dimen/user_picture_ml"
+            android:src="@mipmap/related_tome"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/related_to_me"
-            android:textSize="@dimen/user__list_text"
             android:layout_gravity="center"
+            android:layout_marginLeft="27dp"
+            android:text="@string/related_to_me"
             android:textColor="@color/black"
-            android:layout_marginLeft="27dp"/>
+            android:textSize="@dimen/user__list_text"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/come__into"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/user_into_marginLeft"/>/>
+            android:layout_marginLeft="@dimen/user_into_marginLeft"
+            android:src="@mipmap/come__into"/>/>
 
     </LinearLayout>
+
     <View
         android:layout_width="330dp"
         android:layout_height="0.3dp"
@@ -143,33 +159,37 @@
     </View>
 
     <LinearLayout
+        android:id="@+id/user_monitoring_resources"
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
-        android:orientation="horizontal"
-        android:id="@+id/user_monitoring_resources"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="@dimen/user_list_picture"
             android:layout_height="wrap_content"
-            android:src="@mipmap/resources"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/user_picture_marginLeft"/>
+            android:layout_marginLeft="@dimen/user_picture_marginLeft"
+            android:src="@mipmap/resources"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/my_resources"
-            android:textSize="@dimen/user__list_text"
             android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/user_text_marginLeft"
+            android:text="@string/my_resources"
             android:textColor="@color/black"
-            android:layout_marginLeft="@dimen/user_text_marginLeft"/>/>
+            android:textSize="@dimen/user__list_text"/>/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/come__into"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/user_into_marginLeft"/>/>
+            android:layout_marginLeft="@dimen/user_into_marginLeft"
+            android:src="@mipmap/come__into"/>/>
 
     </LinearLayout>
+
     <View
         android:layout_width="330dp"
         android:layout_height="0.3dp"
@@ -181,31 +201,33 @@
         android:id="@+id/user_monitoring_history"
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
-        android:orientation="horizontal"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="@dimen/relater__picture"
             android:layout_height="@dimen/user_list_picture"
-            android:src="@mipmap/history"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/user_picture_ml"/>
+            android:layout_marginLeft="@dimen/user_picture_ml"
+            android:src="@mipmap/history"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/history"
-            android:textSize="@dimen/user__list_text"
             android:layout_gravity="center"
+            android:layout_marginLeft="27dp"
+            android:text="@string/history"
             android:textColor="@color/black"
-            android:layout_marginLeft="27dp"/>
+            android:textSize="@dimen/user__list_text"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/come__into"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/user_into_marginLeft"/>/>
+            android:layout_marginLeft="@dimen/user_into_marginLeft"
+            android:src="@mipmap/come__into"/>/>
 
     </LinearLayout>
-
 
 
     <View
@@ -222,35 +244,38 @@
     </View>
 
 
-
     <LinearLayout
+        android:id="@+id/user_information_feedback"
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
-        android:orientation="horizontal"
-        android:id="@+id/user_information_feedback"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/feedback"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/user_picture_ml"/>
+            android:layout_marginLeft="@dimen/user_picture_ml"
+            android:src="@mipmap/feedback"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/feedback"
-            android:textSize="@dimen/user__list_text"
             android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/user_text_ml"
+            android:text="@string/feedback"
             android:textColor="@color/black"
-            android:layout_marginLeft="@dimen/user_text_ml"/>
+            android:textSize="@dimen/user__list_text"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/come__into"
             android:layout_gravity="center"
-            android:layout_marginLeft="238dp"/>
+            android:layout_marginLeft="238dp"
+            android:src="@mipmap/come__into"/>
 
     </LinearLayout>
+
     <View
         android:layout_width="330dp"
         android:layout_height="0.3dp"
@@ -259,33 +284,37 @@
     </View>
 
     <LinearLayout
+        android:id="@+id/user_information_app"
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
-        android:orientation="horizontal"
-        android:id="@+id/user_information_app"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/about__app"
             android:layout_gravity="center"
-            android:layout_marginLeft="7dp"/>
+            android:layout_marginLeft="7dp"
+            android:src="@mipmap/about__app"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/about_APP"
-            android:textSize="@dimen/user__list_text"
             android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/user_text_marginLeft"
+            android:text="@string/about_APP"
             android:textColor="@color/black"
-            android:layout_marginLeft="@dimen/user_text_marginLeft"/>
+            android:textSize="@dimen/user__list_text"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/come__into"
             android:layout_gravity="center"
-            android:layout_marginLeft="209dp"/>
+            android:layout_marginLeft="209dp"
+            android:src="@mipmap/come__into"/>
 
     </LinearLayout>
+
     <View
         android:layout_width="320dp"
         android:layout_height="0.3dp"
@@ -294,33 +323,37 @@
     </View>
 
     <LinearLayout
+        android:id="@+id/user_information_setting"
         android:layout_width="match_parent"
         android:layout_height="@dimen/user_list_height"
-        android:orientation="horizontal"
-        android:id="@+id/user_information_setting"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="horizontal">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/tools"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/user_picture_ml"/>
+            android:layout_marginLeft="@dimen/user_picture_ml"
+            android:src="@mipmap/tools"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/set_up"
-            android:textSize="@dimen/user__list_text"
             android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/user_text_ml"
+            android:text="@string/set_up"
             android:textColor="@color/black"
-            android:layout_marginLeft="@dimen/user_text_ml"/>
+            android:textSize="@dimen/user__list_text"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/come__into"
             android:layout_gravity="center"
-            android:layout_marginLeft="237dp"/>/>
+            android:layout_marginLeft="237dp"
+            android:src="@mipmap/come__into"/>/>
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"

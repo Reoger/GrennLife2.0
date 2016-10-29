@@ -17,7 +17,7 @@ public class ContactUsView extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_setting_contact_us);
-        mBack = (ImageButton) findViewById(R.id.all__return);
+        mBack = (ImageButton) findViewById(R.id.toolbar_button1);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

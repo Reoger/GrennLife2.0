@@ -132,6 +132,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:orientation="horizontal"
         android:background="@color/white">
 
         <TextView
@@ -140,37 +141,19 @@
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
             android:text="真实姓名"
-
             android:textColor="@color/black"
             android:textSize="15sp"/>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.3dp"
-        android:layout_marginLeft="15dp"
-        android:background="#66e0e0e0">
-    </View>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white">
-
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
             android:background="@color/transparent"
-            android:hint="填写真实姓名"
+            android:hint="请填写真实姓名"
             android:id="@+id/user_information_username_true"
             android:textColor="@color/black"
             android:textSize="15sp"/>
-
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="0.3dp"
@@ -192,6 +175,16 @@
             android:textColor="@color/black"
             android:textSize="15sp"/>
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:background="@color/transparent"
+            android:hint="   请填写身份证号码"
+            android:id="@+id/user_information_Id"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
 
     </LinearLayout>
 
@@ -202,23 +195,6 @@
         android:background="#66e0e0e0">
     </View>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white">
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="15dp"
-            android:background="@color/transparent"
-            android:hint="填写身份证号码"
-            android:id="@+id/user_information_Id"
-            android:textColor="@color/black"
-            android:textSize="15sp"/>
-
-    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -240,56 +216,55 @@
             android:text="真实住址"
             android:textColor="@color/black"
             android:textSize="15sp"/>
-
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.3dp"
-        android:layout_marginLeft="15dp"
-        android:background="#66e0e0e0">
-    </View>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white">
-
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
             android:background="@color/transparent"
-            android:hint="湖南省株洲市天元区泰山路88号"
+            android:hint="请填写真实地址"
             android:id="@+id/user_information_location"
             android:textColor="@color/black"
             android:textSize="15sp"/>
-
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="0.3dp"
         android:layout_marginLeft="15dp"
         android:background="#66e0e0e0">
     </View>
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white">
-        <EditText
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:layout_marginLeft="15dp"
+            android:text="个人简介"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:layout_marginLeft="15dp"
+            android:background="#66e0e0e0">
+        </View>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
             android:layout_marginLeft="15dp"
             android:background="@color/transparent"
             android:hint="請輸入個人簡介"
             android:id="@+id/user_information_reduce"
             android:textColor="@color/black"
+            android:lines="4"
             android:textSize="15sp"/>
+
     </LinearLayout>
     <View
         android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.reoger.grennlife.MainProject.model.Comment;
@@ -28,6 +29,7 @@ public class AboutActivity extends AppCompatActivity implements IAboutActivity {
     private IAboutInfoPresent mIAbout;
     private TextView mNone;
     private ImageButton mBack;
+    private ProgressBar mBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class AboutActivity extends AppCompatActivity implements IAboutActivity {
         mAdapter = new AboutAdapter(mData, this);
         mNone = (TextView) findViewById(R.id.information_none);
         mBack = (ImageButton) findViewById(R.id.toolbar_button1);
+        mBar = (ProgressBar) findViewById(R.id.about_me_bar);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +60,7 @@ public class AboutActivity extends AppCompatActivity implements IAboutActivity {
         if (flag) {//数据查询成功
             log.d("TAG", "与我相关的数据查询成功");
             mData.addAll(lists);
+            mBar.setVisibility(View.GONE);
             mAdapter.notifyDataSetChanged();
             if(lists.size()==0){
                 mNone.setVisibility(View.VISIBLE);

@@ -43,7 +43,6 @@ import com.reoger.grennlife.user.infomation.View.InfomationActivity;
 import com.reoger.grennlife.user.monitoringHistroy.view.MonitoringHistoryView;
 import com.reoger.grennlife.user.myResuouers.activity.MyResources;
 import com.reoger.grennlife.user.setting.view.SettingActivity;
-import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.GlideUtil;
 import com.reoger.grennlife.utils.log;
 import com.reoger.grennlife.utils.toast;
@@ -59,8 +58,8 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.update.BmobUpdateAgent;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.update.BmobUpdateAgent;
 import space.sye.z.library.RefreshRecyclerView;
 import space.sye.z.library.listener.OnBothRefreshListener;
 import space.sye.z.library.manager.RecyclerMode;
@@ -253,8 +252,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAboutApp.setOnClickListener(this);
         mSetting.setOnClickListener(this);
 
-        CustomApplication application = CustomApplication.getApplication();
-        mUserName.setText(application.getUserName());
+        UserMode uer= BmobUser.getCurrentUser(UserMode.class);
+        mUserName.setText(uer.getUsername());
 
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

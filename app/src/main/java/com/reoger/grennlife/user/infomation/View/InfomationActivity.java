@@ -14,6 +14,7 @@ import com.reoger.grennlife.R;
 import com.reoger.grennlife.loginMVP.model.UserMode;
 import com.reoger.grennlife.user.infomation.presenter.InfomationPresenter;
 import com.reoger.grennlife.user.infomation.presenter.InfomationPresenterCompl;
+import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.log;
 import com.reoger.grennlife.utils.toast;
 
@@ -112,6 +113,9 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
                 log.d("Tag","location"+location.getLatitude()+"::location.getLongitude()"+location.getLongitude()+"::"+
                 location.getAltitude());
             }else{
+                CustomApplication customApplication = CustomApplication.getCustomApplication();
+                if(customApplication.getmUserLocation()!=null)
+                    customApplication.getmUserLocation().getAltitude();
                 log.d("TAg","获得位置信息失败");
             }
     }

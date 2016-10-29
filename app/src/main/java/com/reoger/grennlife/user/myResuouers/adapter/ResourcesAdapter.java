@@ -51,11 +51,13 @@ public class ResourcesAdapter extends BaseAdapter {
             holder.mUserName = (TextView) convertView.findViewById(R.id.item_myresources_username);
             holder.mTime = (TextView) convertView.findViewById(R.id.item_myresources_time);
             holder.mState = (TextView) convertView.findViewById(R.id.item_myresources_state);
+            holder.mName = (TextView) convertView.findViewById(R.id.item_myresources_resuout_name);
 
             OldThing info = mData.get(position);
 
             holder.mUserName.setText(info.getAuthor().getUsername());
             holder.mTime.setText(info.getCreatedAt().toString());
+            holder.mName.setText(info.getTitle());
             if(info.isAvailable()){
                 holder.mState.setText("领取状态：可用");
             }else{
@@ -72,5 +74,6 @@ public class ResourcesAdapter extends BaseAdapter {
         TextView mUserName;
         TextView mTime;
         TextView mState;
+        TextView mName;
     }
 }

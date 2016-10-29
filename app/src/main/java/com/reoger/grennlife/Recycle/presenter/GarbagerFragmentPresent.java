@@ -63,8 +63,6 @@ public class GarbagerFragmentPresent implements IGarbagerFragmentPresent {
         }
 
         Location location = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-
         if (location != null) {
             mGarbager.onResultLocation(true, location);
         } else {
