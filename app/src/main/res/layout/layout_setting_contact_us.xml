@@ -1,47 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_background"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/toolbar_button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:background="@mipmap/all__return"/>
+
+        <TextView
+            android:id="@+id/toolbar_text"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:paddingEnd="50dp"
+            android:text="聯係我們"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+
         <ImageView
-            android:src="@drawable/picture_2"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
             android:layout_gravity="center_horizontal"
-            android:layout_width="180dp"
-            android:layout_height="148dp" />
+            android:src="@drawable/picture_2"/>
     </LinearLayout>
 
     <LinearLayout
-        android:paddingTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/grey"
         android:orientation="vertical"
-        android:background="@color/grey">
+        android:paddingTop="25dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#552f4f4f"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="12dp"
+                android:background="#552f4f4f">
             </View>
+
             <TextView
-                android:text="通信地址：湖南工业大学计痛楼604"
-                android:textSize="25sp"
-                android:layout_gravity="left"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
+                android:text="通信地址：湖南工业大学计桶楼604"
+                android:textSize="20sp"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#552f4f4f"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="12dp"
+                android:background="#552f4f4f">
             </View>
         </LinearLayout>
 
@@ -50,47 +85,57 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#552f4f4f"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="12dp"
+                android:background="#552f4f4f">
             </View>
+
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
                 android:text="客服QQ：850565405"
-                android:textSize="25sp"
-                android:layout_gravity="left"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:textSize="20sp"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#552f4f4f"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="12dp"
+                android:background="#552f4f4f">
             </View>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
             android:orientation="vertical">
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#552f4f4f"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="12dp"
+                android:background="#552f4f4f">
             </View>
+
             <TextView
-                android:text="联系电话：18773380156"
-                android:textSize="25sp"
-                android:layout_gravity="left"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="联系电话：18773380156"
+                android:textSize="20sp"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#552f4f4f"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="12dp"
+                android:background="#552f4f4f">
             </View>
         </LinearLayout>
 

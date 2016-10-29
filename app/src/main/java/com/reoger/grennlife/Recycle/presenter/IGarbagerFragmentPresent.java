@@ -13,7 +13,7 @@ public interface IGarbagerFragmentPresent {
      void doInvailData(Location location);
      //加载更多数据
      void doLoadMoreDate(UserMode userMode);
-     void doInvailData();
+
      //更新数据
      void doRefeshData(UserMode userMode);
 }

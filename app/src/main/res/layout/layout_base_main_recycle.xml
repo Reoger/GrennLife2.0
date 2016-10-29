@@ -3,8 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-          <space.sye.z.library.RefreshRecyclerView
-              android:id="@+id/dynamic_recyclerView"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <space.sye.z.library.RefreshRecyclerView
+            android:id="@+id/dynamic_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:id="@+id/garbager_show_progressbar"/>
+    </FrameLayout>
+
 </LinearLayout>

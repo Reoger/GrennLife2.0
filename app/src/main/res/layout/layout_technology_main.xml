@@ -24,6 +24,15 @@
 
     </RelativeLayout>
 
-
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <include layout="@layout/dynamic_content_main" />
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/technology_content_bar"
+        android:visibility="visible"/>
+</FrameLayout>
+
 </LinearLayout>

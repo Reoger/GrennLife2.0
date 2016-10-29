@@ -24,6 +24,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
                 android:text="
     本公司的重要性。本隐私保护条款适用于我们网站所提供的所有服务。此外，在需要对我们的隐私政策进行更详细解释的场合，我们会分别单独发布隐私声明以解释某特定服务中个人信息的处理方法。
 1、我们关于隐私权的基本政策

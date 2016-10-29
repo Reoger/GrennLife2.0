@@ -37,11 +37,13 @@ dependencies {
     //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
     compile 'cn.bmob.android:http-legacy:1.0'
     //使用Picasso来加载图片
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    //compile 'com.squareup.picasso:picasso:2.5.2'
     //引入okhttp
     // compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     //上拉下拉刷新依赖库
+
+    //選擇圖片
     compile project(':library')
     //圆形的头像，http://blog.csdn.net/katherine_qj/article/details/51356541#comments
     //compile 'de.hdodenhof:circleimageview:2.0.0'
@@ -54,8 +56,11 @@ dependencies {
     compile files('libs/Bmob_Push_V1.0.0beta_20160627.jar')
     //解析json的gson
     compile 'com.google.code.gson:gson-parent:2.7'
-    //android6.0权限申请
+    //android6.0 权限申请
     compile 'com.lovedise:permissiongen:0.0.6'
+    //进度条样式
+    //compile 'com.roger.catloadinglibrary:catloadinglibrary:1.0.1'
+
 }
 
 

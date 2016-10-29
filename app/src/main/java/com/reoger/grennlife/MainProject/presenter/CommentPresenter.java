@@ -1,5 +1,6 @@
 package com.reoger.grennlife.MainProject.presenter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 
 import com.reoger.grennlife.MainProject.model.Comment;
@@ -25,6 +26,7 @@ public class CommentPresenter implements ICommentPresenter{
     private ICommentView iCommentView;
     private Context mContext;
 
+
     public CommentPresenter(ICommentView iCommentView, Context mContext) {
         this.iCommentView = iCommentView;
         this.mContext = mContext;
@@ -33,6 +35,7 @@ public class CommentPresenter implements ICommentPresenter{
 
     @Override
     public void doPublishAdapter(Dynamic dynamic, String content) {
+        showProgressBar();
         UserMode use = BmobUser.getCurrentUser(UserMode.class);
         final Comment comment = new Comment();
         comment.setContent(content);
@@ -44,8 +47,10 @@ public class CommentPresenter implements ICommentPresenter{
             public void done(String s, BmobException e) {
                 if(e == null){
                     log.d("TAG","评论成功");
+                    dialog.dismiss();
                     iCommentView.onResultPublishComment(true,s);
                 }else{
+                    dialog.dismiss();
                     iCommentView.onResultPublishComment(false,e.toString());
                 }
             }
@@ -57,6 +62,8 @@ public class CommentPresenter implements ICommentPresenter{
     @Override
     public void doGetComment(Dynamic dynamic) {
         BmobQuery<Comment> query = new BmobQuery<>();
+        log.d("TAG","進入獲取評論的方法");
+        log.d("TAE","動態裏面的聶榮是"+dynamic.getContent()+"  :"+dynamic.getObjectId());
         query.addWhereEqualTo("dynamic",new BmobPointer(dynamic));
         //希望同时查询该記錄的发布者的信息，以及该記錄的作者的信息
         query.include("user,dynamic.author");
@@ -66,12 +73,26 @@ public class CommentPresenter implements ICommentPresenter{
             @Override
             public void done(List<Comment> list, BmobException e) {
                 if(e == null){
+                    log.d("TAG","獲取評論成功");
+                    for (Comment c :
+                            list) {
+                        log.d("TAG","品論"+c.getContent());
+                    }
                     iCommentView.onResultGetComment(true,list);
                 }else{
+                    log.d("TAG","獲取評論失敗"+e.toString());
                     iCommentView.onResultGetComment(false,null);
                 }
             }
         });
+    }
+    private ProgressDialog dialog;
+    private void showProgressBar(){
+        dialog = new ProgressDialog(mContext);
+        dialog.setTitle("提示");
+        dialog.setMessage("評論中");
+        dialog.setCancelable(false);
+        dialog.show();
 
     }
 }

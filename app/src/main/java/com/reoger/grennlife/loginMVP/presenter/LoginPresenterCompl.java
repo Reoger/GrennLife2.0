@@ -53,7 +53,7 @@ public class LoginPresenterCompl implements ILoginPresenter {
             @Override
             public void done(BmobUser bmobUser, BmobException e) {
                 if (e == null) {
-                    CustomApplication application = new CustomApplication();
+                    CustomApplication application = CustomApplication.getApplication();
                     application.setUserName(name);//设置全局的用户名
                     application.setUserMode(BmobUser.getCurrentUser(UserMode.class));//保留当前的用户登录
                     log.d("TAG","login"+application.getUserName()+" use"+application.getUserMode());
@@ -106,9 +106,9 @@ public class LoginPresenterCompl implements ILoginPresenter {
     private void showDialog() {
         mDialog = new ProgressDialog(mContext);
         mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mDialog.setTitle("publish...");
+        mDialog.setTitle("loading...");
         mDialog.setMessage("正在登录，请稍后...");
-        mDialog.setCancelable(true);
+        mDialog.setCancelable(false);
         mDialog.show();
     }
 }

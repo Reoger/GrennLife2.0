@@ -39,6 +39,7 @@ public class DynamicPresenter implements IDynamicPresenter {
 
 
 
+
     private final static int UPLOAD_SUCESS = 123;
 
 
@@ -73,6 +74,7 @@ public class DynamicPresenter implements IDynamicPresenter {
     public DynamicPresenter(Context mContext,IDynamicView mIDynamicView) {
         this.mIDynamicView = mIDynamicView;
         this.mContext = mContext;
+
     }
 
     // 自定义图片加载器
@@ -222,9 +224,10 @@ public class DynamicPresenter implements IDynamicPresenter {
     private void showDialog() {
         mDialog = new ProgressDialog(mContext);
         mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mDialog.setTitle("publish...");
-        mDialog.setMessage("正在登录，请稍后...");
+        mDialog.setTitle("loading...");
+        mDialog.setMessage("正在發佈，请稍后...");
         mDialog.setCancelable(true);
         mDialog.show();
     }
+
 }

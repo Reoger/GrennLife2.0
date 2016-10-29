@@ -78,13 +78,13 @@ public class RecycleViewActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-
     private void initView() {
 
         mIRecyclingOldPresenter = new RecyclingOldPresenterCompl(this);
         mViewPager = (ViewPager) findViewById(R.id.id_vp);
         mIndicator = (ViewPagerIndicator) findViewById(R.id.id_indicator);
         mBlack = (ImageView) findViewById(R.id.all__return);
+
     }
 
     @Override

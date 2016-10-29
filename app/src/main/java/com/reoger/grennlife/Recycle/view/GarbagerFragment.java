@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.Recycle.adapter.GarbagerAdapter;
@@ -45,6 +46,7 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
     private GarbagerAdapter mAdapter;
     private View rootView;
     private IGarbagerFragmentPresent mIGarbager;
+    private ProgressBar mBar;
 
 
     @Override
@@ -59,10 +61,12 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
 
     private void initView() {
         Context context = getContext();
+
         mIGarbager = new GarbagerFragmentPresent(this, context);
         mIGarbager.doGetCurrentLocation();//获取当前位置信息+
-        mIGarbager.doInvailData();
+
         recyclerView = (RefreshRecyclerView) rootView.findViewById(R.id.dynamic_recyclerView);
+        mBar = (ProgressBar) rootView.findViewById(R.id.garbager_show_progressbar);
 
         mAdapter = new GarbagerAdapter(context, mDatas);
         RecyclerViewManager.with(mAdapter, new LinearLayoutManager(context))
@@ -74,6 +78,7 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
                             UserMode userMode = mDatas.get(0);
                             mIGarbager.doRefeshData(userMode);
                         } else {
+                            new toast(getActivity(),"刷新完成");
                         }
                     }
 
@@ -97,6 +102,7 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
 
     @Override
     public void onResultLocation(boolean flag, Location location) {
+
         if (flag) {
             log.d("TAG", "当前的位置信息" + location.getAltitude() + "***" + location.getLongitude());
             CustomApplication customApplication = CustomApplication.getCustomApplication();
@@ -110,9 +116,13 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
 
     @Override
     public void onGetResultData(boolean flag, TypeGetData type, List<UserMode> lists) {
+        mBar.setVisibility(View.GONE);
         if (flag) {
             switch (type) {
                 case INITIALZATION:
+                    if(mDatas.size()>0){
+                       log.d("Tag","數據長度"+mDatas.size());
+                    }
                     mDatas.addAll(lists);
                     log.d("TAG", "数据初始化成功");
                     break;
@@ -131,14 +141,14 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
     }
 
     private void showDialog(final int postion) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder =  new AlertDialog.Builder(getContext());
+        PermissionGen.needPermission(getActivity(),1001, Manifest.permission.CALL_PHONE);
         builder.setMessage("要联系他嘛?");
         builder.setTitle("提示");
         builder.setNegativeButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                PermissionGen.needPermission(getActivity(),1001, Manifest.permission.CALL_PHONE);
                 String mobile = mDatas.get(postion).getMobilePhoneNumber();
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+mobile));
                 startActivity(intent);

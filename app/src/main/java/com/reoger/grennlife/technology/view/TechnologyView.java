@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.reoger.grennlife.R;
@@ -39,6 +41,7 @@ public class TechnologyView extends AppCompatActivity {
 
     private IServerData mServerDataCompl;
     private IDBOperation mDBOperationComl;
+    private ProgressBar mBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class TechnologyView extends AppCompatActivity {
 
     private void initView() {
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.dynamic_recyclerView);
+        mBar = (ProgressBar) findViewById(R.id.technology_content_bar);
     }
 
     private void initAttr() {
@@ -64,10 +68,12 @@ public class TechnologyView extends AppCompatActivity {
             //成功从数据库读入
             mTechnologyAdapter = new TechnologyAdapter(this, mData);
             mTechnologyAdapter.notifyDataSetChanged();
+            mBar.setVisibility(View.GONE);
         } else {
             //耗时操作
             mData = mServerDataCompl.getDataFromServer(ServerDataCompl.BEAN_TYPE_TECHNOLOGY,this);
             mTechnologyAdapter = new TechnologyAdapter(this, mData);
+            mBar.setVisibility(View.GONE);
         }
 
     }

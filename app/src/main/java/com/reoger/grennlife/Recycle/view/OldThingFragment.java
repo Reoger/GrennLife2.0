@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.Recycle.adapter.OldThingsAdapter;
@@ -40,6 +41,7 @@ public class OldThingFragment extends Fragment implements IOldthing {
     private IOldThingPresent mOllThingPresent;
 
     private ImageButton mPublish;
+    private ProgressBar mBar;
 
 
     @Override
@@ -57,6 +59,7 @@ public class OldThingFragment extends Fragment implements IOldthing {
         mPublish = (ImageButton) rootView.findViewById(R.id.recycle_add);
         mOllThingPresent = new OldThingPresent(this, context);
         recyclerView = (RefreshRecyclerView) rootView.findViewById(R.id.dynamic_recyclerView2);
+        mBar = (ProgressBar) rootView.findViewById(R.id.oldthing_show_progressbar);
         //需要先初始化数据
         mOllThingPresent.doInvailData();
         mOldthingAdapter = new OldThingsAdapter(context, mData);
@@ -102,6 +105,7 @@ public class OldThingFragment extends Fragment implements IOldthing {
     //这里回传获取到的数据
     @Override
     public void onGetResultData(boolean flag, TypeGetData type, List<OldThing> lists) {
+        mBar.setVisibility(View.GONE);
         if (flag) {
             switch (type) {
                 case INITIALZATION:

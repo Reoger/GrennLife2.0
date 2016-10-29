@@ -98,7 +98,6 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void ShowDoalog(){
-        DataCleanManager dataCleanManager = new DataCleanManager();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         try {
             builder.setMessage("共缓存了"+DataCleanManager.getTotalCacheSize(SettingActivity.this)+"数据,确定要全部清除？");

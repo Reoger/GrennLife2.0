@@ -1,7 +1,9 @@
 package com.reoger.grennlife.user.infomation.View;
 
+import android.content.DialogInterface;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +38,7 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
     private InfomationPresenter infomationPresenter;
 
     private static final String[] States={"","正在审核","审核通过","审核不通过"};
+    private AlertDialog mLertDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,11 +119,11 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onGetUpdataUserInfo(boolean flag, String Code) {
         if(flag){
-                new toast(this,"修改成功");
+            showDialog(true);
         }else{
-            new toast(this,"修改失败"+Code);
+            showDialog(false);
+            new toast(this,"錯誤代碼"+Code);
         }
-        finish();
     }
 
     @Override
@@ -147,5 +150,21 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
         mLocation.setEnabled(flag);
         mAuthentication.setEnabled(flag);
         mEditReduce.setEnabled(flag);
+    }
+
+    private void showDialog(boolean flag){
+       AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        if(flag)
+        builder.setMessage("已經成功提交認證信息，請等待審核結果");
+        else
+            builder.setMessage("提交失敗，請稍後重試！");
+        builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        mLertDialog = builder.create();
+        mLertDialog.show();
     }
 }

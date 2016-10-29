@@ -11,6 +11,8 @@
         android:padding="5dp"
         android:textColor="#ff00ff"
         android:id="@+id/item_comments_username"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
         android:text="用戶名:"/>
 
     <TextView

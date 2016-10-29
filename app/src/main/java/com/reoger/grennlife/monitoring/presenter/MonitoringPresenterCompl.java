@@ -341,8 +341,8 @@ public class MonitoringPresenterCompl implements IMonitoringPresenter {
     private void showDialog() {
         mDialog = new ProgressDialog(context);
         mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mDialog.setTitle("loading...");
-        mDialog.setMessage("正在登录，请稍后...");
+        mDialog.setTitle("waiting...");
+        mDialog.setMessage("正在提交数据，请稍后...");
         mDialog.setCancelable(true);
         mDialog.show();
     }

@@ -10,6 +10,7 @@ import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -47,16 +48,21 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     private TextView mUsername;
     private ImageButton mBack;
     private GridLayout mGridLayout;
+    private ProgressBar mProgressBar;
 
     private List<Comment> commentList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.layout_dynamic_comment);
         initView();
         initData();
         setEvent();
+
+
     }
 
     private void setEvent() {
@@ -68,10 +74,11 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     private void initData() {
         mDynamic = (Dynamic) getIntent().getSerializableExtra(DynamicAdapter.COMMENTS);
         mICommentPresenter.doGetComment(mDynamic);//获取评论列表
-        mNone.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.VISIBLE);
+        mNone.setVisibility(View.INVISIBLE);
         mDynamicContent.setText(mDynamic.getContent().toString());
         mTime.setText(mDynamic.getCreatedAt().toString());
-        mUsername.setText("by"+mDynamic.getAuthor().getUsername());
+        mUsername.setText("by: "+mDynamic.getAuthor().getUsername());
         mTitle.setText(mDynamic.getTitle());
         if(mDynamic.getImageUrl()!= null){
             mGridLayout.removeAllViews();
@@ -83,7 +90,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
             for(int i=0;i<bb.length;i++){
                 ImageView imageView = new ImageView(this);
                 Glide.with(this).load(bb[i])
-                        .placeholder(R.mipmap.ic_launcher)//设置占位图片
+                        .placeholder(R.mipmap.photo)//设置占位图片
                         .error(android.R.drawable.stat_notify_error)//图片加载失败的显示
 //                        .bitmapTransform()//剪成正方形
                         .crossFade()//设置淡入淡出效果
@@ -115,6 +122,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initView() {
+
         mDynamicContent = (TextView) findViewById(R.id.dynamic_comments_history);
         mEditComment = (EditText) findViewById(R.id.dynamic_comments_content);
         mButtonPublish = (Button) findViewById(R.id.dynamic_comments_publish);
@@ -125,6 +133,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         mTime = (TextView) findViewById(R.id.dynamic_comments_time);
         mBack = (ImageButton) findViewById(R.id.toolbar_button1);
         mGridLayout = (GridLayout) findViewById(R.id.dynamic_comments_gridlayout);
+        mProgressBar = (ProgressBar) findViewById(R.id.dynamic_add_progress_bar);
 
 
         mICommentPresenter = new CommentPresenter(this,this);
@@ -155,12 +164,13 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onResultGetComment(boolean flag, List<Comment> list) {
-        if(true){
-            if(commentList.size()>0){
+        mProgressBar.setVisibility(View.GONE);
+        if(flag){
+            if(list.size()>0){
                 commentList.addAll(list);
-                mNone.setVisibility(View.INVISIBLE);
+                mNone.setVisibility(View.GONE);
+                mAdapter.notifyDataSetChanged();
             }
-            mAdapter.notifyDataSetChanged();
             log.d("TAG","數據更新成功");
         }else{
             new toast(this,"數據查詢失敗");

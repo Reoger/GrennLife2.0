@@ -1,6 +1,7 @@
 package com.reoger.grennlife.user.infomation.presenter;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -33,6 +34,7 @@ public class InfomationPresenterCompl implements InfomationPresenter {
     private IInfomationView mIInfomationView;
     private Context context;
     private Location  location;
+    private ProgressDialog mProgress;
 
 
     public InfomationPresenterCompl(IInfomationView mIInfomationView, Context context) {
@@ -71,6 +73,7 @@ public class InfomationPresenterCompl implements InfomationPresenter {
 
     @Override
     public void doAuthentication(String name, String Id, String address,String introduction) {
+        showPressgoress();//等待進度條
         UserMode userMode = BmobUser.getCurrentUser(UserMode.class);
         UserMode user = new UserMode();
         user.setObjectId(userMode.getObjectId());
@@ -95,10 +98,12 @@ public class InfomationPresenterCompl implements InfomationPresenter {
             @Override
             public void done(BmobException e) {
                 if(e == null){
+                    mProgress.dismiss();
                     mIInfomationView.onGetUpdataUserInfo(true,null);
                     log.d("TAG","成功更新数据");
                 }else{
                     log.d("TAg","更新失败"+e.toString());
+                    mProgress.dismiss();
                     mIInfomationView.onGetUpdataUserInfo(false,e.toString());
                 }
             }
@@ -157,4 +162,13 @@ public class InfomationPresenterCompl implements InfomationPresenter {
         public void onProviderDisabled(String provider) {
         }
     };
+
+    private void showPressgoress(){
+        mProgress = new ProgressDialog(context);
+        mProgress.setMessage("正在認證...");
+        mProgress.setTitle("waiting...");
+        mProgress.setCancelable(false);
+        mProgress.show();
+
+    }
 }

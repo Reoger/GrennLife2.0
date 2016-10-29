@@ -11,6 +11,11 @@
               android:id="@+id/dynamic_recyclerView2"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"/>
+          <ProgressBar
+              android:layout_width="match_parent"
+              android:layout_height="80dp"
+              android:visibility="visible"
+              android:id="@+id/oldthing_show_progressbar"/>
           <ImageButton
               android:id="@+id/recycle_add"
               android:layout_width="wrap_content"

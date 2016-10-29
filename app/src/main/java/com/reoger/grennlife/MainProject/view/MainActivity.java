@@ -43,6 +43,7 @@ import com.reoger.grennlife.user.infomation.View.InfomationActivity;
 import com.reoger.grennlife.user.monitoringHistroy.view.MonitoringHistoryView;
 import com.reoger.grennlife.user.myResuouers.activity.MyResources;
 import com.reoger.grennlife.user.setting.view.SettingActivity;
+import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.GlideUtil;
 import com.reoger.grennlife.utils.log;
 import com.reoger.grennlife.utils.toast;
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ImageButton mPublishDynamic;
     private TextView mNone;
+    private TextView mUserName;
 
 
     //轮播图的图ArrayList
@@ -226,7 +228,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 new toast(MainActivity.this, "暂时没有任何记录");
             }
-
         }
     };
 
@@ -251,6 +252,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAbout.setOnClickListener(this);
         mAboutApp.setOnClickListener(this);
         mSetting.setOnClickListener(this);
+
+        CustomApplication application = CustomApplication.getApplication();
+        mUserName.setText(application.getUserName());
 
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -455,6 +459,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mPublishDynamic = (ImageButton) tab02.findViewById(R.id.dynamic_add_publish_main);
         mNone = (TextView) tab02.findViewById(R.id.dynamic_item_none);
+        mUserName = (TextView) tab03.findViewById(R.id.user_monitoring_username);
 
         mMonitorHistory = (LinearLayout) tab03.findViewById(R.id.user_monitoring_history);
         mUserInfo = (LinearLayout) tab03.findViewById(R.id.user_monitoring_detail);

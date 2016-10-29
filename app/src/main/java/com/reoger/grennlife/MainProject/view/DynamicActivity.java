@@ -48,6 +48,7 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
 
     private final static int REQUEST_CODE = 123;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,9 +127,7 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
             return false;
         }
         return true;
-
     }
-
 
     //刷新图片
     @Override
@@ -208,6 +207,8 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
         });
         builder.create().show();
     }
+
+
 
     //这个回调显示发布后的结果
     @Override
