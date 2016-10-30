@@ -8,12 +8,12 @@ import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.news.adapter.NewsAdapter;
 import com.reoger.grennlife.news.model.NewsBean;
-import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.IServerData;
 import com.reoger.grennlife.utils.ServerDataOperation.ServerDataCompl;
 import com.reoger.grennlife.utils.db.DBOperationCompl;
@@ -38,6 +38,7 @@ public class NewsView extends Activity implements INewsView {
 
     private IDBOperation mDBOperation;
     private IServerData mServerData;
+    private ImageButton mBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +48,17 @@ public class NewsView extends Activity implements INewsView {
         initAttr();
         recycleMethod();
 
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initView() {
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.dynamic_recyclerView);
+        mBack = (ImageButton) findViewById(R.id.all__return22);
     }
 
     private void initAttr() {
@@ -104,8 +112,6 @@ public class NewsView extends Activity implements INewsView {
                 Log.d("qqer","content:"+one.getContent());
 
                 startActivity(newsIntent);
-                Toast.makeText(CustomApplication.getContext(), "position:" + position, Toast.LENGTH_SHORT)
-                        .show();
             }
         }).into(mRecyclerView, this);
 

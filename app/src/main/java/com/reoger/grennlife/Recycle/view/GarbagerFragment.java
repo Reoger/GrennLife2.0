@@ -75,23 +75,12 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {
-                        if (mDatas.size() > 0) {
-                            UserMode userMode = mDatas.get(0);
-                            mIGarbager.doRefeshData(userMode);
-                        } else {
-                            new toast(getActivity(),"刷新完成");
-                        }
+                       mIGarbager.doGetDateByLocation(TypeGetData.REFRESH,null);
                     }
 
                     @Override
                     public void onLoadMore() {
-                        int position = mDatas.size() - 1;
-                        if (position <= 0) {
-                            new toast(getContext(), "加载不可用");
-                        } else {
-                            UserMode userMode = mDatas.get(position);
-                            mIGarbager.doLoadMoreDate(userMode);
-                        }
+                        mIGarbager.doGetDateByLocation(TypeGetData.LOAD_MORE,null);
                     }
                 }).setOnItemClickListener(new RefreshRecyclerViewAdapter.OnItemClickListener() {
             @Override
@@ -108,7 +97,7 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
             log.d("TAG", "当前的位置信息" + location.getAltitude() + "***" + location.getLongitude());
             CustomApplication customApplication = CustomApplication.getCustomApplication();
             customApplication.setmUserLocation(location);//设置用户信息位全局公用
-            mIGarbager.doInvailData(location);
+            mIGarbager.doGetDateByLocation(TypeGetData.INITIALZATION,location);
         } else {
             new toast(getActivity(),"定位失败，请检查你的网络连接和定位权限");
         }
@@ -124,17 +113,23 @@ public class GarbagerFragment extends Fragment implements IGarbagerFragmentView 
                     mDatas.addAll(lists);
                     break;
                 case REFRESH:
-                    new toast(getContext(), "刷新成功");
+                    mDatas.clear();
+                    mDatas.addAll(lists);
                     break;
                 case LOAD_MORE:
-                    new toast(getContext(), "加载成功");
+                    if(mDatas.size()==lists.size()){
+                        new toast(getContext(), "暂时没有那么多数据");
+                    }else{
+                        mDatas.clear();
+                        mDatas.addAll(lists);
+                    }
                     break;
             }
-            recyclerView.onRefreshCompleted();
-            mAdapter.notifyDataSetChanged();
         } else {
             new toast(getContext(), "失败了");
         }
+        recyclerView.onRefreshCompleted();
+        mAdapter.notifyDataSetChanged();
     }
 
     private void showDialog(final int postion) {

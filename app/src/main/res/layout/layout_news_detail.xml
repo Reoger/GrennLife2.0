@@ -15,24 +15,37 @@
                 android:text="title"
                 android:id="@+id/news_detail_title"
                 android:textStyle="bold"
-                android:textSize="25sp"
+                android:textSize="24sp"
+                android:padding="5dp"
                 android:gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/grey"
+                android:layout_marginTop="5dp"/>
             <TextView
                 android:id="@+id/news_detail_outline"
-                android:paddingLeft="35dp"
-                android:paddingRight="35dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+
                 android:text="content content "
                 android:background="@color/grey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/grey"/>
             <TextView
                 android:id="@+id/news_detail_content"
-                android:paddingTop="35dp"
+                android:paddingTop="20dp"
                 android:text="content content"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"/>
         </LinearLayout>
     </ScrollView>
 

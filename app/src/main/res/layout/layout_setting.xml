@@ -41,9 +41,9 @@
     </View>
 
     <LinearLayout
+        android:id="@+id/setting_layout_clear_data"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:id="@+id/setting_layout_clear_data"
         android:background="@color/white">
 
         <TextView
@@ -240,16 +240,22 @@
         android:id="@+id/setting_layout_logout"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="15dp"
-            android:text="退出登录"
-            android:textColor="#AAFF0033"
-            android:textSize="15sp"/>
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="退出登录"
+                android:textColor="#AAFF0033"
+                android:textSize="15sp"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <View

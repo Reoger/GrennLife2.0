@@ -9,14 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.law.adapter.LawsViewAdapter;
 import com.reoger.grennlife.law.model.LawsBean;
 import com.reoger.grennlife.law.presenter.ILawPresenter;
 import com.reoger.grennlife.law.presenter.PresenterComl;
-import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.IServerData;
 import com.reoger.grennlife.utils.ServerDataOperation.ServerDataCompl;
 import com.reoger.grennlife.utils.db.DBOperationCompl;
@@ -119,8 +117,6 @@ public class LawView extends AppCompatActivity implements ILawView {
                 );
                 startActivity(mLawIntent);
 
-                Toast.makeText(CustomApplication.getContext(), "position:" + position, Toast.LENGTH_SHORT)
-                        .show();
             }
         }).into(mLawRecyclerView, this);
     }

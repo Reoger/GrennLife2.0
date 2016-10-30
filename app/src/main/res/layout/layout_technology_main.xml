@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:background="@mipmap/all__return"
             android:layout_centerVertical="true"
+            android:id="@+id/all__return"
             android:layout_marginLeft="20dp"/>
 
     </RelativeLayout>

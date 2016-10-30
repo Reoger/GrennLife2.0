@@ -10,13 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.reoger.grennlife.R;
 import com.reoger.grennlife.technology.adapter.TechnologyAdapter;
 import com.reoger.grennlife.technology.model.TechnologyBean;
-import com.reoger.grennlife.utils.CustomApplication;
 import com.reoger.grennlife.utils.ServerDataOperation.IServerData;
 import com.reoger.grennlife.utils.ServerDataOperation.ServerDataCompl;
 import com.reoger.grennlife.utils.db.DBOperationCompl;
@@ -42,6 +41,7 @@ public class TechnologyView extends AppCompatActivity {
     private IServerData mServerDataCompl;
     private IDBOperation mDBOperationComl;
     private ProgressBar mBar;
+    private ImageButton mBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,11 +50,18 @@ public class TechnologyView extends AppCompatActivity {
         initView();
         initAttr();
         recycleViewMethod();
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initView() {
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.dynamic_recyclerView);
         mBar = (ProgressBar) findViewById(R.id.technology_content_bar);
+        mBack = (ImageButton) findViewById(R.id.all__return);
     }
 
     private void initAttr() {
@@ -113,9 +120,6 @@ public class TechnologyView extends AppCompatActivity {
                 technologyIntent.putExtra(TechnologyDetailView.ARG_TECHNOLOGY_TITLE,one.getTitle());
                 technologyIntent.putExtra(TechnologyDetailView.ARG_TECHNOLOGY_CONTENT,one.getContent());
                 startActivity(technologyIntent);
-
-                Toast.makeText(CustomApplication.getContext(), "position:" + position, Toast.LENGTH_SHORT)
-                        .show();
 
             }
         }).into(mRecyclerView, this);

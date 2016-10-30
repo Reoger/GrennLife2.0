@@ -1,29 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/toolbar_background">
+
+        <TextView
+            android:id="@+id/toolbar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="版本更新"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:background="@mipmap/all__return"/>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/setting_update_action_btn"
-        android:layout_gravity="center"
         android:layout_width="200dp"
         android:layout_height="115dp"
-        android:text="检查更新"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/shape_feedback_text"
+        android:text="检查更新"
+        android:textColor="@color/blue"
+        android:textSize="18dp"/>
+
     <com.reoger.grennlife.utils.SwitchButton
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/setting_update_switch_network"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:minHeight="50dp"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:text="在2G/3G/4G下更新"
-        app:withTextInterval="16dp"
         app:frameDrawable="@drawable/switch_frame"
+        app:sliderDrawable="@drawable/selector_switch_slider"
         app:stateDrawable="@drawable/selector_switch_state"
         app:stateMaskDrawable="@drawable/switch_state_mask"
-        app:sliderDrawable="@drawable/selector_switch_slider" />
+        app:withTextInterval="16dp"/>
+
     <com.reoger.grennlife.utils.SwitchButton
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -34,9 +65,9 @@
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:text="自动更新"
-        app:withTextInterval="16dp"
         app:frameDrawable="@drawable/switch_frame"
+        app:sliderDrawable="@drawable/selector_switch_slider"
         app:stateDrawable="@drawable/selector_switch_state"
         app:stateMaskDrawable="@drawable/switch_state_mask"
-        app:sliderDrawable="@drawable/selector_switch_slider" />
+        app:withTextInterval="16dp"/>
 </LinearLayout>

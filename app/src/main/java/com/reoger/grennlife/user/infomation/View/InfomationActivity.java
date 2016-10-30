@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.reoger.grennlife.R;
@@ -40,6 +41,7 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
 
     private static final String[] States={"","正在审核","审核通过","审核不通过"};
     private AlertDialog mLertDialog;
+    private ImageButton mBack;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,7 +77,7 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
 
     private void initEvent() {
         mAuthentication.setOnClickListener(this);
-
+        mBack.setOnClickListener(this);
     }
 
     private void initView() {
@@ -88,6 +90,7 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
         mAuthentication = (Button) findViewById(R.id.user_information_authentication);
         mState = (TextView) findViewById(R.id.user_information_status);
         mEditReduce = (EditText) findViewById(R.id.user_information_reduce);
+        mBack = (ImageButton) findViewById(R.id.toolbar_button1);
     }
 
     @Override
@@ -103,6 +106,9 @@ public class InfomationActivity extends AppCompatActivity implements View.OnClic
                     return;
                 }
                 infomationPresenter.doAuthentication(name,Id,location,introducation);
+                break;
+            case R.id.toolbar_button1:
+                finish();
                 break;
         }
     }

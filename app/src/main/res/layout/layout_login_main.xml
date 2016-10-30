@@ -93,8 +93,8 @@
             android:id="@+id/login_load"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:background="#880000ff"
+            android:layout_marginTop="40dp"
+            android:background="#660000ff"
             android:text="登  陆"
             android:textColor="#aa000000"
             android:textSize="22sp"/>

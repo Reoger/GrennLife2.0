@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+              android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="60dp"
+              android:background="@drawable/shape_dark_two"
+              android:layout_marginRight="5px"
+              android:layout_marginLeft="5px"
     >
 
     <!--<LinearLayout-->
@@ -12,13 +15,13 @@
     <!--android:orientation="vertical">-->
     <TextView
         android:id="@+id/laws_title_text"
-        android:gravity="center"
         android:text="title"
-        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="24sp"
-        android:textColor="@color/blue"/>
+        android:textSize="18sp"
+        android:textColor="@color/black"/>
     <!--<TextView-->
     <!--android:id="@+id/laws_content_text"-->
     <!--android:text="content  content  content  content  content"-->
@@ -28,9 +31,5 @@
     <!--android:paddingTop="7dip"/>-->
 
     <!--</LinearLayout>-->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:background="@color/background_main"/>
 
 </LinearLayout>

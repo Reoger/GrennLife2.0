@@ -52,7 +52,7 @@
             android:layout_gravity="center_vertical"
             android:padding="5dp"
             android:text="用户名"
-            android:textSize="16sp"/>
+            android:textSize="18sp"/>
     </LinearLayout>
 
     <TextView
@@ -64,7 +64,8 @@
         android:layout_marginTop="5dp"
         android:lines="5"
         android:padding="5dp"
-        android:text="详细描述"/>
+        android:text="详细描述"
+        android:textSize="17sp"/>
 
     <View
         android:layout_width="match_parent"
@@ -97,6 +98,7 @@
             android:layout_gravity="center"
             android:padding="2dp"
             android:text="联系方式："
+            android:textSize="17sp"
             />
     </LinearLayout>
 
@@ -117,7 +119,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="2dp"
-            android:text="地址"/>
+            android:text="地址"
+            android:textSize="17sp"/>
 
     </LinearLayout>
 
@@ -138,7 +141,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="2dp"
-            android:text="时间"/>
+            android:text="时间"
+            android:textSize="17sp"/>
 
     </LinearLayout>
 
@@ -160,7 +164,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="5dp"
-            android:text="领取状态"/>
+            android:text="领取状态"
+            android:textSize="17sp"/>
 
 
     </LinearLayout>
@@ -168,6 +173,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -61,32 +61,19 @@ public class OldThingFragment extends Fragment implements IOldthing {
         recyclerView = (RefreshRecyclerView) rootView.findViewById(R.id.dynamic_recyclerView2);
         mBar = (ProgressBar) rootView.findViewById(R.id.oldthing_show_progressbar);
         //需要先初始化数据
-        mOllThingPresent.doInvailData();
+        mOllThingPresent.doGetData(TypeGetData.INITIALZATION);
         mOldthingAdapter = new OldThingsAdapter(context, mData);
         RecyclerViewManager.with(mOldthingAdapter, new LinearLayoutManager(context))
-                .setMode(RecyclerMode.NONE)
+                .setMode(RecyclerMode.BOTH)
                 .setOnBothRefreshListener(new OnBothRefreshListener() {
                     @Override
                     public void onPullDown() {
-                        if (mData.size() > 0) {
-                            mOllThingPresent.doRefeshData(mData.get(0));
-                        } else {
-                            new toast(getContext(), "刷新成功");
-                            recyclerView.onRefreshCompleted();
-                        }
+                        mOllThingPresent.doGetData(TypeGetData.REFRESH);
                     }
 
                     @Override
                     public void onLoadMore() {
-                        //这里添加上拉加载更多的逻辑
-//                        int position = mData.size()-1;
-//                        if(position < 0 ){
-//                            new toast(getContext(),"加载不可用");
-//                            recyclerView.onRefreshCompleted();
-//                        }else{
-//                            mOllThingPresent.doLoadMoreDate(mData.get(position));
-//                        }
-                        new toast(getContext(), "触发加载更多");
+                        mOllThingPresent.doGetData(TypeGetData.LOAD_MORE);
                     }
                 }).setOnItemClickListener(new RefreshRecyclerViewAdapter.OnItemClickListener() {
             @Override
@@ -109,32 +96,25 @@ public class OldThingFragment extends Fragment implements IOldthing {
         if (flag) {
             switch (type) {
                 case INITIALZATION:
+                    mData.clear();
                     mData.addAll(lists);
-//                    new toast(getContext(), "添加数据成功");
                     break;
                 case LOAD_MORE:
-                    new toast(getContext(), "加载更多成功");
+                    if(mData.size()==lists.size()){
+                        new toast(getActivity(),"暂时没有更多的数据可以加载");
+                    }else{
+                        mData.clear();
+                        mData.addAll(lists);
+                    }
                     break;
                 case REFRESH:
-                    mData.addAll(0, lists);
-                    new toast(getContext(), "刷新成功");
+                    mData.clear();
+                    mData.addAll(lists);
                     break;
             }
-            if (lists.size() > 0) {
                 mOldthingAdapter.notifyDataSetChanged();
-            }
         } else {
-            switch (type) {
-                case INITIALZATION:
-                    new toast(getContext(), "添加数据失败");
-                    break;
-                case LOAD_MORE:
-                    new toast(getContext(), "加载更多失败");
-                    break;
-                case REFRESH:
-                    new toast(getContext(), "刷新失败");
-                    break;
-            }
+           new toast(getActivity(),"加载失败");
         }
         recyclerView.onRefreshCompleted();
     }

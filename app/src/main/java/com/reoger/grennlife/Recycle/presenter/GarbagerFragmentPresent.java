@@ -16,14 +16,9 @@ import com.reoger.grennlife.Recycle.view.IGarbagerFragmentView;
 import com.reoger.grennlife.loginMVP.model.UserMode;
 import com.reoger.grennlife.utils.log;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
@@ -38,6 +33,7 @@ public class GarbagerFragmentPresent implements IGarbagerFragmentPresent {
     private String mProvider;
     private IGarbagerFragmentView mGarbager;
     private BmobGeoPoint mBmobGeoPoint;
+    private int mDataNum;
 
     public GarbagerFragmentPresent(IGarbagerFragmentView mGarbager, Context context) {
         this.mGarbager = mGarbager;
@@ -72,119 +68,39 @@ public class GarbagerFragmentPresent implements IGarbagerFragmentPresent {
         mLocationManager.requestLocationUpdates(mProvider, 5000, 1, locationListener);
     }
 
+
+    //获取数据
     @Override
-    public void doInvailData(Location location) {
-        mBmobGeoPoint = new BmobGeoPoint(location.getLongitude(), location.getLatitude());
+    public void doGetDateByLocation(final TypeGetData type,Location location) {
+
+        switch (type){
+            case INITIALZATION:
+                mDataNum = 10;
+                mBmobGeoPoint = new BmobGeoPoint(location.getLongitude(), location.getLatitude());
+                break;
+            case REFRESH:
+                mDataNum = 10;
+                break;
+            case LOAD_MORE:
+                mDataNum += 10;
+                break;
+        }
+
         BmobQuery<UserMode> query = new BmobQuery<>();
 //        query.addWhereNear("gpsAdd",mBmobGeoPoint);//获取最近的用户的数据
         query.addWhereEqualTo("State", 2);
-        query.setLimit(10);
+        query.setLimit(mDataNum);
         query.order("-createdAt");
         query.findObjects(new FindListener<UserMode>() {
             @Override
             public void done(List<UserMode> list, BmobException e) {
                 if (e == null) {
-                    if (list.size() > 0)
-                        mGarbager.onGetResultData(true, TypeGetData.INITIALZATION, list);
-                    else
-                        mGarbager.onGetResultData(true, TypeGetData.INITIALZATION, null);
-                    log.d("TAG","數據查詢成功！");
+                        mGarbager.onGetResultData(true, type, list);
                 } else {
-                    mGarbager.onGetResultData(false, TypeGetData.INITIALZATION, null);
-                    log.d("TAG", "查詢失敗");
+                    mGarbager.onGetResultData(false, type, null);
                 }
             }
         });
-    }
-
-    @Override
-    public void doLoadMoreDate(UserMode userMode) {
-        {
-            BmobQuery<UserMode> query = new BmobQuery<UserMode>();
-            String start = userMode.getCreatedAt();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = null;
-            try {
-                date = sdf.parse(start);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
-            BmobQuery<UserMode> query1 = new BmobQuery<>();
-            query1.addWhereEqualTo("State", 2);
-            List<BmobQuery<UserMode>> queries = new ArrayList<>();
-            queries.add(query);
-            queries.add(query1);
-
-            BmobQuery<UserMode> bmobQuery = new BmobQuery<>();
-            bmobQuery.and(queries);
-
-            bmobQuery.setLimit(5);
-            bmobQuery.order("-createdAt");
-            bmobQuery.findObjects(new FindListener<UserMode>() {
-                @Override
-                public void done(List<UserMode> list, BmobException e) {
-                    if (e == null) {
-                        list.remove(0);
-                        if (list.size() > 0) {
-                            mGarbager.onGetResultData(true, TypeGetData.INITIALZATION, list);
-                        } else {
-                            log.d("TAG", "没有数据");
-                            mGarbager.onGetResultData(true, TypeGetData.INITIALZATION, null);
-                        }
-                    } else {
-                        log.d("TAG", e.toString() + "错误码");
-                        mGarbager.onGetResultData(false, TypeGetData.INITIALZATION, list);
-                    }
-                }
-            });
-        }
-
-    }
-
-
-    @Override
-    public void doRefeshData(UserMode userMode) {
-        {
-            BmobQuery<UserMode> query = new BmobQuery<>();
-            String start = userMode.getCreatedAt();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = null;
-            try {
-                date = sdf.parse(start);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            query.addWhereGreaterThanOrEqualTo("createdAt", new BmobDate(date));
-            BmobQuery<UserMode> query1 = new BmobQuery<>();
-            query.addWhereEqualTo("State", 2);
-
-            List<BmobQuery<UserMode>> queries = new ArrayList<>();
-            queries.add(query);
-            queries.add(query1);
-
-            BmobQuery<UserMode> bmobQuery = new BmobQuery<>();
-            bmobQuery.and(queries);
-
-            bmobQuery.findObjects(new FindListener<UserMode>() {
-                @Override
-                public void done(List<UserMode> list, BmobException e) {
-                    if (e == null) {
-                        list.remove(0);
-                        if (list.size() > 0) {
-                            mGarbager.onGetResultData(true, TypeGetData.REFRESH, list);
-                        } else {
-                            log.d("TAG", "刷新并沒有獲得數據");
-                            mGarbager.onGetResultData(true, TypeGetData.REFRESH, null);
-                        }
-
-                    } else {
-                        log.d("YYY", "ggg" + e.toString());
-                        mGarbager.onGetResultData(false, TypeGetData.REFRESH, null);
-                    }
-                }
-            });
-        }
     }
 
     LocationListener locationListener = new LocationListener() {

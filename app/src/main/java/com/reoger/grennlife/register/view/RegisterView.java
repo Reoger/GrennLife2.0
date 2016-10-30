@@ -32,7 +32,7 @@ public class RegisterView extends AppCompatActivity implements IRegisterView, Vi
 
     private ImageButton mRegsiterGetMSMCode;
     private Button mRegsiter;
-//    private Button mRegsiterClear;
+
 
     private int recLen = 60;
     private Timer timer = new Timer();//计时器

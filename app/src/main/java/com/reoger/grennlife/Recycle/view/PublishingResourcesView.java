@@ -222,7 +222,7 @@ public class PublishingResourcesView extends AppCompatActivity implements View.O
     public List<? extends Map<String, ?>> getData() {
         list = new ArrayList<>();
         HashMap<String, Object> map = new HashMap<>();
-        map.put("image", R.mipmap.icon_addpic_focused);
+        map.put("image", R.mipmap.photo____);
         list.add(map);
         return list;
     }
